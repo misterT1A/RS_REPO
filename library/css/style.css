@@ -373,7 +373,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0 40px;
+  padding: 20px 20px 40px;
 }
 
 .coffee_title {
@@ -389,7 +389,7 @@ body {
 }
 
 .coffee_description {
-  margin-top: 40px;
+  margin: 40px 0;
   color: #000;
   text-align: center;
   font-family: Inter;
@@ -398,5 +398,93 @@ body {
   font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
+}
+
+.coffee_prices {
+  display: flex;
+  width: 100%;
+}
+
+.left_price {
+  max-width: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.price_title {
+  display: inline-block;
+  color: #BB945F;
+  font-family: Forum;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 2px;
   text-transform: capitalize;
+  margin-bottom: 40px;
+}
+
+.price_list {
+  display: flex;
+}
+
+.price_elem {
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  margin-right: 58px;
+}
+.price_elem:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+.elem_price {
+  position: relative;
+  display: flex;
+  color: #000;
+  font-family: Forum;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  margin-left: 160px;
+}
+.elem_price:not(:last-child) {
+  margin-bottom: 40px;
+}
+.elem_price::before {
+  position: absolute;
+  top: 50%;
+  left: -160px;
+  z-index: 1;
+  display: block;
+  content: " ";
+  width: 100px;
+  height: 1px;
+  background-color: #BB945F;
+}
+
+.right_price {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.price_title.right,
+.price_list.right {
+  margin-left: auto;
+}
+
+.price_items.right {
+  text-align: end;
 }/*# sourceMappingURL=style.css.map */
