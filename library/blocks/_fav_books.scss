@@ -1,0 +1,82 @@
+.fav__books {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 220px;
+}
+
+.book__item {
+    position: relative;
+    width: 590px;
+    height: 555px;
+    padding-right: 40px;
+    margin-bottom: 40px;
+}
+
+.book__wrapper {
+    border: 1px solid $black;
+    padding: 14px 172px 15px 19px;
+    height: 100%;
+}
+
+.book__text {
+    color: $black;
+    font-family: Forum;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.border.book {
+    width: 60px;
+    background-color: $brown;
+    margin-bottom: 20px;
+}
+
+.book__title,
+.book__autor {
+    color: $black;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.book__autor {
+    text-transform: none;
+}
+
+.book__prescription {
+    color: $black;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    margin-top: 20px;
+}
+
+.button.book {
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+    z-index: 2;
+    margin-top: 14px;
+}
+
+.book__img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+}
