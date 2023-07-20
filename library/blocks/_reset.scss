@@ -31,7 +31,6 @@ a {
     }
 }
 
-
 html {
     scroll-behavior: smooth;
 }
@@ -66,6 +65,7 @@ body {
     border: 1px solid $black2;
 
     color: $black2;
+    background-color: $white;
     text-align: center;
     font-family: Inter;
     font-size: 10px;
@@ -80,6 +80,6 @@ body {
     &:hover {
         border-radius: 2px;
         border: 1px solid $brown;
-        background: $brown;
+        background-color: $brown;
     }
 }
