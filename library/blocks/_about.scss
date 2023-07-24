@@ -68,4 +68,8 @@
     height: 16px;
     border-radius: 50%;
     background-color: $black;
+
+    &.checked {
+        background-color: $brown; 
+    }
 }
