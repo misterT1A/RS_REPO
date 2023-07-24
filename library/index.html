@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libriry</title>
+    <link rel="icon" href="./img/favicon-16x16.png">
     <link href="https://fonts.googleapis.com/css2?family=Forum&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -154,7 +155,7 @@
                                 <p class="book__prescription">A timely and revelatory new biography of Queen Elizabeth
                                     (and her family) exploring how the Windsors have evolved and thrived as the modern
                                     world has changed around them.</p>
-                                <button class="button book">Buy</button>
+                                <button class="button book" disabled>Own</button>
                                 <img class="book__img" src="./img/books/theLastQueen.png" alt="book">
                             </div>
                         </div>
@@ -206,7 +207,7 @@
                                     twice her age with the promise to bring her to America. Her marriage is an
                                     opportunity for her family to eventually immigrate. For fans of Isabel Allende and
                                     Julia Alvarez.</p>
-                                <button class="button book">Buy</button>
+                                <button class="button book" disabled>Own</button>
                                 <img class="book__img" src="./img/books/dominicana.png" alt="book">
                             </div>
                         </div>
@@ -215,7 +216,7 @@
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
                                 <span class="book__title">Crude: A Memoir</span><br>
-                                <span class="book__autor">By Pablo Fajardo & ​​Sophie Tardy-Joubert</span>
+                                <span class="book__autor">By Pablo Fajardo &amp ​​Sophie Tardy-Joubert</span>
                                 <p class="book__prescription">Drawing and color by Damien Roudeau | This book
                                     illustrates the struggles of a group of indigenous Ecuadoreans as they try to sue
                                     the ChevronTexaco company for damage their oil fields did to the Amazon and her
@@ -335,7 +336,7 @@
                         also you can try desserts from bakery.</span>
                     <div class="coffee_prices">
                         <div class="left_price">
-                            <h3 class="price_title">Coffee & Tea</h3>
+                            <h3 class="price_title">Coffee &amp Tea</h3>
                             <div class="price_list">
                                 <ul class="price_items">
                                     <li class="price_elem">Cold Brew Coffee</li>
@@ -357,7 +358,7 @@
                             </div>
                         </div>
                         <div class="right_price">
-                            <h3 class="price_title right">Desserts & Cakes</h3>
+                            <h3 class="price_title right">Desserts &amp Cakes</h3>
                             <div class="price_list right">
                                 <ul class="price_items right">
                                     <li class="price_elem">Forest Gateau</li>
@@ -405,7 +406,7 @@
                             </div>
                         </div>
                         <div class="contacts_right">
-                            <iframe
+                            <iframe class="contacts_map"
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1069.5021789554285!2d-73.9921311438605!3d40.69580002915306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a49b649b8c3%3A0x6342a2291cea2e!2zMjg2IENhZG1hbiBQbGF6YSBXLCBCcm9va2x5biwgTlkgMTEyMDEsINCh0KjQkA!5e0!3m2!1sru!2str!4v1689102186763!5m2!1sru!2str"
                                 width="696" height="414" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -425,8 +426,8 @@
                             <section class="card_wrapper">
                                 <div class="card_data">
                                     <h4 class="card_data_title">Brooklyn Public Library</h4>
-                                    <input class="card_input" type="text" id="cardName" placeholder="Reader's name">
-                                    <input class="card_input" type="text" id="cardNumber" placeholder="Card number">
+                                    <input class="card_input" type="text" id="cardName" pattern="[A-Za-z]*[\d]*[\-]*" title="Please enter correct name" placeholder="Reader's name">
+                                    <input class="card_input" type="text" id="cardNumber" pattern="[A-Za-z]*[\d]*[\-]*" title="Please enter correct card number" placeholder="Card number">
                                 </div>
                                 <button class="button big">Check the card</button>
                             </section>
@@ -458,14 +459,14 @@
                 </div>
                 <div class="footer_down">
                     <ul class="media_list">
-                        <li class="media_item"><a href="#">
+                        <li class="media_item"><a href="https://twitter.com/BKLYNlibrary" target="_blank">
                                 <img class="media_img" src="./img/twitter.svg" alt="twitter">
                             </a></li>
-                        <li class="media_item"><a href="#">
-                                <img class="media_img" src="./img/instagram.svg" alt="twitter">
+                        <li class="media_item"><a href="https://www.instagram.com/bklynlibrary/" target="_blank">
+                                <img class="media_img" src="./img/instagram.svg" alt="instagram">
                             </a></li>
-                        <li class="media_item"><a href="#">
-                                <img class="media_img" src="./img/facebook.svg" alt="twitter">
+                        <li class="media_item"><a href="https://www.facebook.com/BrooklynPublicLibrary/" target="_blank">
+                                <img class="media_img" src="./img/facebook.svg" alt="facebook">
                             </a></li>
                     </ul>
                     <span class="footer_time">Sat - Sun<br>
@@ -474,9 +475,9 @@
                 <span class="Footer_border"></span>
                 <ul class="footer_list">
                     <li class="footer_list_item">2023</li>
-                    <li class="footer_list_item">The Rolling Scopes School</li>
+                    <li class="footer_list_item"><a href="https://rs.school/js-stage0/" target="_blank">The Rolling Scopes School</a></li>
                     <li class="footer_list_item"><a class="footer_list_item" href="https://github.com/misterT1A"
-                            target="_blank">Artem</a></li>
+                            target="_blank">misterT1A</a></li>
                 </ul>
             </div>
         </div>

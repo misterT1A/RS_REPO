@@ -76,6 +76,15 @@
     margin-top: 14px;
 }
 
+.button.book:disabled {
+    border-color: $brown;
+    color: $brown;
+    cursor: default;
+    &:hover {
+        background-color: $white;
+    }
+}
+
 .book__img {
     position: absolute;
     bottom: 0;

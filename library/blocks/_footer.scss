@@ -56,7 +56,7 @@
 }
 
 .Footer_border {
-    isplay: block;
+    display: block;
     content: " ";
     max-width: 1400px;
     width: 100%;
@@ -69,6 +69,10 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+
+    & li:nth-child(2) {
+        margin-left: 56px;
+    }
 }
 
 .footer_list_item {
