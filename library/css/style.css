@@ -50,8 +50,7 @@ body {
 .border {
   display: block;
   content: " ";
-  max-width: 50px;
-  width: 100%;
+  width: 50px;
   height: 1px;
   background-color: #0C0C0E;
 }
@@ -92,8 +91,6 @@ body {
   color: #FFFFFF;
   font-family: Forum;
   font-size: 30px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 50px;
   letter-spacing: 0.6px;
 }
@@ -117,8 +114,6 @@ body {
   color: #FFFFFF;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 50px;
 }
 .nav_item a:hover {
@@ -150,8 +145,6 @@ body {
   text-align: center;
   font-family: Forum;
   font-size: 40px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 50px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -168,8 +161,6 @@ body {
   color: #0C0C0E;
   font-family: Forum;
   font-size: 40px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -181,8 +172,6 @@ body {
   text-align: center;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   margin-top: 40px;
   margin-bottom: 20px;
@@ -242,8 +231,6 @@ body {
   color: #0C0C0E;
   font-family: Forum;
   font-size: 40px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -263,7 +250,6 @@ body {
   text-align: center;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
   font-weight: 700;
   line-height: normal;
   margin-bottom: 33px;
@@ -277,8 +263,6 @@ body {
   color: #000;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
   line-height: normal;
   display: flex;
   align-items: center;
@@ -365,8 +349,6 @@ body {
   color: #000;
   font-family: Forum;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -384,7 +366,6 @@ body {
   color: #000;
   font-family: Inter;
   font-size: 15px;
-  font-style: normal;
   font-weight: 700;
   line-height: 40px;
   letter-spacing: 2px;
@@ -399,8 +380,6 @@ body {
   color: #000;
   font-family: Inter;
   font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -445,8 +424,6 @@ body {
   color: #0C0C0E;
   font-family: Forum;
   font-size: 40px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -459,8 +436,6 @@ body {
   text-align: center;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
 }
@@ -483,8 +458,6 @@ body {
   color: #BB945F;
   font-family: Forum;
   font-size: 40px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -499,8 +472,6 @@ body {
   color: #000;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -516,8 +487,6 @@ body {
   color: #000;
   font-family: Forum;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -565,8 +534,6 @@ body {
   color: #0C0C0E;
   font-family: Forum;
   font-size: 40px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -588,7 +555,6 @@ body {
   color: #000;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
   font-weight: 700;
   line-height: 40px;
   letter-spacing: 2px;
@@ -603,7 +569,6 @@ body {
   color: #000;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -617,7 +582,6 @@ body {
   color: #000;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -641,8 +605,6 @@ body {
   color: #000;
   font-family: Forum;
   font-size: 40px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -665,8 +627,6 @@ body {
   color: #000;
   font-family: Inter;
   font-size: 30px;
-  font-style: normal;
-  font-weight: 400;
   line-height: normal;
   letter-spacing: 0.6px;
   text-align: center;
@@ -694,8 +654,6 @@ body {
   color: #000;
   font-family: Forum;
   font-size: 30px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 50px;
   letter-spacing: 0.6px;
   text-align: start;
@@ -711,7 +669,6 @@ body {
   color: #8E8E8E;
   font-family: Forum;
   font-size: 30px;
-  font-style: normal;
   font-weight: 400;
   line-height: 50px;
   letter-spacing: 0.6px;
@@ -742,8 +699,6 @@ body {
   color: #000;
   font-family: Forum;
   font-size: 30px;
-  font-style: normal;
-  font-weight: 400;
   line-height: normal;
   letter-spacing: 0.6px;
   margin-bottom: 35px;
@@ -757,8 +712,6 @@ body {
   text-align: right;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
   letter-spacing: 0.4px;
 }
@@ -790,8 +743,6 @@ body {
   color: #FFFFFF;
   font-family: Inter;
   font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 21px;
 }
 
@@ -800,8 +751,6 @@ body {
   text-align: right;
   font-family: Inter;
   font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 21px;
 }
 
@@ -850,8 +799,6 @@ body {
   color: #FFFFFF;
   font-family: Inter;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 20px;
   letter-spacing: 2px;
 }/*# sourceMappingURL=style.css.map */
