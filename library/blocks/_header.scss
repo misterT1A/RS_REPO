@@ -1,0 +1,53 @@
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    padding: 0 20px;
+    background-color: $black;
+}
+
+.header__title {
+    color: $white;
+    font-family: Forum;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: 0.6px;
+}
+
+.nav_prof__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav {
+    width: 584px;
+}
+
+.nav__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.nav_item a {
+    color: $white;
+    font-family: Inter;
+    font-size: 20px;
+    line-height: 50px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.profile__header {
+    display: flex;
+    align-items: center;
+    margin-left: 40px;
+
+    & img {
+        cursor: pointer;
+    }
+}
+

@@ -1,0 +1,127 @@
+.libraryCard_wrapper {
+    padding: 18px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card_title {
+    color: $black;
+    font-family: Forum;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.profile_inner {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card_info {
+    max-width: 600px;
+    width: 100%;
+}
+
+.card_infoTitle {
+    color: $black;
+    font-family: Inter;
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: 0.6px;
+    text-align: center;
+}
+
+.card_wrapper {
+    margin-top: 30px;
+    padding: 20px 20px 27px;
+    border: 3px solid $brown;
+    text-align: center;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card_data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 23px;
+    background-color: $brown;
+    padding: 15px 17px 25px;
+}
+
+.card_data_title {
+    width: 100%;
+    color: $black;
+    font-family: Forum;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: 0.6px;
+    text-align: start;
+}
+
+.card_input {
+    display: block;
+    width: 100%;
+    min-height: 66px;
+    padding-left: 20px;
+    border-radius: 10px;
+    background: #FFF;
+    color: $gray;
+    font-family: Forum;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 50px;
+    letter-spacing: 0.6px;
+}
+
+.button.big {
+    margin-top: 20px;
+    max-width: 242px;
+    width: 100%;
+    height: 44px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1px;
+    background-color: $white;
+
+    &:hover {
+        background-color: $brown;
+    }
+}
+
+.profile_info {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.profile_title {
+    color: $black;
+    font-family: Forum;
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: 0.6px;
+    margin-bottom: 35px;
+}
+
+.profile_description {
+    max-width: 456px;
+    width: 100%;
+    margin-bottom: 35px;
+    color: $black;
+    text-align: right;
+    font-family: Inter;
+    font-size: 20px;
+    line-height: 40px;
+    letter-spacing: 0.4px;
+}
+
+.profile_buttons {
+    display: flex;
+    column-gap: 20px;
+}

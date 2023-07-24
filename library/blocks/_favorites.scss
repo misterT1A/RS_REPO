@@ -1,0 +1,110 @@
+.fav__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 20px 0;
+}
+
+.fav__title {
+    color: $black2;
+    font-family: Forum;
+    font-size: 40px;
+    line-height: 40px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.fav__books__description {
+    width: 100%;
+    margin: 40px 0 31px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.fav__description {
+    color: $black;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 33px;
+}
+
+.fav__radio {
+    display: flex;
+}
+
+.radio_text {
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    margin-right: 90px;
+    cursor: pointer;
+
+    text-shadow:
+        0.5px 0.5px 0 #fff,
+        0.5px -0.5px 0 #fff,
+        -0.5px 0.5px 0 #fff,
+        -0.5px -0.5px 0 #fff;
+
+    transition: all 0.2s linear;
+}
+
+.radio_item {
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
+    padding: 8px 0;
+    cursor: pointer;
+}
+
+.radio_default {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.radio_icon {
+    position: relative;
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 21px;
+    border: 2px solid $black;
+    border-radius: 50%;
+    vertical-align: text-top;
+
+}
+
+.radio_icon::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(- 50%, -50%) scale(0);
+    z-index: 1;
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: $black;
+    border-radius: 50%;
+    transition: transform 0.2s ease-in;
+}
+
+.radio_default:checked+.radio_icon::before {
+    transform: translate(- 50%, -50%) scale(1);
+}
+
+.radio_default:checked~.radio_text {
+    text-shadow:
+        0.5px 0.5px 0 #000,
+        0.5px -0.5px 0 #000,
+        -0.5px 0.5px 0 #000,
+        -0.5px -0.5px 0 #000;
+}
