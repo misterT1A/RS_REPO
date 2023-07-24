@@ -12,6 +12,10 @@
     margin-bottom: 40px;
 }
 
+.book__item.hidden {
+    display: none;
+}
+
 .book__wrapper {
     border: 1px solid $black;
     padding: 14px 172px 15px 19px;
@@ -37,6 +41,7 @@
 
 .book__title,
 .book__autor {
+    white-space: nowrap;
     color: $black;
     font-family: Inter;
     font-size: 15px;
