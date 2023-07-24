@@ -219,6 +219,9 @@ body {
   border-radius: 50%;
   background-color: #000;
 }
+.carousel_icon.checked {
+  background-color: #BB945F;
+}
 
 .fav__wrapper {
   display: flex;
