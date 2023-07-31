@@ -1,1 +1,1 @@
-task: library-part2
+task: library-part2 adaptive
