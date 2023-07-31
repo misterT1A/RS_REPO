@@ -28,6 +28,7 @@
 
 .slider__inner {
     display: flex;
+    position: relative;
     gap: 25px;
     margin-bottom: 32px;
 }
@@ -55,11 +56,31 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    
+
     &:hover .carousel_icon {
         background-color: $brown;
     }
 }
+
+
+.slider_prev, .slider_next {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    width: 139px;
+    height: 601px;
+}
+
+.slider_prev {
+    left: 0;
+}
+
+// .slider_next {
+//     right: 0;
+// }
 
 .carousel_icon {
     display: block;
@@ -70,6 +91,25 @@
     background-color: $black;
 
     &.checked {
-        background-color: $brown; 
+        background-color: $brown;
     }
+}
+
+@media screen and (max-width: 768px) {
+
+    .slider__inner {
+        padding: 0 139px;
+        gap: 0;
+        margin-bottom: 18px;
+    }
+
+    .slider__item:not(:first-child) {
+        display: none;
+    }
+
+    .slider_prev, .slider_next {
+        display: flex;
+    }
+
+
 }

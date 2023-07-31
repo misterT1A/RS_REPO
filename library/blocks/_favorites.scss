@@ -54,6 +54,9 @@
         -0.5px -0.5px 0 #fff;
 
     transition: all 0.2s linear;
+    &.last_text {
+        margin-right: 0px;
+    }
 }
 
 .radio_item {

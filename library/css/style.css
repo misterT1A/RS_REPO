@@ -129,15 +129,25 @@ body {
   cursor: pointer;
 }
 
+@media screen and (max-width: 1024px) {
+  .nav {
+    display: none;
+  }
+}
 .welcome__wrapper {
-  background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.1) 100%), url("./../img/welcome.png") center no-repeat;
+  background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.1) 100%), url("./../img/welcome.jpg") center/cover no-repeat;
   min-height: 600px;
 }
 
 .welcome__content {
-  padding: 255px 0 0 20px;
+  padding: 219px 0 0 20px;
   max-width: 576px;
   width: 100%;
+}
+
+.welcom_content_inner {
+  padding: 35px 0;
+  background-color: #000;
 }
 
 .welcome__title {
@@ -179,6 +189,7 @@ body {
 
 .slider__inner {
   display: flex;
+  position: relative;
   gap: 25px;
   margin-bottom: 32px;
 }
@@ -211,6 +222,21 @@ body {
   background-color: #BB945F;
 }
 
+.slider_prev, .slider_next {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 139px;
+  height: 601px;
+}
+
+.slider_prev {
+  left: 0;
+}
+
 .carousel_icon {
   display: block;
   content: " ";
@@ -223,6 +249,19 @@ body {
   background-color: #BB945F;
 }
 
+@media screen and (max-width: 768px) {
+  .slider__inner {
+    padding: 0 139px;
+    gap: 0;
+    margin-bottom: 18px;
+  }
+  .slider__item:not(:first-child) {
+    display: none;
+  }
+  .slider_prev, .slider_next {
+    display: flex;
+  }
+}
 .fav__wrapper {
   display: flex;
   flex-direction: column;
@@ -273,6 +312,9 @@ body {
   cursor: pointer;
   text-shadow: 0.5px 0.5px 0 #fff, 0.5px -0.5px 0 #fff, -0.5px 0.5px 0 #fff, -0.5px -0.5px 0 #fff;
   transition: all 0.2s linear;
+}
+.radio_text.last_text {
+  margin-right: 0px;
 }
 
 .radio_item {
@@ -332,7 +374,8 @@ body {
 
 .book__item {
   position: relative;
-  width: 590px;
+  max-width: 590px;
+  width: 100%;
   height: 555px;
   padding-right: 40px;
   margin-bottom: 40px;
