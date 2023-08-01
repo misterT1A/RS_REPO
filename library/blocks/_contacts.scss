@@ -64,8 +64,31 @@
 }
 
 .contacts_right {
-    position:relative;
-    padding: 0 0 29.8% 0;
-    height:0;
-    overflow:hidden;
+    width: 49.7%;
+    // position:relative;
+    // // padding: 0 0 416px 0;
+    // padding-bottom:56.25%;
+    // height:0;
+    // overflow:hidden;
 } 
+
+.contacts_map {
+    // left:0;
+    // top:0;
+    // height:100%;
+    // width:100%;
+    // position:absolute;
+}
+
+
+@media screen and (max-width: 900px) {
+    .contacts_inner { 
+        flex-direction: column;
+    }
+
+    .contacts_right {
+        width: 100%;
+        margin-top: 100px;
+        margin-left: auto;
+    }
+}
