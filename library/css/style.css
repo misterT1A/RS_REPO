@@ -79,12 +79,13 @@ body {
 }
 
 .header__wrapper {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 90px;
   padding: 0 20px;
-  background-color: #000;
+  background-color: #0C0C0E;
 }
 
 .header__title {
@@ -98,6 +99,9 @@ body {
 .nav_prof__header {
   display: flex;
   justify-content: space-between;
+}
+.nav_prof__header img {
+  cursor: pointer;
 }
 
 .nav {
@@ -120,7 +124,76 @@ body {
   text-decoration: underline;
 }
 
+.burger_icon {
+  position: relative;
+  z-index: 5;
+  top: 3px;
+  display: flex;
+  align-items: center;
+  height: 20px;
+  margin-left: 40px;
+  cursor: pointer;
+}
+
+.burger_item {
+  position: relative;
+  z-index: 5;
+  display: block;
+  content: " ";
+  width: 45px;
+  height: 2px;
+  background-color: #FFFFFF;
+  transition: background-color 0.2s linear;
+}
+.burger_item::before, .burger_item::after {
+  position: absolute;
+  left: 0;
+  z-index: 5;
+  display: block;
+  content: " ";
+  width: 45px;
+  height: 2px;
+  background-color: #FFFFFF;
+  transition: transform 0.2s linear;
+}
+.burger_item::before {
+  top: -10px;
+}
+.burger_item::after {
+  bottom: -10px;
+}
+
+.burger_item.burger_close {
+  background-color: transparent;
+}
+.burger_item.burger_close::before {
+  top: 0;
+  transform: rotate(-45deg);
+}
+.burger_item.burger_close::after {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 4;
+  padding: 100px 107px;
+  width: 332px;
+  height: 570px;
+  background-color: #000;
+}
+
+.nav__list {
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 30px;
+}
+
 .profile__header {
+  z-index: 5;
   display: flex;
   align-items: center;
   margin-left: 40px;
@@ -129,11 +202,10 @@ body {
   cursor: pointer;
 }
 
-@media screen and (max-width: 1024px) {
-  .nav {
-    display: none;
-  }
+.nav_item {
+  text-align: center;
 }
+
 .welcome__wrapper {
   background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.1) 100%), url("./../img/welcome.jpg") center/cover no-repeat;
   min-height: 600px;
@@ -933,4 +1005,10 @@ body {
   font-size: 20px;
   line-height: 20px;
   letter-spacing: 2px;
+}
+
+@media screen and (max-width: 768px) {
+  .footer_list li:nth-child(2) {
+    margin-left: 3px;
+  }
 }/*# sourceMappingURL=style.css.map */

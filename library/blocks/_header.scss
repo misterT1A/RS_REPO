@@ -1,10 +1,11 @@
 .header__wrapper {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 90px;
     padding: 0 20px;
-    background-color: $black;
+    background-color: $black2;
 }
 
 .header__title {
@@ -18,6 +19,10 @@
 .nav_prof__header {
     display: flex;
     justify-content: space-between;
+
+    & img {
+        cursor: pointer;
+    }
 }
 
 .nav {
@@ -41,7 +46,87 @@
     }
 }
 
+//BURGER BUTTON//---------------
+
+.burger_icon {
+    position: relative;
+    z-index: 5;
+    top: 3px;
+    display: flex;
+    align-items: center;
+    height: 20px;
+    margin-left: 40px;
+    cursor: pointer;
+}
+
+.burger_item {
+    position: relative;
+    z-index: 5;
+    display: block;
+    content: " ";
+    width: 45px;
+    height: 2px;
+    background-color: $white;
+    transition: background-color 0.2s linear;
+
+    &::before, &::after {
+        position: absolute;
+        left: 0;
+        z-index: 5;
+        display: block;
+        content: " ";
+        width: 45px;
+        height: 2px;
+        background-color: $white;
+        transition: transform 0.2s linear;
+    }
+
+    &::before {
+        top: -10px;
+    }
+
+    &::after {
+        bottom: -10px;
+    }
+}
+
+.burger_item.burger_close {
+    background-color: transparent;
+
+    &::before {
+       top: 0; 
+        transform: rotate(-45deg);
+    }
+
+    &::after {
+        top: 0; 
+        transform: rotate(45deg);
+    }
+}
+
+//BURGER MENU//---------------
+
+.nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 4;
+    padding: 100px 107px;
+    width: 332px;
+    height: 570px;
+    background-color: $black;
+}
+
+.nav__list {
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 30px;
+}
+
+//----------------
+
 .profile__header {
+    z-index: 5;
     display: flex;
     align-items: center;
     margin-left: 40px;
@@ -51,8 +136,16 @@
     }
 }
 
+.nav_item {
+    text-align: center;
+}
+
 @media screen and (max-width: 1024px) {
-    .nav {
-        display: none;
-    }
+    // .nav {
+    //     display: none;
+    // }
+
+    // .burger_icon {
+    //     display: flex;
+    // }
 }
