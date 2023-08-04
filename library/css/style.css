@@ -128,9 +128,9 @@ body {
   position: relative;
   z-index: 5;
   top: 3px;
-  display: flex;
+  display: none;
   align-items: center;
-  height: 20px;
+  height: 50px;
   margin-left: 40px;
   cursor: pointer;
 }
@@ -175,23 +175,6 @@ body {
   transform: rotate(45deg);
 }
 
-.nav {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 4;
-  padding: 100px 107px;
-  width: 332px;
-  height: 570px;
-  background-color: #000;
-}
-
-.nav__list {
-  flex-direction: column;
-  justify-content: center;
-  row-gap: 30px;
-}
-
 .profile__header {
   z-index: 5;
   display: flex;
@@ -206,6 +189,38 @@ body {
   text-align: center;
 }
 
+@media screen and (max-width: 1024px) {
+  .nav_wrapper.nav_active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+  }
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    z-index: 4;
+    padding: 100px 107px;
+    width: 332px;
+    height: 570px;
+    background-color: #000;
+    transition: right 0.4s linear;
+  }
+  .nav.nav_open {
+    right: 0;
+  }
+  .nav__list {
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 30px;
+  }
+  .burger_icon {
+    display: flex;
+  }
+}
 .welcome__wrapper {
   background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.1) 100%), url("./../img/welcome.jpg") center/cover no-repeat;
   min-height: 600px;

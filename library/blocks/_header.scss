@@ -25,6 +25,7 @@
     }
 }
 
+
 .nav {
     width: 584px;
 }
@@ -52,12 +53,13 @@
     position: relative;
     z-index: 5;
     top: 3px;
-    display: flex;
+    display: none;
     align-items: center;
-    height: 20px;
+    height: 50px;
     margin-left: 40px;
     cursor: pointer;
 }
+
 
 .burger_item {
     position: relative;
@@ -104,26 +106,7 @@
     }
 }
 
-//BURGER MENU//---------------
-
-.nav {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 4;
-    padding: 100px 107px;
-    width: 332px;
-    height: 570px;
-    background-color: $black;
-}
-
-.nav__list {
-    flex-direction: column;
-    justify-content: center;
-    row-gap: 30px;
-}
-
-//----------------
+//-----
 
 .profile__header {
     z-index: 5;
@@ -141,11 +124,40 @@
 }
 
 @media screen and (max-width: 1024px) {
-    // .nav {
-    //     display: none;
-    // }
+    .nav_wrapper.nav_active {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        width: 100vw;
+        height: 100vh;
 
-    // .burger_icon {
-    //     display: flex;
-    // }
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 4;
+        padding: 100px 107px;
+        width: 332px;
+        height: 570px;
+        background-color: $black;
+        transition: right 0.4s linear;
+    }
+
+    .nav.nav_open {
+        right: 0;
+    }
+    
+    .nav__list {
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 30px;
+    }
+    
+
+    .burger_icon {
+        display: flex;
+    }
 }
