@@ -41,6 +41,10 @@ body {
   color: #d1d0c5;
 }
 
+.hidden {
+  overflow: hidden;
+}
+
 .container {
   max-width: 1440px;
   width: 100%;
@@ -127,7 +131,7 @@ body {
 .burger_icon {
   position: relative;
   z-index: 5;
-  top: 3px;
+  top: 0;
   display: none;
   align-items: center;
   height: 50px;
@@ -206,7 +210,7 @@ body {
     padding: 100px 107px;
     width: 332px;
     height: 570px;
-    background-color: #000;
+    background-color: #0C0C0E;
     transition: right 0.4s linear;
   }
   .nav.nav_open {
@@ -234,7 +238,7 @@ body {
 
 .welcom_content_inner {
   padding: 35px 0;
-  background-color: #000;
+  background-color: #0C0C0E;
 }
 
 .welcome__title {
@@ -309,6 +313,10 @@ body {
   background-color: #BB945F;
 }
 
+.visible2, .visible1 {
+  display: none;
+}
+
 .slider_btn {
   display: none;
 }
@@ -346,6 +354,9 @@ body {
 }
 
 @media screen and (max-width: 1024px) {
+  .visible2 {
+    display: flex;
+  }
   .slider__inner {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -365,6 +376,9 @@ body {
   }
   .slider__item:nth-child(3) {
     display: none;
+  }
+  .visible1 {
+    display: flex;
   }
   .slider_btn {
     display: block;

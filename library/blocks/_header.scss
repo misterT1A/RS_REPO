@@ -52,7 +52,7 @@
 .burger_icon {
     position: relative;
     z-index: 5;
-    top: 3px;
+    top: 0;
     display: none;
     align-items: center;
     height: 50px;
@@ -142,7 +142,7 @@
         padding: 100px 107px;
         width: 332px;
         height: 570px;
-        background-color: $black;
+        background-color: $black2;
         transition: right 0.4s linear;
     }
 
