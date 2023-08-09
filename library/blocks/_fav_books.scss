@@ -1,15 +1,20 @@
 .fav__books {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 220px;
+    width: 100%;
 }
 
 .book__item {
     position: relative;
-    width: 590px;
-    height: 555px;
+    max-width: 590px;
+    width: 100%;
+    height: auto;
     padding-right: 40px;
     margin-bottom: 40px;
+
+    &:nth-child(2n + 1) {
+        margin-right: auto;
+    }
 }
 
 .book__item.hidden {
@@ -18,8 +23,9 @@
 
 .book__wrapper {
     border: 1px solid $black;
-    padding: 14px 172px 15px 19px;
-    height: 100%;
+    padding: 14px 172px 55px 19px;
+    min-height: 555px;;
+    height: auto;
 }
 
 .book__text {
@@ -75,6 +81,7 @@
     border-color: $brown;
     color: $brown;
     cursor: default;
+
     &:hover {
         background-color: $white;
     }
@@ -88,4 +95,20 @@
     max-width: 200px;
     width: 100%;
     height: auto;
+}
+
+@media screen and (max-width: 1230px) {
+
+    .fav__books {
+        align-items: center;
+        flex-direction: column;
+    }
+
+
+
+    .book__item {
+        &:nth-child(2n + 1) {
+            margin-right: 0;
+        }
+    }
 }

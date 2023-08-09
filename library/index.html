@@ -11,23 +11,28 @@
     <script defer src="./index.js"></script>
 </head>
 
-<body>
+<body id="body">
     <header class="header">
         <div class="container">
             <div class="header__wrapper">
                 <h1 class="header__title">Brooklyn Public Library</h1>
                 <div class="nav_prof__header">
-                    <nav class="nav">
-                        <ul class="nav__list">
-                            <li class="nav_item"><a href="#about">About</a></li>
-                            <li class="nav_item"><a href="#favorite">Favorites</a></li>
-                            <li class="nav_item"><a href="#coffeeShop">Coffee shop</a></li>
-                            <li class="nav_item"><a href="#contacts">Contacts</a></li>
-                            <li class="nav_item"><a href="#libraryCard">Library Card</a></li>
-                        </ul>
-                    </nav>
+                    <div id="navWrapper" class="nav_wrapper">
+                        <nav id="nav" class="nav">
+                            <ul class="nav__list">
+                                <li class="nav_item"><a class="navLink" href="#about">About</a></li>
+                                <li class="nav_item"><a class="navLink" href="#favorite">Favorites</a></li>
+                                <li class="nav_item"><a class="navLink" href="#coffeeShop">Coffee shop</a></li>
+                                <li class="nav_item"><a class="navLink" href="#contacts">Contacts</a></li>
+                                <li class="nav_item"><a class="navLink" href="#libraryCard">Library Card</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                     <div class="profile__header">
                         <img src="./img/icon_profile.svg" alt="icon_profile">
+                    </div>
+                    <div id="burgerIcon" class="burger_icon">
+                        <span id="burgerButton" class="burger_item"></span>
                     </div>
                 </div>
             </div>
@@ -38,7 +43,9 @@
             <div class="container">
                 <div class="welcome__wrapper">
                     <div class="welcome__content">
-                        <h2 class="welcome__title">Welcome<br> to the Brooklyn<br> Library</h2>
+                        <div class="welcom_content_inner">
+                            <h2 class="welcome__title">Welcome<br> to the Brooklyn<br> Library</h2>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,6 +59,9 @@
                         and a cozy coffee shop inside </span>
                     <div class="about__slider">
                         <div class="slider__inner">
+                            <div class="slider_prev">
+                                <img src="./img/prevArrow.svg" alt="prev">
+                            </div>
                             <div class="slider__item">
                                 <img src="./img/about1.png" alt="slide1">
                             </div>
@@ -61,12 +71,17 @@
                             <div class="slider__item">
                                 <img src="./img/about3.png" alt="slide3">
                             </div>
+                            <div class="slider_next">
+                                <img src="./img/nextArrow.svg" alt="next">
+                            </div>
                         </div>
                         <div class="carousel">
                             <ul class="carousel_list">
                                 <li class="carousel_item"><span class="carousel_icon checked"></span></li>
                                 <li class="carousel_item"><span class="carousel_icon"></span></li>
                                 <li class="carousel_item"><span class="carousel_icon"></span></li>
+                                <li class="carousel_item visible2"><span class="carousel_icon"></span></li>
+                                <li class="carousel_item visible1"><span class="carousel_icon"></span></li>
                             </ul>
                         </div>
                     </div>
@@ -99,7 +114,7 @@
                             <label class="radio_item">
                                 <input class="radio_default" type="radio" id="autumn" name="season">
                                 <span class="radio_icon"></span>
-                                <span class="radio_text">Autumn</span>
+                                <span class="radio_text last_text">Autumn</span>
                             </label>
                         </div>
                     </div>
@@ -409,8 +424,8 @@
                         <div class="contacts_right">
                             <iframe class="contacts_map"
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1069.5021789554285!2d-73.9921311438605!3d40.69580002915306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a49b649b8c3%3A0x6342a2291cea2e!2zMjg2IENhZG1hbiBQbGF6YSBXLCBCcm9va2x5biwgTlkgMTEyMDEsINCh0KjQkA!5e0!3m2!1sru!2str!4v1689102186763!5m2!1sru!2str"
-                                width="696" height="414" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                width="696" height="414" style="border:0; width: 100%;" allowfullscreen=""
+                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
@@ -427,14 +442,14 @@
                             <section class="card_wrapper">
                                 <div class="card_data">
                                     <h4 class="card_data_title">Brooklyn Public Library</h4>
-                                    <input class="card_input" type="text" id="cardName" pattern="[A-Za-z]*[\d]*[\-]*" title="Please enter correct name" placeholder="Reader's name">
-                                    <input class="card_input" type="text" id="cardNumber" pattern="[A-Za-z]*[\d]*[\-]*" title="Please enter correct card number" placeholder="Card number">
+                                    <input class="card_input" type="text" id="cardName" pattern="[A-Za-z]*[\d]*[\-]*"
+                                        title="Please enter correct name" placeholder="Reader's name">
+                                    <input class="card_input" type="text" id="cardNumber" pattern="[A-Za-z]*[\d]*[\-]*"
+                                        title="Please enter correct card number" placeholder="Card number">
                                 </div>
                                 <button class="button big">Check the card</button>
                             </section>
                         </form>
-
-
                         <div class="profile_info">
                             <h3 class="profile_title">Get a reader card</h3>
                             <span class="profile_description">You will be able to see a reader card after logging into
@@ -466,7 +481,8 @@
                         <li class="media_item"><a href="https://www.instagram.com/bklynlibrary/" target="_blank">
                                 <img class="media_img" src="./img/instagram.svg" alt="instagram">
                             </a></li>
-                        <li class="media_item"><a href="https://www.facebook.com/BrooklynPublicLibrary/" target="_blank">
+                        <li class="media_item"><a href="https://www.facebook.com/BrooklynPublicLibrary/"
+                                target="_blank">
                                 <img class="media_img" src="./img/facebook.svg" alt="facebook">
                             </a></li>
                     </ul>
@@ -476,7 +492,8 @@
                 <span class="Footer_border"></span>
                 <ul class="footer_list">
                     <li class="footer_list_item">2023</li>
-                    <li class="footer_list_item"><a href="https://rs.school/js-stage0/" target="_blank">The Rolling Scopes School</a></li>
+                    <li class="footer_list_item"><a href="https://rs.school/js-stage0/" target="_blank">The Rolling
+                            Scopes School</a></li>
                     <li class="footer_list_item"><a class="footer_list_item" href="https://github.com/misterT1A"
                             target="_blank">misterT1A</a></li>
                 </ul>
