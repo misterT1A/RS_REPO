@@ -125,3 +125,28 @@
     display: flex;
     column-gap: 20px;
 }
+
+@media screen and (max-width: 768px) {
+    .profile_inner {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card_info {
+        margin-bottom: 21px;
+    }
+
+    .profile_info {
+        align-items: center;
+    }
+
+    .profile_title {
+        margin-bottom: 40px;
+    }
+
+    .profile_description {
+        max-width: 600px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+}

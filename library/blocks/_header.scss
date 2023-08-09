@@ -1,10 +1,11 @@
 .header__wrapper {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 90px;
     padding: 0 20px;
-    background-color: $black;
+    background-color: $black2;
 }
 
 .header__title {
@@ -18,7 +19,12 @@
 .nav_prof__header {
     display: flex;
     justify-content: space-between;
+
+    & img {
+        cursor: pointer;
+    }
 }
+
 
 .nav {
     width: 584px;
@@ -41,7 +47,69 @@
     }
 }
 
+//BURGER BUTTON//---------------
+
+.burger_icon {
+    position: relative;
+    z-index: 5;
+    top: 0;
+    display: none;
+    align-items: center;
+    height: 50px;
+    margin-left: 40px;
+    cursor: pointer;
+}
+
+
+.burger_item {
+    position: relative;
+    z-index: 5;
+    display: block;
+    content: " ";
+    width: 45px;
+    height: 2px;
+    background-color: $white;
+    transition: background-color 0.2s linear;
+
+    &::before, &::after {
+        position: absolute;
+        left: 0;
+        z-index: 5;
+        display: block;
+        content: " ";
+        width: 45px;
+        height: 2px;
+        background-color: $white;
+        transition: transform 0.2s linear;
+    }
+
+    &::before {
+        top: -10px;
+    }
+
+    &::after {
+        bottom: -10px;
+    }
+}
+
+.burger_item.burger_close {
+    background-color: transparent;
+
+    &::before {
+       top: 0; 
+        transform: rotate(-45deg);
+    }
+
+    &::after {
+        top: 0; 
+        transform: rotate(45deg);
+    }
+}
+
+//-----
+
 .profile__header {
+    z-index: 5;
     display: flex;
     align-items: center;
     margin-left: 40px;
@@ -51,3 +119,45 @@
     }
 }
 
+.nav_item {
+    text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+    .nav_wrapper.nav_active {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        width: 100vw;
+        height: 100vh;
+
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 4;
+        padding: 100px 107px;
+        width: 332px;
+        height: 570px;
+        background-color: $black2;
+        transition: right 0.4s linear;
+    }
+
+    .nav.nav_open {
+        right: 0;
+    }
+    
+    .nav__list {
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 30px;
+    }
+    
+
+    .burger_icon {
+        display: flex;
+    }
+}

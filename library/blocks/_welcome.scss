@@ -1,13 +1,17 @@
 .welcome__wrapper {
-    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%), url("./../img/welcome.png") center no-repeat;
+    background: linear-gradient(180deg, #0C0C0E 0%, #0C0C0E 0.01%, rgba(18, 18, 21, 0.10) 100%), url("./../img/welcome.jpg") center / cover no-repeat;
     min-height: 600px;
 }
 
 .welcome__content {
-    padding: 255px 0 0 20px;
+    padding: 219px 0 0 20px;
     max-width: 576px;
     width: 100%;
+}
 
+.welcom_content_inner {
+    padding: 35px 0;
+    background-color: $black2;
 }
 
 .welcome__title {
@@ -19,3 +23,4 @@
     letter-spacing: 3px;
     text-transform: uppercase;
 }
+

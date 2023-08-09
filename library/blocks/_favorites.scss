@@ -35,6 +35,8 @@
 
 .fav__radio {
     display: flex;
+    max-width: 701px;
+    width: 100%;
 }
 
 .radio_text {
@@ -44,7 +46,6 @@
     line-height: normal;
     display: flex;
     align-items: center;
-    margin-right: 90px;
     cursor: pointer;
 
     text-shadow:
@@ -54,14 +55,20 @@
         -0.5px -0.5px 0 #fff;
 
     transition: all 0.2s linear;
+    &.last_text {
+        margin-right: 0px;
+    }
 }
 
 .radio_item {
     display: flex;
     align-items: center;
-    margin-right: 2px;
     padding: 8px 0;
     cursor: pointer;
+
+    &:not(:last-child) {
+        margin-right: auto;
+    }
 }
 
 .radio_default {
