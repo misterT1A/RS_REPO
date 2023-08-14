@@ -30,7 +30,9 @@ navLinks.forEach(elem => {
         nav.classList.toggle('nav_open');
         navWrapper.classList.toggle('nav_active');
         burgerButton.classList.toggle('burger_close');
-        body.classList.toggle('hidden');
+        if (body.classList.contains('hidden')) {
+            body.classList.toggle('hidden');
+        }
     })
 })
 
