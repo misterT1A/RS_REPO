@@ -1,4 +1,3 @@
-console.log("100/100")
 
 // burger menu
 
@@ -36,3 +35,30 @@ navLinks.forEach(elem => {
     })
 })
 
+//ABOUT SLIDER
+const slider = document.querySelector('.slider__inner');
+const sliderItems = document.querySelectorAll('.slider__item');
+const sliderPrev = document.querySelector('.slider_prev');
+const sliderNext = document.querySelector('.slider_next');
+const carusel = document.getElementById('carusel');
+const caruselItem = document.querySelector('.carousel_item');
+// function deleteCaruselIcon() {
+//     carusel.lastElementChild.remove();
+// }
+
+// function addCaruselIcon() {
+//     let cloneItem = caruselItem.cloneNode(true);
+//     carusel.append(cloneItem);
+// }
+
+// window.addEventListener('resize', (e) => {
+//     const width = document.body.clientWidth;
+//     if (width < 1024) {
+//         if (carusel.children.length == 3) {
+//             addCaruselIcon();
+//         }
+//             deleteCaruselIcon()
+        
+//     }
+// })
+// slider.firstElementChild.remove()
