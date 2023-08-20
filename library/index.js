@@ -131,8 +131,6 @@ function setParams(width) {
 
     slidesCount = sliderItems - slidesPerPage;
 
-    caruselItems = document.querySelectorAll('.carousel_item');
-
     if (currentPosition > slidesCount) {
         currentPosition -= slidesPerPage;
     };
