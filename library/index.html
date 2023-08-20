@@ -101,8 +101,6 @@
                 </div>
             </div>
         </section>
-
-
         <section id="favorite" class="favorites">
             <div class="container">
                 <div class="fav__wrapper">
@@ -110,28 +108,28 @@
                     <span class="border"></span>
                     <div class="fav__books__description">
                         <span class="fav__description">Pick favorites of season</span>
-                        <div class="fav__radio">
-                            <label class="radio_item">
-                                <input class="radio_default" type="radio" id="winter" name="season">
-                                <span class="radio_icon"></span>
-                                <span class="radio_text">Winter</span>
-                            </label>
-                            <label class="radio_item">
-                                <input class="radio_default" type="radio" id="spring" name="season">
-                                <span class="radio_icon"></span>
-                                <span class="radio_text">Spring</span>
-                            </label>
-                            <label class="radio_item">
-                                <input class="radio_default" type="radio" id="summer" name="season">
-                                <span class="radio_icon"></span>
-                                <span class="radio_text">Summer</span>
-                            </label>
-                            <label class="radio_item">
-                                <input class="radio_default" type="radio" id="autumn" name="season">
-                                <span class="radio_icon"></span>
-                                <span class="radio_text last_text">Autumn</span>
-                            </label>
-                        </div>
+                    </div>
+                    <div class="fav__radio">
+                        <label class="radio_item">
+                            <input class="radio_default" type="radio" data-check="winter" checked="checked" id="winter" name="season">
+                            <span class="radio_icon"></span>
+                            <span class="radio_text">Winter</span>
+                        </label>
+                        <label class="radio_item">
+                            <input class="radio_default" type="radio" data-check="spring" id="spring" name="season">
+                            <span class="radio_icon"></span>
+                            <span class="radio_text">Spring</span>
+                        </label>
+                        <label class="radio_item">
+                            <input class="radio_default" type="radio" data-check="summer" id="summer" name="season">
+                            <span class="radio_icon"></span>
+                            <span class="radio_text">Summer</span>
+                        </label>
+                        <label class="radio_item">
+                            <input class="radio_default" type="radio" data-check="autumn" id="autumn" name="season">
+                            <span class="radio_icon"></span>
+                            <span class="radio_text last_text">Autumn</span>
+                        </label>
                     </div>
                     <div class="fav__books">
                         <div data-season="winter" class="book__item">
@@ -190,7 +188,7 @@
                                 <img class="book__img" src="./img/books/theLastQueen.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="spring" class="book__item hidden">
+                        <div data-season="spring" class="book__item hidden none ">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -202,7 +200,7 @@
                                 <img class="book__img" src="./img/books/theBody.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="spring" class="book__item hidden">
+                        <div data-season="spring" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -215,7 +213,7 @@
                                 <img class="book__img" src="./img/books/carry.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="spring" class="book__item hidden">
+                        <div data-season="spring" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -228,7 +226,7 @@
                                 <img class="book__img" src="./img/books/days.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="spring" class="book__item hidden">
+                        <div data-season="spring" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -242,7 +240,7 @@
                                 <img class="book__img" src="./img/books/dominicana.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="summer" class="book__item hidden">
+                        <div data-season="summer" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -256,7 +254,7 @@
                                 <img class="book__img" src="./img/books/grude.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="summer" class="book__item hidden">
+                        <div data-season="summer" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -270,7 +268,7 @@
                                 <img class="book__img" src="./img/books/surfing.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="summer" class="book__item hidden">
+                        <div data-season="summer" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -283,7 +281,7 @@
                                 <img class="book__img" src="./img/books/poems.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="summer" class="book__item hidden">
+                        <div data-season="summer" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -297,7 +295,7 @@
                                 <img class="book__img" src="./img/books/shark.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="autumn" class="book__item hidden">
+                        <div data-season="autumn" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -311,7 +309,7 @@
                                 <img class="book__img" src="./img/books/conversation.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="autumn" class="book__item hidden">
+                        <div data-season="autumn" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -325,7 +323,7 @@
                                 <img class="book__img" src="./img/books/fire.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="autumn" class="book__item hidden">
+                        <div data-season="autumn" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>
@@ -339,7 +337,7 @@
                                 <img class="book__img" src="./img/books/rickey.png" alt="book">
                             </div>
                         </div>
-                        <div data-season="autumn" class="book__item hidden">
+                        <div data-season="autumn" class="book__item hidden none">
                             <div class="book__wrapper">
                                 <h4 class="book__text">Staff Picks</h4>
                                 <span class="border book"></span>

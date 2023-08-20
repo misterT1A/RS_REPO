@@ -271,4 +271,31 @@ caruselItems.forEach((elem, index) => {
     elem.addEventListener('click', () => eventClick(index))
 })
 
+
+
+
 //FAVORITES
+const radioBtn = document.querySelectorAll('.radio_default');
+const books = document.querySelectorAll('.book__item');
+
+radioBtn.forEach(elem => {
+    elem.addEventListener('click', () => {
+      books.forEach(book => {
+        if(book.dataset.season != elem.dataset.check) {
+            book.classList.add('hidden');
+            setTimeout(() => {
+                book.classList.add('none');
+            }, 400)
+
+        } else {
+            setTimeout(() => {
+                book.classList.remove('none');
+            }, 400)
+            setTimeout(() => {
+            book.classList.remove('hidden');
+            book.classList.add('visible');           
+            }, 500)
+        }
+      })
+    })
+})

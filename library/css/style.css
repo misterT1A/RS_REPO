@@ -437,13 +437,15 @@ body {
   font-size: 20px;
   font-weight: 700;
   line-height: normal;
-  margin-bottom: 33px;
 }
 
 .fav__radio {
   display: flex;
   max-width: 701px;
   width: 100%;
+  margin-bottom: 33px;
+  margin-right: auto;
+  background-color: #fff;
 }
 
 .radio_text {
@@ -511,6 +513,13 @@ body {
   text-shadow: 0.5px 0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, -0.5px -0.5px 0 #000;
 }
 
+@media screen and (max-width: 1230px) {
+  .fav__radio {
+    position: sticky;
+    top: 15px;
+    z-index: 3;
+  }
+}
 .fav__books {
   display: flex;
   flex-wrap: wrap;
@@ -524,12 +533,21 @@ body {
   height: auto;
   padding-right: 40px;
   margin-bottom: 40px;
+  transition: opacity 0.5s linear;
 }
 .book__item:nth-child(2n+1) {
   margin-right: auto;
 }
 
+.book__item.visible {
+  opacity: 1;
+}
+
 .book__item.hidden {
+  opacity: 0;
+}
+
+.book__item.hidden.none {
   display: none;
 }
 
