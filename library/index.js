@@ -270,3 +270,5 @@ function eventClick(index) {
 caruselItems.forEach((elem, index) => {
     elem.addEventListener('click', () => eventClick(index))
 })
+
+//FAVORITES
