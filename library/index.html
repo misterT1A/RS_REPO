@@ -28,7 +28,21 @@
                         </nav>
                     </div>
                     <div class="profile__header">
-                        <img src="./img/icon_profile.svg" alt="icon_profile">
+                        <img id="profileIcon" src="./img/icon_profile.svg" alt="icon_profile">
+                        <div class="profile_menu_wrapper">
+                            <div class="profile_menu">
+                                <span class="profile_name">
+                                    <a href="#">Profile</a>
+                                </span>
+                                <span class="border profile_border"></span>
+                                <span class="profile_login">
+                                    <a href="#">Log In</a>
+                                </span>
+                                <span class="profile_register">
+                                    <a href="#">Register</a>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div id="burgerIcon" class="burger_icon">
                         <span id="burgerButton" class="burger_item"></span>
@@ -67,7 +81,7 @@
                         </div>
 
 
-                        <div  class="slider_wrapper">
+                        <div class="slider_wrapper">
 
                             <div class="slider__inner">
                                 <div class="slider__item">
@@ -110,7 +124,8 @@
                     </div>
                     <div class="fav__radio">
                         <label class="radio_item">
-                            <input class="radio_default" type="radio" data-check="winter" checked="checked" id="winter" name="season">
+                            <input class="radio_default" type="radio" data-check="winter" checked="checked" id="winter"
+                                name="season">
                             <span class="radio_icon"></span>
                             <span class="radio_text">Winter</span>
                         </label>
@@ -475,9 +490,18 @@
                 </div>
             </div>
         </section>
-        <section class="popups">
-            
-        </section>
+        <!-- <section class="popups">
+            <div id="profile" class="popup open">
+                <div class="popup_body">
+                    <div class="popup_profile_content">
+                        <div class="profile_name">Profile</div>
+                        <span class="border"></span>
+                        <div class="profile_log_in">Log In</div>
+                        <div class="profile_register">Register</div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
     </main>
     <footer class="footer">
         <div class="container">
