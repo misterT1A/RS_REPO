@@ -222,48 +222,51 @@ function slideLeft() {
 sliderNext.addEventListener('click', slideLeft)
 sliderPrev.addEventListener('click', slideRight)
 
-function eventClick(index) {  
-            if (slidesPerPage === 3) {
+function eventClick(index) {
+    if (slidesPerPage === 3) {
 
-                currentMargin =  -(((100 / slidesPerPage) + 0.6) * index);
-                currentPosition = index;
-                
-                slider.style.marginLeft = currentMargin + '%';
+        currentMargin = -(((100 / slidesPerPage) + 0.6) * index);
+        currentPosition = index;
 
-                caruselIcons.forEach(elem => {
-                    if (elem.classList.contains('checked')) {
-                        elem.classList.remove('checked');
-                    }
-                })
-                caruselIcons[currentPosition].classList.add('checked');
+        slider.style.marginLeft = currentMargin + '%';
 
-            } else if (slidesPerPage === 2) {
-
-                currentMargin =  -(((100 / slidesPerPage) + 1.4) * index);
-                currentPosition = index;
-                slider.style.marginLeft = currentMargin  + '%';
-
-                caruselIcons.forEach(elem => {
-                    if (elem.classList.contains('checked')) {
-                        elem.classList.remove('checked');
-                    }
-                })
-                caruselIcons[currentPosition].classList.add('checked');
-
-            } else {
-
-                currentMargin =  -(((100 / slidesPerPage) + 5.4) * index);
-                currentPosition = index;
-                slider.style.marginLeft = currentMargin  + '%';
-
-                caruselIcons.forEach(elem => {
-                    if (elem.classList.contains('checked')) {
-                        elem.classList.remove('checked');
-                    }
-                })
-                caruselIcons[currentPosition].classList.add('checked');
-
+        caruselIcons.forEach(elem => {
+            if (elem.classList.contains('checked')) {
+                elem.classList.remove('checked');
             }
+        })
+        caruselIcons[currentPosition].classList.add('checked');
+
+    } else if (slidesPerPage === 2) {
+
+        currentMargin = -(((100 / slidesPerPage) + 1.4) * index);
+        currentPosition = index;
+        slider.style.marginLeft = currentMargin + '%';
+
+        caruselIcons.forEach(elem => {
+            if (elem.classList.contains('checked')) {
+                elem.classList.remove('checked');
+            }
+        })
+        caruselIcons[currentPosition].classList.add('checked');
+
+    } else {
+
+        currentMargin = -(((100 / slidesPerPage) + 5.4) * index);
+        currentPosition = index;
+        slider.style.marginLeft = currentMargin + '%';
+
+        caruselIcons.forEach(elem => {
+            if (elem.classList.contains('checked')) {
+                elem.classList.remove('checked');
+            }
+        })
+        caruselIcons[currentPosition].classList.add('checked');
+
+    }
+
+
+    checkArrow();
 
 }
 
@@ -272,30 +275,28 @@ caruselItems.forEach((elem, index) => {
 })
 
 
-
-
 //FAVORITES
 const radioBtn = document.querySelectorAll('.radio_default');
 const books = document.querySelectorAll('.book__item');
 
 radioBtn.forEach(elem => {
     elem.addEventListener('click', () => {
-      books.forEach(book => {
-        if(book.dataset.season != elem.dataset.check) {
-            book.classList.add('hidden');
-            setTimeout(() => {
-                book.classList.add('none');
-            }, 400)
+        books.forEach(book => {
+            if (book.dataset.season != elem.dataset.check) {
+                book.classList.add('hidden');
+                setTimeout(() => {
+                    book.classList.add('none');
+                }, 400)
 
-        } else {
-            setTimeout(() => {
-                book.classList.remove('none');
-            }, 400)
-            setTimeout(() => {
-            book.classList.remove('hidden');
-            book.classList.add('visible');           
-            }, 500)
-        }
-      })
+            } else {
+                setTimeout(() => {
+                    book.classList.remove('none');
+                }, 400)
+                setTimeout(() => {
+                    book.classList.remove('hidden');
+                    book.classList.add('visible');
+                }, 500)
+            }
+        })
     })
 })
