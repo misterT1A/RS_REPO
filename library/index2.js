@@ -1,11 +1,10 @@
 const profileMenu = document.querySelector('.profile_menu');
 const profileIcon = document.getElementById('profileIcon');
-const body2 = document.getElementById('body');
 
 //profileMenu===================
 let openMenu = false;
 profileIcon.addEventListener('click', () => {
-    if(!openMenu) {
+    if (!openMenu) {
         profileMenu.classList.add('profile_open')
         setTimeout(() => {
             openMenu = true;
@@ -16,7 +15,18 @@ profileIcon.addEventListener('click', () => {
     }
 })
 
-body2.addEventListener('click', (elem) => {
+body.addEventListener('click', (elem) => {
+
+
+    if (elem.target.classList.contains('profile_icon')
+        && !openMenu
+        && nav.classList.contains('nav_open')) {
+        nav.classList.toggle('nav_open');
+        navWrapper.classList.toggle('nav_active');
+        burgerButton.classList.toggle('burger_close');
+        body.classList.toggle('hidden');
+    }
+
     if (openMenu && elem.target != profileMenu) {
         profileMenu.classList.remove('profile_open')
         openMenu = false;
@@ -24,15 +34,13 @@ body2.addEventListener('click', (elem) => {
 })
 ////====================
 
-//popUP ==============
+// //popUP ==============
 const popLinks = document.querySelectorAll('.modal_link');
 const closeBtns = document.querySelectorAll('.close_btn');
-
-
 let unlock = true;
-const setTimeout = 800;
+const timeout = 800;
 
-if(popLinks.length > 0) {
+if (popLinks.length > 0) {
     popLinks.forEach(elem => {
         elem.addEventListener('click', (e) => {
             const currentPopup = document.getElementById(elem.dataset.link);
@@ -42,10 +50,10 @@ if(popLinks.length > 0) {
     })
 }
 
-if(closeBtns.length > 0) {
+if (closeBtns.length > 0) {
     closeBtns.forEach(elem => {
         elem.addEventListener('click', (e) => {
-           const parantClose = elem.closest('popup');
+            const parantClose = elem.closest('.popup');
             popupClose(parantClose);
             e.preventDefault();
         })
@@ -53,7 +61,50 @@ if(closeBtns.length > 0) {
 }
 
 function popupOpen(currentPopup) {
-    if(currentPopup && unlock) {
-        
+    if (currentPopup && unlock) {
+        const popupActice = document.querySelector('.popup.open');
+        if (popupActice) {
+            popupClose(popupActice, false);
+        } else {
+            bodyLock();
+        }
+    }
+    currentPopup.classList.add('open');
+    currentPopup.addEventListener('click', (e) => {
+        if (!e.target.closest('.popup_content')) {
+            popupClose(e.target.closest('.popup'));
+        }
+    })
+}
+
+function popupClose(popup, doUnLock = true) {
+    if (unlock) {
+        popup.classList.remove('open');
+    }
+    if (doUnLock) {
+        bodyUnLock();
     }
 }
+
+function bodyLock() {
+    const lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + 'px';
+    body.style.paddingRight = lockPaddingValue;
+    body.classList.add('hidden');
+    unlock = false;
+    setTimeout(() => {
+        unlock = true;
+    }, timeout);
+}
+
+function bodyUnLock() {
+    setTimeout(() => {
+        body.style.paddingRight = '0px';
+        body.classList.remove('hidden');
+        unlock = false;
+        setTimeout(() => {
+            unlock = true;
+        }, timeout)
+    }, timeout)
+}
+//==================
+//login register logic

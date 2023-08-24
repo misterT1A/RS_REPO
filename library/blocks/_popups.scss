@@ -4,7 +4,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #0000007c;
+    z-index: 100;
+    background-color: #0000009a;
 
     opacity: 0;
     visibility: hidden;
@@ -20,7 +21,7 @@
     visibility: visible;
 }
 
-.popup.open .popup_content {
+.popup.open .login_popup {
     opacity: 1;
     transform: perspective(600px) translate(0px, 0px) rotateX(0deg);
 }
@@ -31,22 +32,6 @@
     align-items: center;
     justify-content: center;
     padding: 30px 10px;
-}
-
-.popup_login_content {
-    position: relative;
-    background-color: #ffffff;
-    color: #000;
-    width: 250px;
-    height: 262px;
-    padding: 20px 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    transition: all 0.8s ease 0s;
-    // opacity: 0;
-    // transform: perspective(600px) translate(0px, -100%) rotateX(45deg);
 }
 
 .close_btn {
@@ -74,6 +59,23 @@
     transform: scale(1.3) rotate(45deg);
 }
 
+// login
+.login_popup {
+    position: relative;
+    background-color: #ffffff;
+    color: #000;
+    width: 250px;
+    height: 262px;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transition: all 0.8s ease 0s;
+    opacity: 0;
+    transform: perspective(600px) translate(0px, -100%) rotateX(45deg);
+}
+
 .pop_login_title {
     color: #000;
     font-family: Forum;
@@ -94,8 +96,7 @@
 
 .login_email_input {}
 
-.login_email_input,
-.login_pass_input {
+.loginRegister_input {
     height: 20px;
     width: 100%;
     border: 1px solid $brown;
@@ -128,3 +129,28 @@
     letter-spacing: 1px;
     text-decoration-line: underline;
 }
+
+// =================
+// Register
+
+.popup.open .register_popup {
+    opacity: 1;
+    transform: perspective(600px) translate(0px, 0px) rotateX(0deg);
+}
+
+.register_popup {
+    position: relative;
+    background-color: #ffffff;
+    color: #000;
+    width: 250px;
+    height: 382px;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transition: all 0.8s ease 0s;
+    opacity: 0;
+    transform: perspective(600px) translate(0px, -100%) rotateX(45deg);
+}
+//=========
