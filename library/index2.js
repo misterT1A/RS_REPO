@@ -80,6 +80,9 @@ function popupOpen(currentPopup) {
 function popupClose(popup, doUnLock = true) {
     if (unlock) {
         popup.classList.remove('open');
+        document.querySelectorAll('.form_login').forEach(elem => {
+            elem.reset();
+        });
     }
     if (doUnLock) {
         bodyUnLock();
@@ -111,7 +114,7 @@ function bodyUnLock() {
 const formRegister = document.getElementById('formRegister');
 
 
-function submitForm(event) {
+function submitRegForm(event) {
 
     const { elements } = formRegister;
     let data = Array.from(elements)
@@ -122,12 +125,23 @@ function submitForm(event) {
         })
 
     let objData = data.reduce((acc, elem) => {
-       acc[elem.name] = elem.value
-       return acc;
+        acc[elem.name] = elem.value
+        return acc;
     }, {})
 
-    let serObj = JSON.stringify(objData)
-    localStorage.setItem(objData.firstName, serObj)
+    if(localStorage.getItem('users')) {
+        let users = JSON.parse(localStorage.getItem('users'))
+        console.log(users)
+        users.push(objData)
+        localStorage.setItem('users', JSON.stringify(users))
+    } else {
+        let arrUsers = []
+        arrUsers.push(objData)
+        localStorage.setItem('users', JSON.stringify(arrUsers))
+    }
+
+    // let serObj = JSON.stringify(arrUsers)
+    // localStorage.setItem('users', serObj)
     setTimeout(() => {
         showInfoRegister();
     }, timeout)
@@ -147,6 +161,33 @@ function showInfoRegister() {
 
 localStorage.clear()
 
-formRegister.addEventListener('submit', submitForm)
+
+formRegister.addEventListener('submit', submitRegForm)
 //================================
 //Login logic
+const formLogin = document.getElementById('formLogin');
+
+function submitLogForm(event) {
+    const { elements } = formLogin;
+    let data = Array.from(elements)
+        .filter((item) => !!item.name)
+        .map((element) => {
+            const { name, value } = element
+            return { name, value }
+        })
+
+    let objData = data.reduce((acc, elem) => {
+        acc[elem.name] = elem.value
+        return acc;
+    }, {})
+    let arrUsers = []
+    arrUsers.push(objData)
+
+    // if()
+    // let user = localStorage.getItem
+    // popupClose(formRegister.closest('.popup'))
+    event.preventDefault();
+    event.target.reset();
+}
+
+formLogin.addEventListener('submit', submitLogForm)
