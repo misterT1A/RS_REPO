@@ -1208,11 +1208,22 @@ body {
   letter-spacing: 0.3px;
 }
 
-.loginRegister_input {
+.login_input,
+.Register_input {
   height: 20px;
   width: 100%;
   border: 1px solid #BB945F;
   margin: 10px 0;
+}
+
+.login_input,
+.Register_input:valid {
+  border-color: green;
+}
+
+.login_input,
+.Register_input:invalid {
+  border-color: red;
 }
 
 .btn_modal {

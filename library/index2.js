@@ -108,3 +108,44 @@ function bodyUnLock() {
 }
 //==================
 //login register logic
+const formRegister = document.getElementById('formRegister');
+
+
+
+function serializeForm(formNode) {
+    const { elements } = formNode
+    let data = Array.from(elements)
+        .filter((item) => !!item.name)
+        .map((element) => {
+            const { name, value } = element
+
+            return { name, value }
+        })
+}
+
+
+serializeForm(formRegister)
+
+function handleFormSubmit(event) {
+
+    const { elements } = formRegister;
+    let data = Array.from(elements)
+        .filter((item) => !!item.name)
+        .map((element) => {
+            const { name, value } = element
+            return { name, value }
+        })
+
+    let objData = data.reduce((acc, elem) => {
+       acc[elem.name] = elem.value
+       return acc;
+    }, {})
+
+    let serObj = JSON.stringify(objData)
+    localStorage.setItem(objData.firstName, serObj)
+    event.preventDefault();
+}
+
+localStorage.clear()
+
+formRegister.addEventListener('submit', handleFormSubmit)
