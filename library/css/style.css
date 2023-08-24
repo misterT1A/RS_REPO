@@ -1155,10 +1155,12 @@ body {
   position: relative;
   background-color: #ffffff;
   color: #000;
-  max-width: 250px;
-  width: 100%;
+  width: 250px;
   height: 262px;
   padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   transition: all 0.8s ease 0s;
 }
 
@@ -1192,6 +1194,7 @@ body {
   line-height: 20px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
 .login_label {
@@ -1207,4 +1210,32 @@ body {
   height: 20px;
   width: 100%;
   border: 1px solid #BB945F;
+  margin: 10px 0;
+}
+
+.btn_modal {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.login_info {
+  width: 100%;
+}
+
+.login_info_title {
+  color: #000;
+  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
+  font-family: Inter;
+  font-size: 10px;
+  margin-right: 10px;
+}
+
+.login_info_link {
+  color: #0C0C0E;
+  text-align: center;
+  font-family: Inter;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration-line: underline;
 }/*# sourceMappingURL=style.css.map */
