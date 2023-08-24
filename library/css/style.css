@@ -1119,7 +1119,8 @@ body {
     margin-left: 3px;
   }
 }
-.popup {
+.popup,
+.popup_registerInfo {
   position: fixed;
   top: 0;
   left: 0;
@@ -1144,7 +1145,8 @@ body {
   transform: perspective(600px) translate(0px, 0px) rotateX(0deg);
 }
 
-.popup_body {
+.popup_body,
+.popup_registerInfo_body {
   min-height: 100%;
   display: flex;
   align-items: center;
@@ -1271,4 +1273,44 @@ body {
   transition: all 0.8s ease 0s;
   opacity: 0;
   transform: perspective(600px) translate(0px, -100%) rotateX(45deg);
+}
+
+.form_login {
+  position: relative;
+}
+
+.popup_registerInfo {
+  background-color: transparent;
+}
+
+.popup_registerInfo.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup_registerInfo.open .register_info {
+  opacity: 1;
+  transform: perspective(600px) translate(0px, 0px) rotateX(0deg);
+}
+
+.register_info {
+  width: 310px;
+  height: 48px;
+  background-color: rgb(63, 63, 63);
+  transition: all 0.2s linear;
+}
+
+.register_info.register_open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.register_text {
+  color: #FFFFFF;
+  text-shadow: 0px 2px 3px rgba(255, 255, 255, 0.16);
+  font-family: Inter;
+  font-size: 20px;
+  margin-right: 10px;
+  width: 100%;
+  text-align: center;
 }/*# sourceMappingURL=style.css.map */

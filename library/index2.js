@@ -107,26 +107,11 @@ function bodyUnLock() {
     }, timeout)
 }
 //==================
-//login register logic
+// register logic
 const formRegister = document.getElementById('formRegister');
 
 
-
-function serializeForm(formNode) {
-    const { elements } = formNode
-    let data = Array.from(elements)
-        .filter((item) => !!item.name)
-        .map((element) => {
-            const { name, value } = element
-
-            return { name, value }
-        })
-}
-
-
-serializeForm(formRegister)
-
-function handleFormSubmit(event) {
+function submitForm(event) {
 
     const { elements } = formRegister;
     let data = Array.from(elements)
@@ -143,9 +128,25 @@ function handleFormSubmit(event) {
 
     let serObj = JSON.stringify(objData)
     localStorage.setItem(objData.firstName, serObj)
+    setTimeout(() => {
+        showInfoRegister();
+    }, timeout)
+
+    popupClose(formRegister.closest('.popup'))
     event.preventDefault();
+    event.target.reset();
+}
+
+function showInfoRegister() {
+    const infoReg = document.getElementById('registerInfo');
+    infoReg.classList.add('open')
+    setTimeout(() => {
+        infoReg.classList.remove('open')
+    }, 1200)
 }
 
 localStorage.clear()
 
-formRegister.addEventListener('submit', handleFormSubmit)
+formRegister.addEventListener('submit', submitForm)
+//================================
+//Login logic
