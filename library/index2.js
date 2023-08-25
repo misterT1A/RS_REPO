@@ -112,6 +112,7 @@ function bodyUnLock() {
 //==================
 // register logic
 const formRegister = document.getElementById('formRegister');
+const regInfoText = document.querySelector('.register_text');
 
 
 function submitRegForm(event) {
@@ -129,19 +130,30 @@ function submitRegForm(event) {
         return acc;
     }, {})
 
-    if(localStorage.getItem('users')) {
+    if (localStorage.getItem('users')) {
         let users = JSON.parse(localStorage.getItem('users'))
-        console.log(users)
-        users.push(objData)
-        localStorage.setItem('users', JSON.stringify(users))
+
+        let coincidence = false;
+        users.forEach(elem => {
+            if (elem.email === objData.email) {
+                coincidence = true;
+                const regInfoText = document.querySelector('.register_text');
+                regInfoText.textContent = 'User from this email already exists';
+                localStorage.setItem('users', JSON.stringify(users))
+            }
+        })
+        if (!coincidence) {
+            regInfoText.textContent = 'Registration completed successfully';
+            users.push(objData)
+            localStorage.setItem('users', JSON.stringify(users))
+        }
+        coincidence = false;
+
     } else {
         let arrUsers = []
         arrUsers.push(objData)
         localStorage.setItem('users', JSON.stringify(arrUsers))
     }
-
-    // let serObj = JSON.stringify(arrUsers)
-    // localStorage.setItem('users', serObj)
     setTimeout(() => {
         showInfoRegister();
     }, timeout)
@@ -166,6 +178,25 @@ formRegister.addEventListener('submit', submitRegForm)
 //================================
 //Login logic
 const formLogin = document.getElementById('formLogin');
+const profileIconInProfile = document.querySelector('.myProfile_icon');
+const profileName = document.querySelector('.myProfile_name');
+const statCounts = document.querySelectorAll('.stat_item_count');
+const booksList = document.querySelector('.myProfile_books_list');
+const cardNumber = document.querySelector('.myProfile_card_numberCard');
+const copyLink = document.querySelector('.myProfile_card_copy');
+
+function changeBodyLogin(elem) {
+    if (!elem.visits) {
+        elem.visits = 1;
+    } else {
+        elem.visits += 1;
+    }
+
+    if (!elem.bonuses) {
+        elem.bonuses = 1240;
+    }
+
+}
 
 function submitLogForm(event) {
     const { elements } = formLogin;
@@ -180,14 +211,38 @@ function submitLogForm(event) {
         acc[elem.name] = elem.value
         return acc;
     }, {})
-    let arrUsers = []
-    arrUsers.push(objData)
 
-    // if()
-    // let user = localStorage.getItem
-    // popupClose(formRegister.closest('.popup'))
+    let users = JSON.parse(localStorage.getItem('users'))
+
+    let coincidence = false;
+
+    users.forEach(elem => {
+        if (objData.email === elem.email && objData.password === elem.password) {
+            coincidence = true;
+
+            elem.login = true;
+            changeBodyLogin(elem);
+        }
+    })
+
+    if (coincidence) {
+        localStorage.setItem('users', JSON.stringify(users))
+        regInfoText.textContent = 'Login completed successfully';
+        coincidence = false;
+    } else {
+        localStorage.setItem('users', JSON.stringify(users))
+        regInfoText.textContent = 'Incorrect data or no user';
+    }
+
+    setTimeout(() => {
+        showInfoRegister();
+    }, timeout)
+
+    popupClose(formLogin.closest('.popup'))
+
     event.preventDefault();
     event.target.reset();
 }
 
 formLogin.addEventListener('submit', submitLogForm)
+//================================
