@@ -171,19 +171,18 @@ function showInfoRegister() {
     }, 1200)
 }
 
-localStorage.clear()
+// localStorage.clear()
 
 
 formRegister.addEventListener('submit', submitRegForm)
 //================================
 //Login logic
 const formLogin = document.getElementById('formLogin');
-const profileIconInProfile = document.querySelector('.myProfile_icon');
-const profileName = document.querySelector('.myProfile_name');
 const statCounts = document.querySelectorAll('.stat_item_count');
 const booksList = document.querySelector('.myProfile_books_list');
 const cardNumber = document.querySelector('.myProfile_card_numberCard');
 const copyLink = document.querySelector('.myProfile_card_copy');
+
 
 function changeBodyLogin(elem) {
     if (!elem.visits) {
@@ -195,6 +194,64 @@ function changeBodyLogin(elem) {
     if (!elem.bonuses) {
         elem.bonuses = 1240;
     }
+
+    if (!elem.books) {
+        elem.books = [];
+        elem.books.push('The Last Queen, Clive Irving');
+        elem.books.push('Dominicana, Angie Cruz');
+    } else {
+        elem.books.push('The Last Queen, Clive Irving');
+        elem.books.push('Dominicana, Angie Cruz');
+    }
+
+    if (!elem.booksCount) {
+        elem.booksCount = elem.books.length;
+    }
+
+    if(!elem.cardNumber) {
+        elem.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16);
+    }
+
+    let profileIconInProfile = document.querySelector('.myProfile_icon');
+    let userIcon = `${elem.firstName[0].toUpperCase()} ${elem.lastName[0].toUpperCase()}`
+    profileIconInProfile.textContent = userIcon;
+
+    let profileName = document.querySelector('.myProfile_name');
+    let firstName = `${elem.firstName[0].toUpperCase()}${elem.firstName.slice(1)}`;
+    let lastName = `${elem.lastName[0].toUpperCase()}${elem.lastName.slice(1)}`;
+
+    if (elem.firstName.length > 10) {
+        firstName = firstName.slice(0, 8) + '...';
+    }
+    if (elem.lastName.length > 10) {
+        lastName = lastName.slice(0, 8) + '...';
+    }
+
+    profileName.textContent = `${firstName} ${lastName}`;
+
+    statCounts.forEach(element => {
+        for (let key in elem) {
+            if (element.dataset.statistic === key) {
+                element.textContent = elem[key];
+            }
+        }
+    })
+
+    booksList.innerHTML = '';
+
+    if (elem.books.length > 0) {
+        elem.books.forEach(elem => {
+            const book = document.createElement('li');
+            book.classList.add('myProfile_book_item')
+            book.textContent = elem;
+            booksList.append(book)
+        }) 
+    }
+
+
+
+
+
 
 }
 
