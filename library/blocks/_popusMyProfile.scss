@@ -84,11 +84,20 @@
     margin-bottom: 20px;
 }
 
+.myProfile_statistics.stat_card_content {
+    column-gap: 34px;
+    margin-bottom: 0;
+}
+
 .stat_item {
     display: flex;
     flex-direction: column;
     align-items: center;
     row-gap: 10px;
+}
+
+.stat_item.stat_card {
+    row-gap: 2px;
 }
 
 .stat_tem_title {
@@ -98,6 +107,10 @@
     line-height: 20px;
     letter-spacing: 0.4px;
     text-transform: capitalize;
+}
+
+.stat_tem_title.stat_card_title {
+    font-size: 10px;
 }
 
 .stat_item_icon {
@@ -164,6 +177,7 @@
 .myProfile_card_numberCard {
     color: #BB945F;
 }
+
 
 .myProfile_card_copy {
     cursor: pointer;

@@ -178,12 +178,13 @@ formRegister.addEventListener('submit', submitRegForm)
 //================================
 //Login logic
 const formLogin = document.getElementById('formLogin');
-const statCounts = document.querySelectorAll('.stat_item_count');
+
 const booksList = document.querySelector('.myProfile_books_list');
 const cardNumber = document.querySelector('.myProfile_card_numberCard');
 const copyLink = document.querySelector('.myProfile_card_copy');
 
 changeBodyLogin()
+// localStorage.clear()
 
 function changeProfileIcon(elem) {
     let profileIconInProfile = document.querySelector('.myProfile_icon');
@@ -200,82 +201,162 @@ function changeProfileIcon(elem) {
     profileIconInHeader.append(newIcon);
 }
 
-function changeDropMenu(elem) {
+function changeDropMenu(cardNumber, logIn = false) {
     const name = document.getElementById('profileNameInDrop');
     const logInMyprof = document.getElementById('profileLoginInDrop');
     const registerLogout = document.getElementById('profileRegisterInDrop');
 
+    if (logIn) {
+        name.textContent = cardNumber;
+        logInMyprof.textContent = 'My profile';
+        logInMyprof.dataset.link = 'myProfile';
+
+        registerLogout.textContent = 'Log Out';
+        registerLogout.dataset.lonk = 'LogOut';
+    } else {
+        name.textContent = 'Profile';
+        logInMyprof.textContent = 'Log In';
+        logInMyprof.dataset.link = 'logIn';
+
+        registerLogout.textContent = 'Register';
+        registerLogout.dataset.lonk = 'register';
+    }
 }
 
-function changeBodyLogin() {
+function changeLibraryCard(elem) {
+    const statistic = document.querySelector('.myProfile_statistics');
+    const clonStat = statistic.cloneNode(true);
+    let btnCard = document.getElementById('cardBtn');
+    const cardWrapper = document.querySelector('.card_wrapper');
 
-    let users = JSON.parse(localStorage.getItem('users'))
-    users.forEach(elem => {
-        if (elem.login) {
 
-            if (!elem.visits) {
-                elem.visits = 1;
-            } else {
-                elem.visits += 1;
-            }
+    if (btnCard) {
+        btnCard.remove()
+    }
 
-            if (!elem.bonuses) {
-                elem.bonuses = 1240;
-            }
+    const statWrapper = document.createElement('div');
+    statWrapper.classList.add('myProfileCloneNodePart');
+    cardWrapper.append(statWrapper);
+    clonStat.classList.add('clone_stat');
+    statWrapper.append(clonStat)
 
-            if (!elem.books) {
-                elem.books = [];
-                elem.books.push('The Last Queen, Clive Irving');
-                elem.books.push('Dominicana, Angie Cruz');
-            } else {
-                elem.books.push('The Last Queen, Clive Irving');
-                elem.books.push('Dominicana, Angie Cruz');
-            }
+    const statCounts = document.querySelectorAll('.stat_item_count');
+    let arrStats = Array.from(statCounts)
 
-            if (!elem.booksCount) {
-                elem.booksCount = elem.books.length;
-            }
+    cardWrapper.classList.add('card_login');
+    arrStats.forEach(element => {
+           if(element.closest('.stat_item').closest('.clone_stat')) {
+            const elem =  element.closest(".stat_item");
+            elem.closest('.myProfile_statistics').classList.add('stat_card_content')
+            elem.classList.add('stat_card');
+            elem.children[0].classList.add('stat_card_title');
 
-            if (!elem.cardNumber) {
-                elem.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16);
-            }
-
-            changeProfileIcon(elem);
-
-            let profileName = document.querySelector('.myProfile_name');
-            let firstName = `${elem.firstName[0].toUpperCase()}${elem.firstName.slice(1)}`;
-            let lastName = `${elem.lastName[0].toUpperCase()}${elem.lastName.slice(1)}`;
-
-            if (elem.firstName.length > 10) {
-                firstName = firstName.slice(0, 8) + '...';
-            }
-            if (elem.lastName.length > 10) {
-                lastName = lastName.slice(0, 8) + '...';
-            }
-
-            profileName.textContent = `${firstName} ${lastName}`;
-
-            statCounts.forEach(element => {
-                for (let key in elem) {
-                    if (element.dataset.statistic === key) {
-                        element.textContent = elem[key];
-                    }
-                }
-            })
-
-            booksList.innerHTML = '';
-
-            if (elem.books.length > 0) {
-                elem.books.forEach(elem => {
-                    const book = document.createElement('li');
-                    book.classList.add('myProfile_book_item')
-                    book.textContent = elem;
-                    booksList.append(book)
-                })
-            }
-
-        }
+            console.log(elem.children[0])
+           }
+ 
     })
+
+}
+
+const copyBtn = document.querySelector('.myProfile_card_copy');
+function copyText(elem) {
+    const copyText = document.querySelector('.myProfile_card_numberCard').textContent;
+    const inputText = document.querySelector('.cardHidden');
+
+    const el = document.createElement('textarea');
+    el.value = copyText;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+}
+copyBtn.addEventListener('click', copyText);
+
+
+function changeBodyLogin() {
+    let users = JSON.parse(localStorage.getItem('users'))
+    if (users) {
+        users.forEach(elem => {
+            if (elem.login) {
+                if (!elem.visits) {
+                    elem.visits = 1;
+                } else {
+                    elem.visits += 1;
+                }
+
+                if (!elem.bonuses) {
+                    elem.bonuses = 1240;
+                }
+
+                if (!elem.books) {
+                    elem.books = [];
+                    elem.books.push('The Last Queen, Clive Irving');
+                    elem.books.push('Dominicana, Angie Cruz');
+                } else {
+                    // elem.books.push('The Last Queen, Clive Irving');
+                    // elem.books.push('Dominicana, Angie Cruz');
+                }
+
+                if (!elem.booksCount) {
+                    elem.booksCount = elem.books.length;
+                }
+
+                if (!elem.cardNumber) {
+                    elem.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16).toUpperCase();
+                }
+
+                localStorage.setItem('users', JSON.stringify(users))
+
+                changeProfileIcon(elem);
+
+                changeDropMenu(elem.cardNumber, true);
+
+                let profileName = document.querySelector('.myProfile_name');
+                let firstName = `${elem.firstName[0].toUpperCase()}${elem.firstName.slice(1)}`;
+                let lastName = `${elem.lastName[0].toUpperCase()}${elem.lastName.slice(1)}`;
+
+                if (elem.firstName.length > 10) {
+                    firstName = firstName.slice(0, 8) + '...';
+                }
+                if (elem.lastName.length > 10) {
+                    lastName = lastName.slice(0, 8) + '...';
+                }
+
+                profileName.textContent = `${firstName} ${lastName}`;
+
+                const cardNumberInProfile = document.querySelector('.myProfile_card_numberCard');
+                cardNumberInProfile.textContent = elem.cardNumber
+
+                changeLibraryCard(elem);
+                const statCounts = document.querySelectorAll('.stat_item_count');
+                statCounts.forEach(element => {
+                    for (let key in elem) {
+                        if (element.dataset.statistic === key) {
+                            element.textContent = elem[key];
+                        }
+                    }
+                })
+
+                booksList.innerHTML = '';
+
+                if (elem.books.length > 0) {
+                    elem.books.forEach(elem => {
+                        const book = document.createElement('li');
+                        book.classList.add('myProfile_book_item')
+                        book.textContent = elem;
+                        booksList.append(book)
+                    })
+                }
+
+            }
+        })
+    }
+}
+
+function logOut() {
 
 }
 
@@ -324,4 +405,7 @@ function submitLogForm(event) {
 }
 
 formLogin.addEventListener('submit', submitLogForm)
+
+
+
 //================================
