@@ -183,75 +183,99 @@ const booksList = document.querySelector('.myProfile_books_list');
 const cardNumber = document.querySelector('.myProfile_card_numberCard');
 const copyLink = document.querySelector('.myProfile_card_copy');
 
+changeBodyLogin()
 
-function changeBodyLogin(elem) {
-    if (!elem.visits) {
-        elem.visits = 1;
-    } else {
-        elem.visits += 1;
-    }
-
-    if (!elem.bonuses) {
-        elem.bonuses = 1240;
-    }
-
-    if (!elem.books) {
-        elem.books = [];
-        elem.books.push('The Last Queen, Clive Irving');
-        elem.books.push('Dominicana, Angie Cruz');
-    } else {
-        elem.books.push('The Last Queen, Clive Irving');
-        elem.books.push('Dominicana, Angie Cruz');
-    }
-
-    if (!elem.booksCount) {
-        elem.booksCount = elem.books.length;
-    }
-
-    if(!elem.cardNumber) {
-        elem.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16);
-    }
-
+function changeProfileIcon(elem) {
     let profileIconInProfile = document.querySelector('.myProfile_icon');
+    let profileIconInHeader = document.getElementById('profileIcon');
+    let profileIconDefault = document.getElementById('profileIconDefault');
+
     let userIcon = `${elem.firstName[0].toUpperCase()} ${elem.lastName[0].toUpperCase()}`
+
     profileIconInProfile.textContent = userIcon;
+    profileIconInHeader.innerHTML = '';
+    let newIcon = document.createElement('div');
+    newIcon.classList.add('profile_header_afterLogin');
+    newIcon.textContent = userIcon;
+    profileIconInHeader.append(newIcon);
+}
 
-    let profileName = document.querySelector('.myProfile_name');
-    let firstName = `${elem.firstName[0].toUpperCase()}${elem.firstName.slice(1)}`;
-    let lastName = `${elem.lastName[0].toUpperCase()}${elem.lastName.slice(1)}`;
+function changeDropMenu(elem) {
+    const name = document.getElementById('profileNameInDrop');
+    const logInMyprof = document.getElementById('profileLoginInDrop');
+    const registerLogout = document.getElementById('profileRegisterInDrop');
 
-    if (elem.firstName.length > 10) {
-        firstName = firstName.slice(0, 8) + '...';
-    }
-    if (elem.lastName.length > 10) {
-        lastName = lastName.slice(0, 8) + '...';
-    }
+}
 
-    profileName.textContent = `${firstName} ${lastName}`;
+function changeBodyLogin() {
 
-    statCounts.forEach(element => {
-        for (let key in elem) {
-            if (element.dataset.statistic === key) {
-                element.textContent = elem[key];
+    let users = JSON.parse(localStorage.getItem('users'))
+    users.forEach(elem => {
+        if (elem.login) {
+
+            if (!elem.visits) {
+                elem.visits = 1;
+            } else {
+                elem.visits += 1;
             }
+
+            if (!elem.bonuses) {
+                elem.bonuses = 1240;
+            }
+
+            if (!elem.books) {
+                elem.books = [];
+                elem.books.push('The Last Queen, Clive Irving');
+                elem.books.push('Dominicana, Angie Cruz');
+            } else {
+                elem.books.push('The Last Queen, Clive Irving');
+                elem.books.push('Dominicana, Angie Cruz');
+            }
+
+            if (!elem.booksCount) {
+                elem.booksCount = elem.books.length;
+            }
+
+            if (!elem.cardNumber) {
+                elem.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16);
+            }
+
+            changeProfileIcon(elem);
+
+            let profileName = document.querySelector('.myProfile_name');
+            let firstName = `${elem.firstName[0].toUpperCase()}${elem.firstName.slice(1)}`;
+            let lastName = `${elem.lastName[0].toUpperCase()}${elem.lastName.slice(1)}`;
+
+            if (elem.firstName.length > 10) {
+                firstName = firstName.slice(0, 8) + '...';
+            }
+            if (elem.lastName.length > 10) {
+                lastName = lastName.slice(0, 8) + '...';
+            }
+
+            profileName.textContent = `${firstName} ${lastName}`;
+
+            statCounts.forEach(element => {
+                for (let key in elem) {
+                    if (element.dataset.statistic === key) {
+                        element.textContent = elem[key];
+                    }
+                }
+            })
+
+            booksList.innerHTML = '';
+
+            if (elem.books.length > 0) {
+                elem.books.forEach(elem => {
+                    const book = document.createElement('li');
+                    book.classList.add('myProfile_book_item')
+                    book.textContent = elem;
+                    booksList.append(book)
+                })
+            }
+
         }
     })
-
-    booksList.innerHTML = '';
-
-    if (elem.books.length > 0) {
-        elem.books.forEach(elem => {
-            const book = document.createElement('li');
-            book.classList.add('myProfile_book_item')
-            book.textContent = elem;
-            booksList.append(book)
-        }) 
-    }
-
-
-
-
-
 
 }
 
@@ -278,15 +302,13 @@ function submitLogForm(event) {
             coincidence = true;
 
             elem.login = true;
-            changeBodyLogin(elem);
+            localStorage.setItem('users', JSON.stringify(users))
+            regInfoText.textContent = 'Login completed successfully';
+            changeBodyLogin();
         }
     })
 
-    if (coincidence) {
-        localStorage.setItem('users', JSON.stringify(users))
-        regInfoText.textContent = 'Login completed successfully';
-        coincidence = false;
-    } else {
+    if (!coincidence) {
         localStorage.setItem('users', JSON.stringify(users))
         regInfoText.textContent = 'Incorrect data or no user';
     }

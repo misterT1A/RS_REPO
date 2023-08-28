@@ -13,6 +13,7 @@
     right: 0;
     z-index: 3;
     opacity: 0;
+    padding: 5px 2px 8px;
     width: 80px;
     height: 0;
     background-color: $white;
@@ -26,7 +27,7 @@
 .profile_menu.profile_open {
     opacity: 1;
     height: 115px;
-    padding: 5px 2px 8px;
+
 }
 
 .profile_name {

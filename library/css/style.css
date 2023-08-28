@@ -190,6 +190,27 @@ body {
   cursor: pointer;
 }
 
+.profile_header_icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile_header_afterLogin {
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #BB945F;
+  font-family: Inter;
+  font-size: 12px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
 .nav_item {
   text-align: center;
 }
@@ -232,6 +253,7 @@ body {
   right: 0;
   z-index: 3;
   opacity: 0;
+  padding: 5px 2px 8px;
   width: 80px;
   height: 0;
   background-color: #FFFFFF;
@@ -244,7 +266,6 @@ body {
 .profile_menu.profile_open {
   opacity: 1;
   height: 115px;
-  padding: 5px 2px 8px;
 }
 
 .profile_name {
