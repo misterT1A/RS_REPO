@@ -186,28 +186,35 @@ const copyLink = document.querySelector('.myProfile_card_copy');
 changeBodyLogin()
 // localStorage.clear()
 
-function changeProfileIcon(elem) {
+function changeProfileIcon(elem, defult = false) {
     let profileIconInProfile = document.querySelector('.myProfile_icon');
     let profileIconInHeader = document.getElementById('profileIcon');
     let profileIconDefault = document.getElementById('profileIconDefault');
 
-    let userIcon = `${elem.firstName[0].toUpperCase()} ${elem.lastName[0].toUpperCase()}`
+    if (!defult) {
+        let userIcon = `${elem.firstName[0].toUpperCase()} ${elem.lastName[0].toUpperCase()}`
 
-    profileIconInProfile.textContent = userIcon;
-    profileIconInHeader.innerHTML = '';
-    let newIcon = document.createElement('div');
-    newIcon.classList.add('profile_header_afterLogin');
-    newIcon.textContent = userIcon;
-    profileIconInHeader.append(newIcon);
+        profileIconInProfile.textContent = userIcon;
+        profileIconInHeader.innerHTML = '';
+        let newIcon = document.createElement('div');
+        newIcon.classList.add('profile_header_afterLogin');
+        newIcon.textContent = userIcon;
+        profileIconInHeader.append(newIcon);
+
+    } else {
+        profileIconInHeader.innerHTML = '';
+        profileIconInHeader.append(profileIconDefault)
+    }
 }
 
-function changeDropMenu(cardNumber, logIn = false) {
+function changeDropMenu(cardNumber, defult = false) {
     const name = document.getElementById('profileNameInDrop');
     const logInMyprof = document.getElementById('profileLoginInDrop');
     const registerLogout = document.getElementById('profileRegisterInDrop');
 
-    if (logIn) {
+    if (!defult) {
         name.textContent = cardNumber;
+        name.style.fontSize = '13px'
         logInMyprof.textContent = 'My profile';
         logInMyprof.dataset.link = 'myProfile';
 
@@ -215,6 +222,7 @@ function changeDropMenu(cardNumber, logIn = false) {
         registerLogout.dataset.lonk = 'LogOut';
     } else {
         name.textContent = 'Profile';
+        name.style.fontSize = '';
         logInMyprof.textContent = 'Log In';
         logInMyprof.dataset.link = 'logIn';
 
@@ -222,40 +230,93 @@ function changeDropMenu(cardNumber, logIn = false) {
         registerLogout.dataset.lonk = 'register';
     }
 }
-
-function changeLibraryCard(elem) {
+//доделать
+function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false) {
     const statistic = document.querySelector('.myProfile_statistics');
     const clonStat = statistic.cloneNode(true);
     let btnCard = document.getElementById('cardBtn');
     const cardWrapper = document.querySelector('.card_wrapper');
+    const cardInfo = document.querySelector('.profile_description');
+    const profileBtn = document.querySelectorAll('.prof_btn');
+    const profileTitle = document.querySelector('.profile_title');
+    const cardInfoTitle = document.querySelector('.card_infoTitle');
+    const cardInputs = document.querySelectorAll('.card_input');
+    const btnProf = document.getElementById('profbtnMyprof');
+    const btnReg = document.getElementById('profBtnReg');
+    const btnLog = document.getElementById('profBtnLog');
 
+    if (!defult) {
+        Array.from(cardInputs).forEach((elem, index) => {
+            if (index === 0) {
+                elem.value = `${firstName} ${lastName}`;
+                elem.disabled = true;
+                elem.style.color = '#BB945F'
+            } else {
+                elem.value = cardNumber;
+                elem.disabled = true;
+                elem.style.color = '#BB945F'
+            }
+        })
 
-    if (btnCard) {
-        btnCard.remove()
+        cardInfoTitle.textContent = 'Your Library card';
+        profileTitle.textContent = 'Visit your profile';
+        cardInfo.textContent = 'With a digital library card you get free access to the Library’s wide array of digital resources including e-books, databases, educational resources, and more.';
+
+        btnProf.classList.remove('prof_hidden');
+        btnReg.classList.add('prof_hidden');
+        btnLog.classList.add('prof_hidden');
+
+        if (btnCard) {
+            btnCard.remove()
+        }
+
+        const statWrapper = document.createElement('div');
+        statWrapper.classList.add('myProfileCloneNodePart');
+        cardWrapper.append(statWrapper);
+        clonStat.classList.add('clone_stat');
+        statWrapper.append(clonStat)
+
+        const statCounts = document.querySelectorAll('.stat_item_count');
+        let arrStats = Array.from(statCounts)
+
+        cardWrapper.classList.add('card_login');
+        arrStats.forEach(element => {
+            if (element.closest('.stat_item').closest('.clone_stat')) {
+                const elem = element.closest(".stat_item");
+                elem.closest('.myProfile_statistics').classList.add('stat_card_content')
+                elem.classList.add('stat_card');
+                elem.children[0].classList.add('stat_card_title');
+            }
+
+        })
+
+    } else {
+        Array.from(cardInputs).forEach((elem, index) => {
+            if (index === 0) {
+                elem.value = "Reader's name";
+                elem.disabled = false;
+                elem.style.color = ''
+            } else {
+                elem.value = "Card number";
+                elem.disabled = false;
+                elem.style.color = ''
+            }
+        })
+
+        cardInfoTitle.textContent = 'Find your Library card';
+        profileTitle.textContent = 'Get a reader card';
+        cardInfo.textContent = 'You will be able to see a reader card after logging into account or you can register a new account';
+
+        btnProf.classList.add('prof_hidden');
+        btnReg.classList.remove('prof_hidden');
+        btnLog.classList.remove('prof_hidden');
+
+        // cardWrapper.append(btnCard);
+
+        // незакончено
+
+        
     }
-
-    const statWrapper = document.createElement('div');
-    statWrapper.classList.add('myProfileCloneNodePart');
-    cardWrapper.append(statWrapper);
-    clonStat.classList.add('clone_stat');
-    statWrapper.append(clonStat)
-
-    const statCounts = document.querySelectorAll('.stat_item_count');
-    let arrStats = Array.from(statCounts)
-
-    cardWrapper.classList.add('card_login');
-    arrStats.forEach(element => {
-           if(element.closest('.stat_item').closest('.clone_stat')) {
-            const elem =  element.closest(".stat_item");
-            elem.closest('.myProfile_statistics').classList.add('stat_card_content')
-            elem.classList.add('stat_card');
-            elem.children[0].classList.add('stat_card_title');
-
-            console.log(elem.children[0])
-           }
- 
-    })
-
 }
 
 const copyBtn = document.querySelector('.myProfile_card_copy');
@@ -312,7 +373,7 @@ function changeBodyLogin() {
 
                 changeProfileIcon(elem);
 
-                changeDropMenu(elem.cardNumber, true);
+                changeDropMenu(elem.cardNumber);
 
                 let profileName = document.querySelector('.myProfile_name');
                 let firstName = `${elem.firstName[0].toUpperCase()}${elem.firstName.slice(1)}`;
@@ -330,7 +391,7 @@ function changeBodyLogin() {
                 const cardNumberInProfile = document.querySelector('.myProfile_card_numberCard');
                 cardNumberInProfile.textContent = elem.cardNumber
 
-                changeLibraryCard(elem);
+                changeLibraryCard(elem, firstName, lastName, elem.cardNumber);
                 const statCounts = document.querySelectorAll('.stat_item_count');
                 statCounts.forEach(element => {
                     for (let key in elem) {

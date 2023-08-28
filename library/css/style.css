@@ -1430,6 +1430,10 @@ body {
        column-gap: 20px;
 }
 
+.prof_hidden {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .profile_inner {
     flex-direction: column;
