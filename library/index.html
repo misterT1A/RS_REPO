@@ -168,7 +168,7 @@
                                         Complete with dysfunctional family values, light Sapphic romance, and a strong,
                                         complex
                                         protagonist. Not for the faint of heart. </p>
-                                    <button data-link="buy" class="button book modal_link">Buy</button>
+                                    <button data-link="buy" class="button book">Buy</button>
                                     <img class="book__img" src="./img/books/theBookEaters.png" alt="book">
                                 </div>
                             </div>
@@ -628,41 +628,55 @@
                                             <div class="block_card_numb">
                                                 <label class="buy_label">
                                                     Bank card number
-                                                    <input class="buy_input" name="cardNumber" type="text">
+                                                    <input class="buy_input" name="cardNumber" type="text"
+                                                        minlength="16" maxlength="16" required
+                                                        pattern="[A-Za-z]*[\d]*[\-]*"
+                                                        title="Please enter correct card number">
                                                 </label>
-                                                <label class="buy_label buy_number_code">
+
+                                                <div class="buy_number_code">
                                                     Expiration code
                                                     <div class="buy_number_code_inputs">
-                                                        <input class="buy_input Expiration_imput" name="ExpirationCode"
-                                                            type="text">
-                                                        <input class="buy_input Expiration_imput" name="ExpirationCode"
-                                                            type="text">
+                                                        <label>
+                                                            <input class="buy_input Expiration_imput"
+                                                                name="ExpirationCodeFirst" type="text" required
+                                                                minlength="2" maxlength="2">
+                                                        </label>
+
+                                                        <label>
+                                                            <input class="buy_input Expiration_imput"
+                                                                name="ExpirationCodeSecond" type="text" required
+                                                                minlength="2" maxlength="2">
+                                                        </label>
                                                     </div>
-                                                </label>
+                                                </div>
 
                                                 <label class="buy_label buy_number_code">
                                                     CVC
-                                                    <input class="buy_input Expiration_imput" name="CVC" type="text">
+                                                    <input class="buy_input Expiration_imput" name="CVC" type="text"
+                                                        required
+                                                        minlength="3" maxlength="3">
                                                 </label>
                                             </div>
                                             <div class="block_name_card">
                                                 <label class="buy_label">
                                                     Cardholder name
-                                                    <input class="buy_input" name="CardholderName" type="text">
+                                                    <input class="buy_input" name="CardholderName" type="text" required>
                                                 </label>
 
                                                 <label class="buy_label">
                                                     Postal code
-                                                    <input class="buy_input" name="PostalCode" type="text">
+                                                    <input class="buy_input" name="PostalCode" type="text" required>
                                                 </label>
 
                                                 <label class="buy_label">
                                                     City / Town
-                                                    <input class="buy_input" name="CityTown" type="text">
+                                                    <input class="buy_input" name="CityTown" type="text" required>
                                                 </label>
                                             </div>
                                             <div class="buy_footer">
-                                                <button class="button btn_modal buy_btn" type="submit">Buy</button>
+                                                <button id="buyBtn" class="button btn_modal buy_btn"
+                                                    type="submit" disabled>Buy</button>
                                                 <div class="buy_price">$ 25.00</div>
                                             </div>
                                         </form>

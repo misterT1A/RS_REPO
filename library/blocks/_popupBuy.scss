@@ -79,6 +79,12 @@
     flex-direction: column;
     row-gap: 10px;
     margin-bottom: 20px;
+
+    color: #000;
+    font-family: Inter;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
 }
 
 .buy_number_code {
@@ -89,6 +95,14 @@
 .buy_number_code_inputs {
     display: flex;
     column-gap: 10px;
+}
+
+.buy_input:valid {
+    border-color: green;
+}
+
+.buy_input:invalid {
+    border-color: $brown;
 }
 
 .block_name_card {
@@ -106,6 +120,18 @@
 
 .button.btn_modal.buy_btn {
     margin: 0px;
+}
+
+.button.btn_modal.buy_btn:disabled {
+    border: 1px solid #c5c5c5;
+    color: #c5c5c5;
+    cursor:auto;
+
+    &:hover {
+        border-radius: 1px;
+        border: 1px solid #c5c5c5;
+        background-color: transparent;
+    }
 }
 
 .buy_price {

@@ -183,9 +183,17 @@ const booksList = document.querySelector('.myProfile_books_list');
 const cardNumber = document.querySelector('.myProfile_card_numberCard');
 const copyLink = document.querySelector('.myProfile_card_copy');
 const libraryBtnCheck = document.getElementById('cardBtn');
+const copyBtn = document.querySelector('.myProfile_card_copy');
 
 changeBodyLogin()
 // localStorage.clear()
+
+function checkValidity(event) {
+    const formNode = event.target.form
+    const isValid = formNode.checkValidity()
+
+    buyBtn.disabled = !isValid
+}
 
 function changeProfileIcon(elem, defult = false) {
     let profileIconInProfile = document.querySelector('.myProfile_icon');
@@ -231,7 +239,7 @@ function changeDropMenu(cardNumber, defult = false) {
         registerLogout.dataset.lonk = 'register';
     }
 }
-//доделать
+
 function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false) {
     const statistic = document.querySelector('.myProfile_statistics');
     const clonStat = statistic.cloneNode(true);
@@ -326,12 +334,12 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
 
         let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
 
-        if(statWrapperNew) {
+        if (statWrapperNew) {
             statWrapperNew.remove();
         }
 
         cardWrapper.classList.remove('card_login');
-        
+
         cardWrapper.append(btnCard);
     }
 }
@@ -346,7 +354,7 @@ function checkCardUser(e) {
     const cardInputs = document.querySelectorAll('.card_input');
 
     const { elements } = formLibrary;
- 
+
     let data = Array.from(elements)
         .filter((item) => !!item.name)
         .map((element) => {
@@ -369,20 +377,20 @@ function checkCardUser(e) {
                     elem.style.color = '#BB945F'
                 }
             })
-        
+
             if (btnCard) {
                 btnCard.remove()
             }
-        
+
             const statWrapper = document.createElement('div');
             statWrapper.classList.add('myProfileCloneNodePart');
             cardWrapper.append(statWrapper);
             clonStat.classList.add('clone_stat');
             statWrapper.append(clonStat)
-        
+
             const statCounts = document.querySelectorAll('.stat_item_count');
             let arrStats = Array.from(statCounts)
-        
+
             cardWrapper.classList.add('card_login');
             arrStats.forEach(element => {
                 if (element.closest('.stat_item').closest('.clone_stat')) {
@@ -391,7 +399,7 @@ function checkCardUser(e) {
                     elem.classList.add('stat_card');
                     elem.children[0].classList.add('stat_card_title');
                 }
-        
+
             })
         }
     })
@@ -413,15 +421,34 @@ function checkCardUser(e) {
         statWrapperNew.remove();
 
         cardWrapper.classList.remove('card_login');
-        
+
         cardWrapper.append(btnCard);
     }, 10000)
     e.preventDefault()
 }
 libraryBtnCheck.addEventListener('click', checkCardUser);
 
+function updateStatInfo() {
+    let users = JSON.parse(localStorage.getItem('users'))
+    users.forEach(elem => {
+        if (elem.login) {
+            let statCounts = document.querySelectorAll('.stat_item_count');
+            statCounts.forEach(element => {
+                console.log(element)
+                for (let key in elem) {
+                    if (element.dataset.statistic === key) {
+                       
+                        element.textContent = elem[key];
+                        console.log(element, element.textContent)
+                    }
+                }
+            })
 
-const copyBtn = document.querySelector('.myProfile_card_copy');
+            addBook(elem);
+        }
+    })
+}
+
 function copyText(elem) {
     const copyText = document.querySelector('.myProfile_card_numberCard').textContent;
     const inputText = document.querySelector('.cardHidden');
@@ -438,6 +465,15 @@ function copyText(elem) {
 }
 copyBtn.addEventListener('click', copyText);
 
+function addBook(elem) {
+    booksList.innerHTML = '';
+    elem.books.forEach(elem => {
+        const book = document.createElement('li');
+        book.classList.add('myProfile_book_item')
+        book.textContent = elem;
+        booksList.append(book)
+    })
+}
 
 function changeBodyLogin() {
     let users = JSON.parse(localStorage.getItem('users'))
@@ -456,11 +492,6 @@ function changeBodyLogin() {
 
                 if (!elem.books) {
                     elem.books = [];
-                    elem.books.push('The Last Queen, Clive Irving');
-                    elem.books.push('Dominicana, Angie Cruz');
-                } else {
-                    // elem.books.push('The Last Queen, Clive Irving');
-                    // elem.books.push('Dominicana, Angie Cruz');
                 }
 
                 if (!elem.booksCount) {
@@ -503,15 +534,10 @@ function changeBodyLogin() {
                     }
                 })
 
-                booksList.innerHTML = '';
+ 
 
                 if (elem.books.length > 0) {
-                    elem.books.forEach(elem => {
-                        const book = document.createElement('li');
-                        book.classList.add('myProfile_book_item')
-                        book.textContent = elem;
-                        booksList.append(book)
-                    })
+                    addBook(elem);
                 }
 
             }
@@ -571,3 +597,54 @@ formLogin.addEventListener('submit', submitLogForm)
 
 //================================
 //buy popup 
+const formBuy = document.getElementById('formbuy');
+const buyBtn = document.getElementById('buyBtn');
+const bookLinks = document.querySelectorAll('.book')
+
+let bookInfo = null;
+
+function getNameBook(elem) {
+    let perent = elem.closest('.book__wrapper');
+    let nameBook = perent.children[2].textContent;
+    let autorBook = perent.children[4].textContent.slice(3);
+    bookInfo = `${nameBook}, ${autorBook}`;
+}
+
+if (bookLinks.length > 0) {
+    bookLinks.forEach(elem => {
+        elem.addEventListener('click', (e) => {
+            const currentPopup = document.getElementById(elem.dataset.link);
+            getNameBook(elem);
+            popupOpen(currentPopup);
+            e.preventDefault();
+        })
+    })
+}
+
+function toBuyBook(e) {
+
+
+    let users = JSON.parse(localStorage.getItem('users'))
+
+    users.forEach(elem => {
+        if (elem.login) {
+            if (bookInfo) {
+                elem.books.push(bookInfo);
+            }
+            elem.booksCount = elem.books.length;
+        }
+    })
+    bookInfo = null;
+    localStorage.setItem('users', JSON.stringify(users))
+
+    updateStatInfo();
+    e.preventDefault()
+    e.target.reset();
+
+    popupClose(formBuy.closest('.popup'))
+}
+
+formBuy.addEventListener('input', checkValidity)
+
+formBuy.addEventListener('submit', toBuyBook);
+//===================
