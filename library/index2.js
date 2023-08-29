@@ -182,6 +182,7 @@ const formLogin = document.getElementById('formLogin');
 const booksList = document.querySelector('.myProfile_books_list');
 const cardNumber = document.querySelector('.myProfile_card_numberCard');
 const copyLink = document.querySelector('.myProfile_card_copy');
+const libraryBtnCheck = document.getElementById('cardBtn');
 
 changeBodyLogin()
 // localStorage.clear()
@@ -311,13 +312,114 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
         btnReg.classList.remove('prof_hidden');
         btnLog.classList.remove('prof_hidden');
 
-        // cardWrapper.append(btnCard);
+        Array.from(cardInputs).forEach((elem, index) => {
+            if (index === 0) {
+                elem.value = "Reader's name";
+                elem.disabled = false;
+                elem.style.color = ''
+            } else {
+                elem.value = "Card number";
+                elem.disabled = false;
+                elem.style.color = ''
+            }
+        })
 
-        // незакончено
+        let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
 
+        if(statWrapperNew) {
+            statWrapperNew.remove();
+        }
+
+        cardWrapper.classList.remove('card_login');
         
+        cardWrapper.append(btnCard);
     }
 }
+
+function checkCardUser(e) {
+    let formLibrary = document.getElementById('formLibrary');
+    let users = JSON.parse(localStorage.getItem('users'))
+    let btnCard = document.getElementById('cardBtn');
+    const cardWrapper = document.querySelector('.card_wrapper');
+    const statistic = document.querySelector('.myProfile_statistics');
+    const clonStat = statistic.cloneNode(true);
+    const cardInputs = document.querySelectorAll('.card_input');
+
+    const { elements } = formLibrary;
+ 
+    let data = Array.from(elements)
+        .filter((item) => !!item.name)
+        .map((element) => {
+            const { name, value } = element
+            return { name, value }
+        })
+
+    let objData = data.reduce((acc, elem) => {
+        acc[elem.name] = elem.value
+        return acc;
+    }, {})
+    users.forEach(elem => {
+        if (`${elem.firstName} ${elem.lastName}` === objData.name && elem.cardNumber === objData.number) {
+            Array.from(cardInputs).forEach((elem, index) => {
+                if (index === 0) {
+                    elem.disabled = true;
+                    elem.style.color = '#BB945F'
+                } else {
+                    elem.disabled = true;
+                    elem.style.color = '#BB945F'
+                }
+            })
+        
+            if (btnCard) {
+                btnCard.remove()
+            }
+        
+            const statWrapper = document.createElement('div');
+            statWrapper.classList.add('myProfileCloneNodePart');
+            cardWrapper.append(statWrapper);
+            clonStat.classList.add('clone_stat');
+            statWrapper.append(clonStat)
+        
+            const statCounts = document.querySelectorAll('.stat_item_count');
+            let arrStats = Array.from(statCounts)
+        
+            cardWrapper.classList.add('card_login');
+            arrStats.forEach(element => {
+                if (element.closest('.stat_item').closest('.clone_stat')) {
+                    const elem = element.closest(".stat_item");
+                    elem.closest('.myProfile_statistics').classList.add('stat_card_content')
+                    elem.classList.add('stat_card');
+                    elem.children[0].classList.add('stat_card_title');
+                }
+        
+            })
+        }
+    })
+
+    setTimeout(() => {
+        Array.from(cardInputs).forEach((elem, index) => {
+            if (index === 0) {
+                elem.value = "Reader's name";
+                elem.disabled = false;
+                elem.style.color = ''
+            } else {
+                elem.value = "Card number";
+                elem.disabled = false;
+                elem.style.color = ''
+            }
+        })
+
+        let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
+        statWrapperNew.remove();
+
+        cardWrapper.classList.remove('card_login');
+        
+        cardWrapper.append(btnCard);
+    }, 10000)
+    e.preventDefault()
+}
+libraryBtnCheck.addEventListener('click', checkCardUser);
+
 
 const copyBtn = document.querySelector('.myProfile_card_copy');
 function copyText(elem) {
@@ -467,6 +569,5 @@ function submitLogForm(event) {
 
 formLogin.addEventListener('submit', submitLogForm)
 
-
-
 //================================
+//buy popup 
