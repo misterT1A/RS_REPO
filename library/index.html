@@ -524,8 +524,10 @@
                                 <div class="profile_buttons">
                                     <button id="profbtnMyprof" data-link="myProfile"
                                         class="button prof_btn modal_link prof_hidden">Profile</button>
-                                    <button id="profBtnReg" data-link="register" class="button prof_btn modal_link">Sign Up</button>
-                                    <button id="profBtnLog" data-link="logIn" class="button prof_btn modal_link">Log in</button>
+                                    <button id="profBtnReg" data-link="register" class="button prof_btn modal_link">Sign
+                                        Up</button>
+                                    <button id="profBtnLog" data-link="logIn" class="button prof_btn modal_link">Log
+                                        in</button>
                                 </div>
                             </div>
                         </div>
@@ -602,6 +604,76 @@
                                     <a data-link="logIn" class="modal_link login_info_link" href="#">Login</a>
                                 </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="buy" class="popup open">
+                    <div class="popup_body">
+                        <div class="popup_content">
+                            <div class="buy_popup">
+                                <div class="close_btn">
+                                    <img class="close_img" src="./img/close_btn_white.svg" alt="close">
+                                </div>
+                                <div class="buy_header">
+                                    <h3 class="buy_header_title">Buy a library card</h3>
+                                </div>
+                                <div class="buy_wrapper">
+                                    <div class="buy_left">
+                                        <form id="formbuy" method="post" class="form_buy">
+                                            <div class="block_card_numb">
+                                                <label class="buy_label">
+                                                    Bank card number
+                                                    <input class="buy_input" name="cardNumber" type="text">
+                                                </label>
+                                                <label class="buy_label buy_number_code">
+                                                    Expiration code
+                                                    <div class="buy_number_code_inputs">
+                                                        <input class="buy_input Expiration_imput" name="ExpirationCode"
+                                                            type="text">
+                                                        <input class="buy_input Expiration_imput" name="ExpirationCode"
+                                                            type="text">
+                                                    </div>
+                                                </label>
+
+                                                <label class="buy_label buy_number_code">
+                                                    CVC
+                                                    <input class="buy_input Expiration_imput" name="CVC" type="text">
+                                                </label>
+                                            </div>
+                                            <div class="block_name_card">
+                                                <label class="buy_label">
+                                                    Cardholder name
+                                                    <input class="buy_input" name="CardholderName" type="text">
+                                                </label>
+
+                                                <label class="buy_label">
+                                                    Postal code
+                                                    <input class="buy_input" name="PostalCode" type="text">
+                                                </label>
+
+                                                <label class="buy_label">
+                                                    City / Town
+                                                    <input class="buy_input" name="CityTown" type="text">
+                                                </label>
+                                            </div>
+                                            <div class="buy_footer">
+                                                <button class="button btn_modal buy_btn" type="submit">Buy</button>
+                                                <div class="buy_price">$ 25.00</div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="buy_right">
+                                        <p class="buy_text">If you are live, work, attend school, or pay property taxes in New York State, you can get a $25 digital library card right now using this online form. Visitors to New York State can also use this form to apply for a temporary card.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- 
+                                <div class="login_info">
+                                    <span class="login_info_title">Don’t have an account?</span>
+                                    <a data-link="register" class="modal_link login_info_link" href="#">Register</a>
+                                </div> -->
                             </div>
                         </div>
                     </div>

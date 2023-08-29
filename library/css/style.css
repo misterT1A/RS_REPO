@@ -97,16 +97,6 @@
   margin: 10px 0;
 }
 
-.login_input,
-.Register_input:valid {
-  border-color: green;
-}
-
-.login_input,
-.Register_input:invalid {
-  border-color: red;
-}
-
 .btn_modal {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -381,6 +371,138 @@
 }
 .myProfile_card_copy:hover {
   transform: scale(1.3);
+}
+
+.popup.open .buy_popup {
+  opacity: 1;
+  transform: perspective(600px) translate(0px, 0px) rotateX(0deg);
+}
+
+.buy_popup {
+  position: relative;
+  background-color: #ffffff;
+  color: #000;
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.8s ease 0s;
+  opacity: 0;
+  transform: perspective(600px) translate(0px, -100%) rotateX(45deg);
+}
+
+.close_btn {
+  top: 22px;
+  right: 18px;
+}
+
+.buy_header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0C0C0E;
+}
+
+.buy_header_title {
+  color: #FFFFFF;
+  text-align: center;
+  font-family: Forum;
+  font-size: 40px;
+  line-height: 20px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.buy_wrapper {
+  display: flex;
+  padding: 30px 35px 40px;
+}
+
+.buy_left {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+}
+
+.buy_label {
+  color: #000;
+  font-family: Inter;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.3px;
+}
+
+.buy_input {
+  margin-top: 10px;
+  height: 20px;
+  width: 100%;
+  border: 1px solid #BB945F;
+}
+
+.buy_input.Expiration_imput {
+  width: 45px;
+}
+
+.block_card_numb {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.buy_number_code {
+  display: flex;
+  flex-direction: column;
+}
+
+.buy_number_code_inputs {
+  display: flex;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+}
+
+.block_name_card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.buy_footer {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.button.btn_modal.buy_btn {
+  margin: 0px;
+}
+
+.buy_price {
+  color: #0C0C0E;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: flex-end;
+}
+
+.buy_right {
+  width: 100%;
+  height: auto;
+  padding-left: 40px;
+}
+
+.buy_text {
+  color: #8E8E8E;
+  font-family: Inter;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 2px;
 }
 
 * {
