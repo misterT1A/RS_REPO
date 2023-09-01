@@ -184,7 +184,7 @@ const formLogin = document.getElementById('formLogin');
 const booksList = document.querySelector('.myProfile_books_list');
 const cardNumber = document.querySelector('.myProfile_card_numberCard');
 const copyLink = document.querySelector('.myProfile_card_copy');
-const libraryBtnCheck = document.getElementById('cardBtn');
+let libraryBtnCheck = document.getElementById('cardBtn');
 const copyBtn = document.querySelector('.myProfile_card_copy');
 
 changeBodyLogin()
@@ -201,7 +201,7 @@ function changeProfileIcon(elem, defult = false) {
     let profileIconInProfile = document.querySelector('.myProfile_icon');
     let profileIconInHeader = document.getElementById('profileIcon');
     const profileIconDefault = document.getElementById('profileIconDefault');
-    console.log(profileIconDefault)
+
 
     if (!defult) {
         let userIcon = `${elem.firstName[0].toUpperCase()} ${elem.lastName[0].toUpperCase()}`
@@ -250,7 +250,7 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
     const statistic = document.querySelector('.myProfile_statistics');
     const clonStat = statistic.cloneNode(true);
     let btnCard = document.getElementById('cardBtn');
-    const cardWrapper = document.querySelector('.card_wrapper');
+    let cardWrapper = document.querySelector('.card_wrapper');
     const cardInfo = document.querySelector('.profile_description');
     const profileBtn = document.querySelectorAll('.prof_btn');
     const profileTitle = document.querySelector('.profile_title');
@@ -291,7 +291,7 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
         clonStat.classList.add('clone_stat');
         statWrapper.append(clonStat)
 
-        const statCounts = document.querySelectorAll('.stat_item_count');
+        let statCounts = document.querySelectorAll('.stat_item_count');
         let arrStats = Array.from(statCounts)
 
         cardWrapper.classList.add('card_login');
@@ -305,19 +305,23 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
 
         })
 
-    } else {
-        Array.from(cardInputs).forEach((elem, index) => {
-            if (index === 0) {
-                elem.value = "Reader's name";
-                elem.disabled = false;
-                elem.style.color = ''
-            } else {
-                elem.value = "Card number";
-                elem.disabled = false;
-                elem.style.color = ''
+        let users = JSON.parse(localStorage.getItem('users'))
+        users.forEach(elem => {
+            if (elem.login) {
+                let statCounts = document.querySelectorAll('.stat_item_count');
+                statCounts.forEach(element => {
+                    for (let key in elem) {
+                        if (element.dataset.statistic === key) {
+
+                            element.textContent = elem[key];
+                        }
+                    }
+                })
+
             }
         })
 
+    } else {
         cardInfoTitle.textContent = 'Find your Library card';
         profileTitle.textContent = 'Get a reader card';
         cardInfo.textContent = 'You will be able to see a reader card after logging into account or you can register a new account';
@@ -346,18 +350,28 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
 
         cardWrapper.classList.remove('card_login');
 
-        cardWrapper.append(btnCard);
+        if (defult && cardWrapper.children.length < 2) {
+            let newBtn = document.createElement('button');
+            newBtn.classList.add('button');
+            newBtn.classList.add('big');
+            newBtn.id = 'cardBtn';
+            newBtn.textContent = 'Check the card';
+            cardWrapper.append(newBtn);
+        }
+
     }
 }
 
 function checkCardUser(e) {
     let formLibrary = document.getElementById('formLibrary');
     let users = JSON.parse(localStorage.getItem('users'))
-    let btnCard = document.getElementById('cardBtn');
+    let btnCard = document.getElementsByClassName('.lybraryBtn');
     const cardWrapper = document.querySelector('.card_wrapper');
     const statistic = document.querySelector('.myProfile_statistics');
     const clonStat = statistic.cloneNode(true);
     const cardInputs = document.querySelectorAll('.card_input');
+
+    let toFind = false;
 
     const { elements } = formLibrary;
 
@@ -372,64 +386,82 @@ function checkCardUser(e) {
         acc[elem.name] = elem.value
         return acc;
     }, {})
-    users.forEach(elem => {
-        if (`${elem.firstName} ${elem.lastName}` === objData.name && elem.cardNumber === objData.number) {
-            Array.from(cardInputs).forEach((elem, index) => {
-                if (index === 0) {
-                    elem.disabled = true;
-                    elem.style.color = '#BB945F'
-                } else {
-                    elem.disabled = true;
-                    elem.style.color = '#BB945F'
-                }
-            })
+    console.log(objData)
+    if (users) {
+        users.forEach(elem => {
+            if (`${elem.firstName} ${elem.lastName}` === objData.name && elem.cardNumber === objData.number) {
+                toFind = true;
+                Array.from(cardInputs).forEach((elem, index) => {
+                    if (index === 0) {
+                        elem.disabled = true;
+                        elem.style.color = '#BB945F'
+                    } else {
+                        elem.disabled = true;
+                        elem.style.color = '#BB945F'
+                    }
+                })
 
-            if (btnCard) {
-                btnCard.remove()
-            }
-
-            const statWrapper = document.createElement('div');
-            statWrapper.classList.add('myProfileCloneNodePart');
-            cardWrapper.append(statWrapper);
-            clonStat.classList.add('clone_stat');
-            statWrapper.append(clonStat)
-
-            const statCounts = document.querySelectorAll('.stat_item_count');
-            let arrStats = Array.from(statCounts)
-
-            cardWrapper.classList.add('card_login');
-            arrStats.forEach(element => {
-                if (element.closest('.stat_item').closest('.clone_stat')) {
-                    const elem = element.closest(".stat_item");
-                    elem.closest('.myProfile_statistics').classList.add('stat_card_content')
-                    elem.classList.add('stat_card');
-                    elem.children[0].classList.add('stat_card_title');
+                if (btnCard) {
+                    btnCard.remove()
                 }
 
-            })
-        }
-    })
+                const statWrapper = document.createElement('div');
+                statWrapper.classList.add('myProfileCloneNodePart');
+                cardWrapper.append(statWrapper);
+                clonStat.classList.add('clone_stat');
+                statWrapper.append(clonStat)
 
-    setTimeout(() => {
-        Array.from(cardInputs).forEach((elem, index) => {
-            if (index === 0) {
-                elem.value = "Reader's name";
-                elem.disabled = false;
-                elem.style.color = ''
-            } else {
-                elem.value = "Card number";
-                elem.disabled = false;
-                elem.style.color = ''
+                let statCounts = document.querySelectorAll('.stat_item_count');
+                let arrStats = Array.from(statCounts)
+
+                cardWrapper.classList.add('card_login');
+                arrStats.forEach(element => {
+                    if (element.closest('.stat_item').closest('.clone_stat')) {
+                        const elem = element.closest(".stat_item");
+                        elem.closest('.myProfile_statistics').classList.add('stat_card_content')
+                        elem.classList.add('stat_card');
+                        elem.children[0].classList.add('stat_card_title');
+                    }
+
+                })
+                statCounts = document.querySelectorAll('.stat_item_count');
+                statCounts.forEach(element => {
+                    for (let key in elem) {
+                        if (element.dataset.statistic === key) {
+
+                            element.textContent = elem[key];
+                        }
+                    }
+                })
             }
         })
 
-        let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
-        statWrapperNew.remove();
+        setTimeout(() => {
+            Array.from(cardInputs).forEach((elem, index) => {
+                if (index === 0) {
+                    elem.value = "Reader's name";
+                    elem.disabled = false;
+                    elem.style.color = ''
+                } else {
+                    elem.value = "Card number";
+                    elem.disabled = false;
+                    elem.style.color = ''
+                }
+            })
 
-        cardWrapper.classList.remove('card_login');
+            let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
+            statWrapperNew.remove();
 
-        cardWrapper.append(btnCard);
-    }, 10000)
+            cardWrapper.classList.remove('card_login');
+
+            cardWrapper.append(btnCard);
+        }, 10000)
+    }
+
+    if (!toFind) {
+        formLibrary.reset()
+    }
+
     e.preventDefault()
 }
 libraryBtnCheck.addEventListener('click', checkCardUser);
@@ -440,12 +472,10 @@ function updateStatInfo() {
         if (elem.login) {
             let statCounts = document.querySelectorAll('.stat_item_count');
             statCounts.forEach(element => {
-                console.log(element)
                 for (let key in elem) {
                     if (element.dataset.statistic === key) {
 
                         element.textContent = elem[key];
-                        console.log(element, element.textContent)
                     }
                 }
             })
@@ -523,12 +553,14 @@ function changeMyProfile(elem, defult = false) {
     }
 }
 
-function changeBodyLogin(defult = false) {
+function changeBodyLogin() {
 
     let users = JSON.parse(localStorage.getItem('users'))
     if (users) {
+        let toFindUserInLogin = false;
         users.forEach(elem => {
             if (elem.login === true) {
+                toFindUserInLogin = true;
                 if (!elem.visits) {
                     elem.visits = 1;
                 } else {
@@ -558,15 +590,18 @@ function changeBodyLogin(defult = false) {
                 changeDropMenu(elem.cardNumber);
 
                 changeMyProfile(elem);
-
-            } else {
-                changeProfileIcon(elem, defult);
-
-                changeDropMenu(elem.cardNumber, defult);
-
-                changeMyProfile(elem, defult);
             }
         })
+
+        if (!toFindUserInLogin) {
+            changeProfileIcon(undefined, true);
+
+            changeDropMenu(undefined, true);
+
+            changeLibraryCard(undefined, undefined, undefined, undefined, true)
+        }
+
+        toFindUserInLogin = false;
     }
 
 }
@@ -634,6 +669,7 @@ function submitLogForm(event) {
 
     popupClose(formLogin.closest('.popup'))
 
+
     event.preventDefault();
     event.target.reset();
 }
@@ -693,3 +729,17 @@ formBuy.addEventListener('input', checkValidity)
 
 formBuy.addEventListener('submit', toBuyBook);
 //===================
+
+async function elementUpdate(selector) {
+    try {
+      var html = await (await fetch(location.href)).text();
+      var newdoc = new DOMParser().parseFromString(html, 'text/html');
+      document.querySelector(selector).outerHTML = newdoc.querySelector(selector).outerHTML;
+      console.log('Элемент '+selector+' был успешно обновлен');
+      return true;
+    } catch(err) {
+      console.log('При обновлении элемента '+selector+' произошла ошибка:');
+      console.error(err);
+      return false;
+    }
+  }
