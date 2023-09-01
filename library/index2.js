@@ -44,8 +44,10 @@ if (popLinks.length > 0) {
     popLinks.forEach(elem => {
         elem.addEventListener('click', (e) => {
             const currentPopup = document.getElementById(elem.dataset.link);
-            popupOpen(currentPopup);
-            e.preventDefault();
+            if (currentPopup) {
+                popupOpen(currentPopup);
+                e.preventDefault();
+            }
         })
     })
 }
@@ -198,7 +200,8 @@ function checkValidity(event) {
 function changeProfileIcon(elem, defult = false) {
     let profileIconInProfile = document.querySelector('.myProfile_icon');
     let profileIconInHeader = document.getElementById('profileIcon');
-    let profileIconDefault = document.getElementById('profileIconDefault');
+    const profileIconDefault = document.getElementById('profileIconDefault');
+    console.log(profileIconDefault)
 
     if (!defult) {
         let userIcon = `${elem.firstName[0].toUpperCase()} ${elem.lastName[0].toUpperCase()}`
@@ -211,8 +214,11 @@ function changeProfileIcon(elem, defult = false) {
         profileIconInHeader.append(newIcon);
 
     } else {
+        let newIcon = document.createElement('img');
+        newIcon.classList.add('profile_icon');
+        newIcon.src = "./img/icon_profile.svg";
         profileIconInHeader.innerHTML = '';
-        profileIconInHeader.append(profileIconDefault)
+        profileIconInHeader.append(newIcon)
     }
 }
 
@@ -228,7 +234,7 @@ function changeDropMenu(cardNumber, defult = false) {
         logInMyprof.dataset.link = 'myProfile';
 
         registerLogout.textContent = 'Log Out';
-        registerLogout.dataset.lonk = 'LogOut';
+        registerLogout.dataset.link = 'LogOut';
     } else {
         name.textContent = 'Profile';
         name.style.fontSize = '';
@@ -236,7 +242,7 @@ function changeDropMenu(cardNumber, defult = false) {
         logInMyprof.dataset.link = 'logIn';
 
         registerLogout.textContent = 'Register';
-        registerLogout.dataset.lonk = 'register';
+        registerLogout.dataset.link = 'register';
     }
 }
 
@@ -437,7 +443,7 @@ function updateStatInfo() {
                 console.log(element)
                 for (let key in elem) {
                     if (element.dataset.statistic === key) {
-                       
+
                         element.textContent = elem[key];
                         console.log(element, element.textContent)
                     }
@@ -475,11 +481,54 @@ function addBook(elem) {
     })
 }
 
-function changeBodyLogin() {
+function changeMyProfile(elem, defult = false) {
+    let profileName = document.querySelector('.myProfile_name');
+    const cardNumberInProfile = document.querySelector('.myProfile_card_numberCard');
+    const statCounts = document.querySelectorAll('.stat_item_count');
+
+    if (!defult) {
+
+        let firstName = `${elem.firstName[0].toUpperCase()}${elem.firstName.slice(1)}`;
+        let lastName = `${elem.lastName[0].toUpperCase()}${elem.lastName.slice(1)}`;
+
+        if (elem.firstName.length > 10) {
+            firstName = firstName.slice(0, 8) + '...';
+        }
+        if (elem.lastName.length > 10) {
+            lastName = lastName.slice(0, 8) + '...';
+        }
+
+        profileName.textContent = `${firstName} ${lastName}`;
+
+
+        cardNumberInProfile.textContent = elem.cardNumber
+
+        changeLibraryCard(elem, firstName, lastName, elem.cardNumber);
+
+        statCounts.forEach(element => {
+            for (let key in elem) {
+                if (element.dataset.statistic === key) {
+                    element.textContent = elem[key];
+                }
+            }
+        })
+
+        if (elem.books.length > 0) {
+            addBook(elem);
+        }
+    } else {
+        profileName.textContent = 'John Doe';
+        cardNumberInProfile.textContent = 'No card'
+        changeLibraryCard(elem, firstName, lastName, elem.cardNumber, true)
+    }
+}
+
+function changeBodyLogin(defult = false) {
+
     let users = JSON.parse(localStorage.getItem('users'))
     if (users) {
         users.forEach(elem => {
-            if (elem.login) {
+            if (elem.login === true) {
                 if (!elem.visits) {
                     elem.visits = 1;
                 } else {
@@ -508,46 +557,42 @@ function changeBodyLogin() {
 
                 changeDropMenu(elem.cardNumber);
 
-                let profileName = document.querySelector('.myProfile_name');
-                let firstName = `${elem.firstName[0].toUpperCase()}${elem.firstName.slice(1)}`;
-                let lastName = `${elem.lastName[0].toUpperCase()}${elem.lastName.slice(1)}`;
+                changeMyProfile(elem);
 
-                if (elem.firstName.length > 10) {
-                    firstName = firstName.slice(0, 8) + '...';
-                }
-                if (elem.lastName.length > 10) {
-                    lastName = lastName.slice(0, 8) + '...';
-                }
+            } else {
+                changeProfileIcon(elem, defult);
 
-                profileName.textContent = `${firstName} ${lastName}`;
+                changeDropMenu(elem.cardNumber, defult);
 
-                const cardNumberInProfile = document.querySelector('.myProfile_card_numberCard');
-                cardNumberInProfile.textContent = elem.cardNumber
-
-                changeLibraryCard(elem, firstName, lastName, elem.cardNumber);
-                const statCounts = document.querySelectorAll('.stat_item_count');
-                statCounts.forEach(element => {
-                    for (let key in elem) {
-                        if (element.dataset.statistic === key) {
-                            element.textContent = elem[key];
-                        }
-                    }
-                })
-
- 
-
-                if (elem.books.length > 0) {
-                    addBook(elem);
-                }
-
+                changeMyProfile(elem, defult);
             }
         })
     }
+
 }
 
+//LogOut===============
 function logOut() {
+    let users = JSON.parse(localStorage.getItem('users'))
+    users.forEach(elem => {
+        if (elem.login === true) {
+            elem.login = false;
+            localStorage.setItem('users', JSON.stringify(users))
+            changeBodyLogin(true)
+        }
+    })
 
 }
+
+popLinks.forEach(elem => {
+    elem.addEventListener('click', (e) => {
+        if (elem.dataset.link === 'LogOut') {
+            logOut();
+        }
+    })
+})
+//=======================
+
 
 function submitLogForm(event) {
     const { elements } = formLogin;
