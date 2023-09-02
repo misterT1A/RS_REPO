@@ -190,8 +190,8 @@ const copyLink = document.querySelector('.myProfile_card_copy');
 let libraryBtnCheck = document.getElementById('cardBtn');
 let cloneBtnCard = libraryBtnCheck.cloneNode(true);
 const copyBtn = document.querySelector('.myProfile_card_copy');
-console.log(libraryBtnCheck)
-console.log('clonbtn', cloneBtnCard)
+const bookLinks = document.querySelectorAll('.book_link');
+
 changeBodyLogin()
 // localStorage.clear()
 
@@ -253,7 +253,7 @@ function changeDropMenu(cardNumber, defult = false) {
 
 function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false) {
     const statistic = document.querySelector('.myProfile_statistics');
-    const clonStat = statistic.cloneNode(true);   
+    const clonStat = statistic.cloneNode(true);
     let cardWrapper = document.querySelector('.card_wrapper');
     const cardInfo = document.querySelector('.profile_description');
     const profileBtn = document.querySelectorAll('.prof_btn');
@@ -263,7 +263,7 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
     const btnProf = document.getElementById('profbtnMyprof');
     const btnReg = document.getElementById('profBtnReg');
     const btnLog = document.getElementById('profBtnLog');
-  
+
     if (!defult) {
         Array.from(cardInputs).forEach((elem, index) => {
             if (index === 0) {
@@ -325,8 +325,8 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
             }
         })
 
-    } 
-    if(defult) {
+    }
+    if (defult) {
         cardInfoTitle.textContent = 'Find your Library card';
         profileTitle.textContent = 'Get a reader card';
         cardInfo.textContent = 'You will be able to see a reader card after logging into account or you can register a new account';
@@ -356,8 +356,8 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
         cardWrapper.classList.remove('card_login');
 
         if (defult && cardWrapper.children.length < 2) {
-           
-            
+
+
             // let newBtn = document.createElement('button');
             // newBtn.classList.add('button');
             // newBtn.classList.add('big');
@@ -369,7 +369,7 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
             cardWrapper.append(libraryBtnCheck);
 
         }
-        
+
 
     }
 }
@@ -594,11 +594,15 @@ function changeBodyLogin() {
 
                 localStorage.setItem('users', JSON.stringify(users))
 
+                profileIcon.setAttribute('title', `${elem.firstName} ${elem.lastName}`)
+
                 changeProfileIcon(elem);
 
                 changeDropMenu(elem.cardNumber);
 
                 changeMyProfile(elem);
+                changeBookBtnAfterLogin();
+  
             }
         })
 
@@ -608,6 +612,8 @@ function changeBodyLogin() {
             changeDropMenu(undefined, true);
 
             changeLibraryCard(undefined, undefined, undefined, undefined, true)
+            changeBookBtnAfterLogin();
+            profileIcon.removeAttribute('title');
         }
 
         toFindUserInLogin = false;
@@ -689,9 +695,10 @@ formLogin.addEventListener('submit', submitLogForm)
 //buy popup 
 const formBuy = document.getElementById('formbuy');
 const buyBtn = document.getElementById('buyBtn');
-const bookLinks = document.querySelectorAll('.book')
+
 
 let bookInfo = null;
+let bookBtn = null;
 
 function getNameBook(elem) {
     let perent = elem.closest('.book__wrapper');
@@ -703,11 +710,11 @@ function getNameBook(elem) {
 if (bookLinks.length > 0) {
     bookLinks.forEach(elem => {
         elem.addEventListener('click', (e) => {
+            bookBtn = elem;
             let users = JSON.parse(localStorage.getItem('users'))
             users.forEach(element => {
                 if (element.login === true) {
                     const currentPopup = document.getElementById(elem.dataset.link);
-                    console.log(currentPopup)
                     getNameBook(elem);
                     popupOpen(currentPopup);
                     e.preventDefault();
@@ -721,7 +728,26 @@ if (bookLinks.length > 0) {
     })
 }
 
-
+function changeBookBtnAfterLogin() {
+    bookLinks.forEach(book => {
+        let nameBook = book.closest('.book__wrapper').children[2].textContent
+        let users = JSON.parse(localStorage.getItem('users'))
+        users.forEach(user => {
+            if(user.login === true) {
+                user.books.forEach(elem => {
+                    if(elem.split(',')[0] === nameBook) {
+                        book.disabled = true;
+                        book.textContent = 'Own'
+                    };
+                })
+            } else {
+                book.disabled = false;
+                book.textContent = 'Buy'
+            }
+            
+        })
+    })
+}
 
 function toBuyBook(e) {
 
@@ -729,14 +755,17 @@ function toBuyBook(e) {
     let users = JSON.parse(localStorage.getItem('users'))
 
     users.forEach(elem => {
-        if (elem.login) {
+        if (elem.login === true) {
             if (bookInfo) {
                 elem.books.push(bookInfo);
+                bookBtn.disabled = true;
+                bookBtn.textContent = 'Own'
             }
             elem.booksCount = elem.books.length;
         }
     })
     bookInfo = null;
+    bookBtn = null;
     localStorage.setItem('users', JSON.stringify(users))
 
     updateStatInfo();

@@ -51,6 +51,11 @@
     cursor: pointer;
 }
 
+.close_btn.close_sm {
+    top: 12px;
+    right: 13px;
+}
+
 .close_img {
     transition: transform 0.1s linear;
     width: 15px;

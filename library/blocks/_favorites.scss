@@ -122,7 +122,8 @@
 @media screen and (max-width: 1230px) {
     .fav__radio {
         position: sticky;
-        top: 15px;
+        top: 0px;
         z-index: 3;
+        box-shadow: 0px 30px 30px $white;
     }
 }
