@@ -146,6 +146,7 @@ function submitRegForm(event) {
         })
         if (!coincidence) {
             regInfoText.textContent = 'Registration completed successfully';
+            objData.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16).toUpperCase();
             users.push(objData)
             localStorage.setItem('users', JSON.stringify(users))
         }
@@ -153,6 +154,7 @@ function submitRegForm(event) {
 
     } else {
         let arrUsers = []
+        objData.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16).toUpperCase();
         arrUsers.push(objData)
         localStorage.setItem('users', JSON.stringify(arrUsers))
     }
@@ -161,6 +163,7 @@ function submitRegForm(event) {
     }, timeout)
 
     popupClose(formRegister.closest('.popup'))
+    changeBodyLogin();
     event.preventDefault();
     event.target.reset();
 }
@@ -185,8 +188,10 @@ const booksList = document.querySelector('.myProfile_books_list');
 const cardNumber = document.querySelector('.myProfile_card_numberCard');
 const copyLink = document.querySelector('.myProfile_card_copy');
 let libraryBtnCheck = document.getElementById('cardBtn');
+let cloneBtnCard = libraryBtnCheck.cloneNode(true);
 const copyBtn = document.querySelector('.myProfile_card_copy');
-
+console.log(libraryBtnCheck)
+console.log('clonbtn', cloneBtnCard)
 changeBodyLogin()
 // localStorage.clear()
 
@@ -248,8 +253,7 @@ function changeDropMenu(cardNumber, defult = false) {
 
 function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false) {
     const statistic = document.querySelector('.myProfile_statistics');
-    const clonStat = statistic.cloneNode(true);
-    let btnCard = document.getElementById('cardBtn');
+    const clonStat = statistic.cloneNode(true);   
     let cardWrapper = document.querySelector('.card_wrapper');
     const cardInfo = document.querySelector('.profile_description');
     const profileBtn = document.querySelectorAll('.prof_btn');
@@ -259,7 +263,7 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
     const btnProf = document.getElementById('profbtnMyprof');
     const btnReg = document.getElementById('profBtnReg');
     const btnLog = document.getElementById('profBtnLog');
-
+  
     if (!defult) {
         Array.from(cardInputs).forEach((elem, index) => {
             if (index === 0) {
@@ -281,8 +285,8 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
         btnReg.classList.add('prof_hidden');
         btnLog.classList.add('prof_hidden');
 
-        if (btnCard) {
-            btnCard.remove()
+        if (cardWrapper.children[1].classList.contains('button')) {
+            cardWrapper.children[1].remove()
         }
 
         const statWrapper = document.createElement('div');
@@ -321,7 +325,8 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
             }
         })
 
-    } else {
+    } 
+    if(defult) {
         cardInfoTitle.textContent = 'Find your Library card';
         profileTitle.textContent = 'Get a reader card';
         cardInfo.textContent = 'You will be able to see a reader card after logging into account or you can register a new account';
@@ -342,22 +347,29 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
             }
         })
 
-        let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
+        // let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
 
-        if (statWrapperNew) {
-            statWrapperNew.remove();
+        if (cardWrapper.children[1].classList.contains('myProfileCloneNodePart')) {
+            cardWrapper.children[1].remove();
         }
 
         cardWrapper.classList.remove('card_login');
 
         if (defult && cardWrapper.children.length < 2) {
-            let newBtn = document.createElement('button');
-            newBtn.classList.add('button');
-            newBtn.classList.add('big');
-            newBtn.id = 'cardBtn';
-            newBtn.textContent = 'Check the card';
-            cardWrapper.append(newBtn);
+           
+            
+            // let newBtn = document.createElement('button');
+            // newBtn.classList.add('button');
+            // newBtn.classList.add('big');
+            // newBtn.classList.add('lybraryBtn');
+            // newBtn.id = 'cardBtn';
+            // newBtn.setAttribute('type', "submit")
+            // newBtn.setAttribute('form', "formLibrary")
+            // newBtn.textContent = 'Check the card';
+            cardWrapper.append(libraryBtnCheck);
+
         }
+        
 
     }
 }
@@ -365,7 +377,7 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
 function checkCardUser(e) {
     let formLibrary = document.getElementById('formLibrary');
     let users = JSON.parse(localStorage.getItem('users'))
-    let btnCard = document.getElementsByClassName('.lybraryBtn');
+    // let btnCard = document.getElementById('cardBtn');
     const cardWrapper = document.querySelector('.card_wrapper');
     const statistic = document.querySelector('.myProfile_statistics');
     const clonStat = statistic.cloneNode(true);
@@ -386,7 +398,7 @@ function checkCardUser(e) {
         acc[elem.name] = elem.value
         return acc;
     }, {})
-    console.log(objData)
+
     if (users) {
         users.forEach(elem => {
             if (`${elem.firstName} ${elem.lastName}` === objData.name && elem.cardNumber === objData.number) {
@@ -394,15 +406,16 @@ function checkCardUser(e) {
                 Array.from(cardInputs).forEach((elem, index) => {
                     if (index === 0) {
                         elem.disabled = true;
-                        elem.style.color = '#BB945F'
+                        elem.style.color = '#BB945F';
                     } else {
                         elem.disabled = true;
                         elem.style.color = '#BB945F'
                     }
                 })
 
-                if (btnCard) {
-                    btnCard.remove()
+                if (cardWrapper.children[1]) {
+                    btnCard = cardWrapper.children[1].cloneNode(true);
+                    cardWrapper.children[1].remove()
                 }
 
                 const statWrapper = document.createElement('div');
@@ -454,7 +467,7 @@ function checkCardUser(e) {
 
             cardWrapper.classList.remove('card_login');
 
-            cardWrapper.append(btnCard);
+            cardWrapper.append(libraryBtnCheck);
         }, 10000)
     }
 
@@ -554,10 +567,10 @@ function changeMyProfile(elem, defult = false) {
 }
 
 function changeBodyLogin() {
-
+    const cardWrapper = document.querySelector('.card_wrapper');
     let users = JSON.parse(localStorage.getItem('users'))
+    let toFindUserInLogin = false;
     if (users) {
-        let toFindUserInLogin = false;
         users.forEach(elem => {
             if (elem.login === true) {
                 toFindUserInLogin = true;
@@ -577,10 +590,6 @@ function changeBodyLogin() {
 
                 if (!elem.booksCount) {
                     elem.booksCount = elem.books.length;
-                }
-
-                if (!elem.cardNumber) {
-                    elem.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16).toUpperCase();
                 }
 
                 localStorage.setItem('users', JSON.stringify(users))
@@ -613,7 +622,7 @@ function logOut() {
         if (elem.login === true) {
             elem.login = false;
             localStorage.setItem('users', JSON.stringify(users))
-            changeBodyLogin(true)
+            changeBodyLogin()
         }
     })
 
@@ -694,13 +703,25 @@ function getNameBook(elem) {
 if (bookLinks.length > 0) {
     bookLinks.forEach(elem => {
         elem.addEventListener('click', (e) => {
-            const currentPopup = document.getElementById(elem.dataset.link);
-            getNameBook(elem);
-            popupOpen(currentPopup);
-            e.preventDefault();
+            let users = JSON.parse(localStorage.getItem('users'))
+            users.forEach(element => {
+                if (element.login === true) {
+                    const currentPopup = document.getElementById(elem.dataset.link);
+                    console.log(currentPopup)
+                    getNameBook(elem);
+                    popupOpen(currentPopup);
+                    e.preventDefault();
+                } else {
+                    const popup = document.getElementById('logIn');
+                    popupOpen(popup);
+                }
+            })
+
         })
     })
 }
+
+
 
 function toBuyBook(e) {
 
@@ -730,16 +751,16 @@ formBuy.addEventListener('input', checkValidity)
 formBuy.addEventListener('submit', toBuyBook);
 //===================
 
-async function elementUpdate(selector) {
-    try {
-      var html = await (await fetch(location.href)).text();
-      var newdoc = new DOMParser().parseFromString(html, 'text/html');
-      document.querySelector(selector).outerHTML = newdoc.querySelector(selector).outerHTML;
-      console.log('Элемент '+selector+' был успешно обновлен');
-      return true;
-    } catch(err) {
-      console.log('При обновлении элемента '+selector+' произошла ошибка:');
-      console.error(err);
-      return false;
-    }
-  }
+// async function elementUpdate(selector) {
+//     try {
+//         var html = await (await fetch(location.href)).text();
+//         var newdoc = new DOMParser().parseFromString(html, 'text/html');
+//         document.querySelector(selector).outerHTML = newdoc.querySelector(selector).outerHTML;
+//         console.log('Элемент ' + selector + ' был успешно обновлен');
+//         return true;
+//     } catch (err) {
+//         console.log('При обновлении элемента ' + selector + ' произошла ошибка:');
+//         console.error(err);
+//         return false;
+//     }
+// }
