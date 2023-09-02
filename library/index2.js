@@ -61,7 +61,16 @@ if (closeBtns.length > 0) {
         })
     })
 }
+// let mouseDown = false;
+// window.addEventListener('mousedown', (e) => {
+//     console.log('222')
+//     mouseDown = true;
+// })
 
+// setTimeout(() => {
+//     mouseDown = false;
+// }, 100)
+// console.log(mouseDown)
 function popupOpen(currentPopup) {
     if (currentPopup && unlock) {
         const popupActice = document.querySelector('.popup.open');
@@ -72,8 +81,11 @@ function popupOpen(currentPopup) {
         }
     }
     currentPopup.classList.add('open');
-    currentPopup.addEventListener('click', (e) => {
+    currentPopup.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
         if (!e.target.closest('.popup_content')) {
+            console.log('11')
+            
             popupClose(e.target.closest('.popup'));
         }
     })
@@ -178,7 +190,10 @@ function showInfoRegister() {
 
 // localStorage.clear()
 
-
+// window.addEventListener('mouseup', (e) => {
+//     if(e.target === )
+//     console.log(e.target)
+// })
 formRegister.addEventListener('submit', submitRegForm)
 //================================
 //Login logic
