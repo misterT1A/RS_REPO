@@ -30,13 +30,16 @@
     font-size: 20px;
     font-weight: 700;
     line-height: normal;
-    margin-bottom: 33px;
+    // margin-bottom: 33px;
 }
 
 .fav__radio {
     display: flex;
     max-width: 701px;
     width: 100%;
+    margin-bottom: 33px;
+    margin-right: auto;
+    background-color: #fff;
 }
 
 .radio_text {
@@ -114,4 +117,13 @@
         0.5px -0.5px 0 #000,
         -0.5px 0.5px 0 #000,
         -0.5px -0.5px 0 #000;
+}
+
+@media screen and (max-width: 1230px) {
+    .fav__radio {
+        position: sticky;
+        top: 0px;
+        z-index: 3;
+        box-shadow: 0px 30px 30px $white;
+    }
 }
