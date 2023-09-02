@@ -25,17 +25,38 @@
     margin-bottom: 20px;
 }
 
+.about_slider {
+    position: relative;
+}
+
+
+
+.slider_wrapper {
+    max-width: 1400px;
+    overflow: hidden;
+    transition: 0.1s linear;
+}
 
 .slider__inner {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 25px;
+    display: flex;
+    width: 1000%;
+    height: 100%;
+    transition: all .5s;
+    column-gap: 26px;
 }
 
 .slider__item img {
     width: 100%;
     height: auto;
+    // width: 450px;
+    // height: 560px;
 }
+
+
+
+
+
+
 
 .carousel {
     display: flex;
@@ -71,7 +92,12 @@
 }
 
 .slider_prev, .slider_next {
+    position: absolute;
+    top: 0;
     display: none;
+    width: 100px;
+    height: 560px;
+
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -80,9 +106,14 @@
         background-color: darken($color: $white, $amount: 20%);
     }
 
+    &.inactive {
+        opacity: 0.3;
+    }
+
 }
 
 .slider_prev {
+    left: -120px;
 
     & img {
         position: relative;
@@ -91,13 +122,15 @@
 }
 
 .slider_next {
-
+    right: -120px;
 
     & img {
         position: relative;
         top: 19px;
     }
 }
+
+
 
 .carousel_icon {
     display: block;
@@ -112,40 +145,20 @@
     }
 }
 
-@media screen and (max-width: 1024px) {
-
-    .visible2 {
-        display: flex;
-    }
-
-    .slider__inner {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .slider__item:nth-child(4) {
-        display: none;
-    }
-}
-
-
-@media screen and (max-width: 768px) {
-
-    .about__slider {
-        width: 100%;
-    }
-
-    .slider__inner {
-        grid-template-columns: 19% 1fr 19%;
-        grid-template-rows: auto;
-        column-gap: 0;
-    }
-
-    .slider__item:nth-child(3) {
-        display: none;
+@media screen and (max-width: 1440px) {
+    .slider_wrapper {
+        max-width: 925px;
     }
 
     .visible1 {
         display: flex;
+    }
+}   
+
+
+@media screen and (max-width: 1024px) {
+    .slider_wrapper {
+        max-width: 450px;
     }
 
     .slider_btn {
@@ -157,8 +170,35 @@
 
     }
 
+    .visible2 {
+        display: flex;
+    }
+
+}
+
+
+@media screen and (max-width: 768px) {
+    // .slider_wrapper {
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    // }
+
+    // .about__slider {
+    //     width: 62%;
+    // }
+
+    // .slider__inner {
+    //     grid-auto-columns: max-content;
+    //     grid-template-rows: auto;
+    //     column-gap: 0;
+    // }
+
+    // .slider__item:nth-child(3) {
+    //     display: none;
+    // }
     .carousel {
-        margin-top: 14px;
+        margin-top: 17px;
     }
 
 }
