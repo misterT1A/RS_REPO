@@ -16,8 +16,6 @@ profileIcon.addEventListener('click', () => {
 })
 
 body.addEventListener('click', (elem) => {
-
-
     if (elem.target.classList.contains('profile_icon')
         && !openMenu
         && nav.classList.contains('nav_open')) {
@@ -61,16 +59,7 @@ if (closeBtns.length > 0) {
         })
     })
 }
-// let mouseDown = false;
-// window.addEventListener('mousedown', (e) => {
-//     console.log('222')
-//     mouseDown = true;
-// })
 
-// setTimeout(() => {
-//     mouseDown = false;
-// }, 100)
-// console.log(mouseDown)
 function popupOpen(currentPopup) {
     if (currentPopup && unlock) {
         const popupActice = document.querySelector('.popup.open');
@@ -84,8 +73,6 @@ function popupOpen(currentPopup) {
     currentPopup.addEventListener('mousedown', (e) => {
         e.stopPropagation();
         if (!e.target.closest('.popup_content')) {
-            console.log('11')
-            
             popupClose(e.target.closest('.popup'));
         }
     })
@@ -188,12 +175,8 @@ function showInfoRegister() {
     }, 1200)
 }
 
-// localStorage.clear()
 
-// window.addEventListener('mouseup', (e) => {
-//     if(e.target === )
-//     console.log(e.target)
-// })
+
 formRegister.addEventListener('submit', submitRegForm)
 //================================
 //Login logic
@@ -617,7 +600,7 @@ function changeBodyLogin() {
 
                 changeMyProfile(elem);
                 changeBookBtnAfterLogin();
-  
+
             }
         })
 
@@ -722,22 +705,25 @@ function getNameBook(elem) {
     bookInfo = `${nameBook}, ${autorBook}`;
 }
 
+function isLogin(item) {
+    return item.login === true;
+}
+
 if (bookLinks.length > 0) {
     bookLinks.forEach(elem => {
         elem.addEventListener('click', (e) => {
             bookBtn = elem;
             let users = JSON.parse(localStorage.getItem('users'))
-            users.forEach(element => {
-                if (element.login === true) {
-                    const currentPopup = document.getElementById(elem.dataset.link);
-                    getNameBook(elem);
-                    popupOpen(currentPopup);
-                    e.preventDefault();
-                } else {
-                    const popup = document.getElementById('logIn');
-                    popupOpen(popup);
-                }
-            })
+
+            if (users.some(isLogin)) {
+                const currentPopup = document.getElementById(elem.dataset.link);
+                getNameBook(elem);
+                popupOpen(currentPopup);
+                e.preventDefault();
+            } else {
+                const popup = document.getElementById('logIn');
+                popupOpen(popup);
+            }
 
         })
     })
@@ -748,9 +734,9 @@ function changeBookBtnAfterLogin() {
         let nameBook = book.closest('.book__wrapper').children[2].textContent
         let users = JSON.parse(localStorage.getItem('users'))
         users.forEach(user => {
-            if(user.login === true) {
+            if (user.login === true) {
                 user.books.forEach(elem => {
-                    if(elem.split(',')[0] === nameBook) {
+                    if (elem.split(',')[0] === nameBook) {
                         book.disabled = true;
                         book.textContent = 'Own'
                     };
@@ -759,7 +745,7 @@ function changeBookBtnAfterLogin() {
                 book.disabled = false;
                 book.textContent = 'Buy'
             }
-            
+
         })
     })
 }
@@ -795,16 +781,3 @@ formBuy.addEventListener('input', checkValidity)
 formBuy.addEventListener('submit', toBuyBook);
 //===================
 
-// async function elementUpdate(selector) {
-//     try {
-//         var html = await (await fetch(location.href)).text();
-//         var newdoc = new DOMParser().parseFromString(html, 'text/html');
-//         document.querySelector(selector).outerHTML = newdoc.querySelector(selector).outerHTML;
-//         console.log('Элемент ' + selector + ' был успешно обновлен');
-//         return true;
-//     } catch (err) {
-//         console.log('При обновлении элемента ' + selector + ' произошла ошибка:');
-//         console.error(err);
-//         return false;
-//     }
-// }
