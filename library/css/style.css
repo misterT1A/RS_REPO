@@ -1536,6 +1536,16 @@ body {
   letter-spacing: 0.6px;
 }
 
+.card_input:-webkit-autofill,
+.card_input:-webkit-autofill:focus {
+  -webkit-transition: background-color 600000s 0s, color 600000s 0s;
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+.card_input[data-autocompleted] {
+  background-color: transparent !important;
+}
+
 .myProfileCloneNodePart {
   display: flex;
   align-items: center;
