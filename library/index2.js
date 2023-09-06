@@ -250,6 +250,7 @@ function changeDropMenu(cardNumber, defult = false) {
 }
 
 function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false) {
+    let formLibrary = document.getElementById('formLibrary');
     const statistic = document.querySelector('.myProfile_statistics');
     const clonStat = statistic.cloneNode(true);
     let cardWrapper = document.querySelector('.card_wrapper');
@@ -335,11 +336,11 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
 
         Array.from(cardInputs).forEach((elem, index) => {
             if (index === 0) {
-                elem.value = "Reader's name";
+                elem.placeholder = "Reader's name";
                 elem.disabled = false;
                 elem.style.color = ''
             } else {
-                elem.value = "Card number";
+                elem.placeholder = "Card number";
                 elem.disabled = false;
                 elem.style.color = ''
             }
@@ -368,6 +369,7 @@ function changeLibraryCard(elem, firstName, lastName, cardNumber, defult = false
 
         }
 
+        formLibrary.reset()
 
     }
 }
@@ -403,9 +405,11 @@ function checkCardUser(e) {
                 toFind = true;
                 Array.from(cardInputs).forEach((elem, index) => {
                     if (index === 0) {
+                        elem.backgroundColor = 'transparent';
                         elem.disabled = true;
                         elem.style.color = '#BB945F';
                     } else {
+                        elem.backgroundColor = 'transparent';
                         elem.disabled = true;
                         elem.style.color = '#BB945F'
                     }
@@ -450,11 +454,13 @@ function checkCardUser(e) {
         setTimeout(() => {
             Array.from(cardInputs).forEach((elem, index) => {
                 if (index === 0) {
-                    elem.value = "Reader's name";
+                    elem.value = '';
+                    elem.placeholder = "Reader's name";
                     elem.disabled = false;
                     elem.style.color = ''
                 } else {
-                    elem.value = "Card number";
+                    elem.value = '';
+                    elem.placeholder = "Card number";
                     elem.disabled = false;
                     elem.style.color = ''
                 }
@@ -576,6 +582,10 @@ function changeBodyLogin() {
                     elem.visits = 1;
                 } else {
                     elem.visits += 1;
+                }
+
+                if (!elem.cardDate) {
+                    elem.cardDate = false;
                 }
 
                 if (!elem.bonuses) {
@@ -710,20 +720,43 @@ function isLogin(item) {
 }
 
 if (bookLinks.length > 0) {
-    bookLinks.forEach(elem => {
-        elem.addEventListener('click', (e) => {
-            bookBtn = elem;
+    bookLinks.forEach(element => {
+        element.addEventListener('click', (e) => {
+            bookBtn = element;
+            getNameBook(element)
             let users = JSON.parse(localStorage.getItem('users'))
-
             if (users.some(isLogin)) {
-                const currentPopup = document.getElementById(elem.dataset.link);
-                getNameBook(elem);
-                popupOpen(currentPopup);
-                e.preventDefault();
+                users.forEach(elem => {
+                    if (elem.login === true) {
+                        if (elem.cardDate === true) {
+                            
+                            if (bookInfo) {
+                                elem.books.push(bookInfo);
+                                bookBtn.disabled = true;
+                                bookBtn.textContent = 'Own'
+                            }
+                            elem.booksCount = elem.books.length;
+
+                            bookInfo = null;
+                            bookBtn = null;
+                            localStorage.setItem('users', JSON.stringify(users))
+
+                            updateStatInfo();
+                        }
+
+                        if (elem.cardDate === false) {
+                            const currentPopup = document.getElementById(element.dataset.link);
+                            getNameBook(element);
+                            popupOpen(currentPopup);
+                            e.preventDefault();
+                        }
+                    }
+                })
             } else {
                 const popup = document.getElementById('logIn');
                 popupOpen(popup);
             }
+
 
         })
     })
@@ -761,6 +794,7 @@ function toBuyBook(e) {
                 elem.books.push(bookInfo);
                 bookBtn.disabled = true;
                 bookBtn.textContent = 'Own'
+                elem.cardDate = true;
             }
             elem.booksCount = elem.books.length;
         }
