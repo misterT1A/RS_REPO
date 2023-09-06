@@ -37,14 +37,14 @@ body.addEventListener('click', (elem) => {
 const popLinks = document.querySelectorAll('.modal_link');
 const closeBtns = document.querySelectorAll('.close_btn');
 let unlock = true;
-const timeout = 800;
+
 
 if (popLinks.length > 0) {
     popLinks.forEach(elem => {
         elem.addEventListener('click', (e) => {
-            const currentPopup = document.getElementById(elem.dataset.link);
-            if (currentPopup) {
-                popupOpen(currentPopup);
+            const Popup = document.getElementById(elem.dataset.link);
+            if (Popup) {
+                popOpen(Popup);
                 e.preventDefault();
             }
         })
@@ -55,50 +55,50 @@ if (closeBtns.length > 0) {
     closeBtns.forEach(elem => {
         elem.addEventListener('click', (e) => {
             const parantClose = elem.closest('.popup');
-            popupClose(parantClose);
+            popClose(parantClose);
             e.preventDefault();
         })
     })
 }
 
-function popupOpen(currentPopup) {
-    if (currentPopup && unlock) {
+function popOpen(Popup) {
+    if (Popup && unlock) {
         const popupActice = document.querySelector('.popup.open');
         if (popupActice) {
-            popupClose(popupActice, false);
+            popClose(popupActice, false);
         } else {
             bodyLock();
         }
     }
-    currentPopup.classList.add('open');
-    currentPopup.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
+    Popup.classList.add('open');
+    Popup.addEventListener('mousedown', (e) => {
+        // e.stopPropagation();
         if (!e.target.closest('.popup_content')) {
-            popupClose(e.target.closest('.popup'));
+            popClose(e.target.closest('.popup'));
         }
     })
 }
 
-function popupClose(popup, doUnLock = true) {
+function popClose(popup, lock = true) {
     if (unlock) {
         popup.classList.remove('open');
         document.querySelectorAll('.form_login').forEach(elem => {
             elem.reset();
         });
     }
-    if (doUnLock) {
+    if (lock) {
         bodyUnLock();
     }
 }
 
 function bodyLock() {
-    const lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + 'px';
-    body.style.paddingRight = lockPaddingValue;
+    const lockPadding = window.innerWidth - document.querySelector('.wrapper').offsetWidth + 'px';
+    body.style.paddingRight = lockPadding;
     body.classList.add('hidden');
     unlock = false;
     setTimeout(() => {
         unlock = true;
-    }, timeout);
+    }, 800);
 }
 
 function bodyUnLock() {
@@ -108,8 +108,8 @@ function bodyUnLock() {
         unlock = false;
         setTimeout(() => {
             unlock = true;
-        }, timeout)
-    }, timeout)
+        }, 800)
+    }, 800)
 }
 //==================
 // register logic
@@ -162,9 +162,9 @@ function submitRegForm(event) {
     }
     setTimeout(() => {
         showInfoRegister();
-    }, timeout)
+    }, 800)
 
-    popupClose(formRegister.closest('.popup'))
+    popClose(formRegister.closest('.popup'))
     changeBodyLogin();
     event.preventDefault();
     event.target.reset();
@@ -691,9 +691,9 @@ function submitLogForm(event) {
 
     setTimeout(() => {
         showInfoRegister();
-    }, timeout)
+    }, 800)
 
-    popupClose(formLogin.closest('.popup'))
+    popClose(formLogin.closest('.popup'))
 
 
     event.preventDefault();
@@ -748,16 +748,16 @@ if (bookLinks.length > 0) {
                         }
 
                         if (elem.cardDate === false) {
-                            const currentPopup = document.getElementById(element.dataset.link);
+                            const Popup = document.getElementById(element.dataset.link);
                             getNameBook(element);
-                            popupOpen(currentPopup);
+                            popOpen(Popup);
                             e.preventDefault();
                         }
                     }
                 })
             } else {
                 const popup = document.getElementById('logIn');
-                popupOpen(popup);
+                popOpen(popup);
             }
 
 
@@ -810,7 +810,7 @@ function toBuyBook(e) {
     e.preventDefault()
     e.target.reset();
 
-    popupClose(formBuy.closest('.popup'))
+    popClose(formBuy.closest('.popup'))
 }
 
 formBuy.addEventListener('input', checkValidity)
