@@ -448,31 +448,54 @@ function checkCardUser(e) {
                         }
                     }
                 })
+
+                setTimeout(() => {
+                    Array.from(cardInputs).forEach((elem, index) => {
+                        if (index === 0) {
+                            elem.value = '';
+                            elem.placeholder = "Reader's name";
+                            elem.disabled = false;
+                            elem.style.color = ''
+                        } else {
+                            elem.value = '';
+                            elem.placeholder = "Card number";
+                            elem.disabled = false;
+                            elem.style.color = ''
+                        }
+                    })
+        
+                    let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
+                    statWrapperNew.remove();
+        
+                    cardWrapper.classList.remove('card_login');
+        
+                    cardWrapper.append(libraryBtnCheck);
+                }, 10000)
             }
         })
 
-        setTimeout(() => {
-            Array.from(cardInputs).forEach((elem, index) => {
-                if (index === 0) {
-                    elem.value = '';
-                    elem.placeholder = "Reader's name";
-                    elem.disabled = false;
-                    elem.style.color = ''
-                } else {
-                    elem.value = '';
-                    elem.placeholder = "Card number";
-                    elem.disabled = false;
-                    elem.style.color = ''
-                }
-            })
+        // setTimeout(() => {
+        //     Array.from(cardInputs).forEach((elem, index) => {
+        //         if (index === 0) {
+        //             elem.value = '';
+        //             elem.placeholder = "Reader's name";
+        //             elem.disabled = false;
+        //             elem.style.color = ''
+        //         } else {
+        //             elem.value = '';
+        //             elem.placeholder = "Card number";
+        //             elem.disabled = false;
+        //             elem.style.color = ''
+        //         }
+        //     })
 
-            let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
-            statWrapperNew.remove();
+        //     let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
+        //     statWrapperNew.remove();
 
-            cardWrapper.classList.remove('card_login');
+        //     cardWrapper.classList.remove('card_login');
 
-            cardWrapper.append(libraryBtnCheck);
-        }, 10000)
+        //     cardWrapper.append(libraryBtnCheck);
+        // }, 10000)
     }
 
     if (!toFind) {
