@@ -16,7 +16,8 @@ profileIcon.addEventListener('click', () => {
 })
 
 body.addEventListener('click', (elem) => {
-    if (elem.target.classList.contains('profile_icon')
+    if ((elem.target.classList.contains('profile_icon')
+        || (elem.target.classList.contains('profile_header_afterLogin')))
         && !openMenu
         && nav.classList.contains('nav_open')) {
         nav.classList.toggle('nav_open');
@@ -146,6 +147,7 @@ function submitRegForm(event) {
         if (!coincidence) {
             regInfoText.textContent = 'Registration completed successfully';
             objData.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16).toUpperCase();
+            objData.login = true;
             users.push(objData)
             localStorage.setItem('users', JSON.stringify(users))
         }
@@ -154,6 +156,7 @@ function submitRegForm(event) {
     } else {
         let arrUsers = []
         objData.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16).toUpperCase();
+        objData.login = true;
         arrUsers.push(objData)
         localStorage.setItem('users', JSON.stringify(arrUsers))
     }
@@ -207,7 +210,7 @@ function changeProfileIcon(elem, defult = false) {
 
 
     if (!defult) {
-        let userIcon = `${elem.firstName[0].toUpperCase()} ${elem.lastName[0].toUpperCase()}`
+        let userIcon = `${elem.firstName[0].toUpperCase()}${elem.lastName[0].toUpperCase()}`
 
         profileIconInProfile.textContent = userIcon;
         profileIconInHeader.innerHTML = '';
@@ -463,39 +466,16 @@ function checkCardUser(e) {
                             elem.style.color = ''
                         }
                     })
-        
+
                     let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
                     statWrapperNew.remove();
-        
+
                     cardWrapper.classList.remove('card_login');
-        
+
                     cardWrapper.append(libraryBtnCheck);
                 }, 10000)
             }
         })
-
-        // setTimeout(() => {
-        //     Array.from(cardInputs).forEach((elem, index) => {
-        //         if (index === 0) {
-        //             elem.value = '';
-        //             elem.placeholder = "Reader's name";
-        //             elem.disabled = false;
-        //             elem.style.color = ''
-        //         } else {
-        //             elem.value = '';
-        //             elem.placeholder = "Card number";
-        //             elem.disabled = false;
-        //             elem.style.color = ''
-        //         }
-        //     })
-
-        //     let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
-        //     statWrapperNew.remove();
-
-        //     cardWrapper.classList.remove('card_login');
-
-        //     cardWrapper.append(libraryBtnCheck);
-        // }, 10000)
     }
 
     if (!toFind) {
@@ -752,7 +732,7 @@ if (bookLinks.length > 0) {
                 users.forEach(elem => {
                     if (elem.login === true) {
                         if (elem.cardDate === true) {
-                            
+
                             if (bookInfo) {
                                 elem.books.push(bookInfo);
                                 bookBtn.disabled = true;
