@@ -16,7 +16,8 @@ profileIcon.addEventListener('click', () => {
 })
 
 body.addEventListener('click', (elem) => {
-    if (elem.target.classList.contains('profile_icon')
+    if ((elem.target.classList.contains('profile_icon')
+        || (elem.target.classList.contains('profile_header_afterLogin')))
         && !openMenu
         && nav.classList.contains('nav_open')) {
         nav.classList.toggle('nav_open');
@@ -36,14 +37,14 @@ body.addEventListener('click', (elem) => {
 const popLinks = document.querySelectorAll('.modal_link');
 const closeBtns = document.querySelectorAll('.close_btn');
 let unlock = true;
-const timeout = 800;
+
 
 if (popLinks.length > 0) {
     popLinks.forEach(elem => {
         elem.addEventListener('click', (e) => {
-            const currentPopup = document.getElementById(elem.dataset.link);
-            if (currentPopup) {
-                popupOpen(currentPopup);
+            const Popup = document.getElementById(elem.dataset.link);
+            if (Popup) {
+                popOpen(Popup);
                 e.preventDefault();
             }
         })
@@ -54,50 +55,50 @@ if (closeBtns.length > 0) {
     closeBtns.forEach(elem => {
         elem.addEventListener('click', (e) => {
             const parantClose = elem.closest('.popup');
-            popupClose(parantClose);
+            popClose(parantClose);
             e.preventDefault();
         })
     })
 }
 
-function popupOpen(currentPopup) {
-    if (currentPopup && unlock) {
+function popOpen(Popup) {
+    if (Popup && unlock) {
         const popupActice = document.querySelector('.popup.open');
         if (popupActice) {
-            popupClose(popupActice, false);
+            popClose(popupActice, false);
         } else {
             bodyLock();
         }
     }
-    currentPopup.classList.add('open');
-    currentPopup.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
+    Popup.classList.add('open');
+    Popup.addEventListener('mousedown', (e) => {
+        // e.stopPropagation();
         if (!e.target.closest('.popup_content')) {
-            popupClose(e.target.closest('.popup'));
+            popClose(e.target.closest('.popup'));
         }
     })
 }
 
-function popupClose(popup, doUnLock = true) {
+function popClose(popup, lock = true) {
     if (unlock) {
         popup.classList.remove('open');
         document.querySelectorAll('.form_login').forEach(elem => {
             elem.reset();
         });
     }
-    if (doUnLock) {
+    if (lock) {
         bodyUnLock();
     }
 }
 
 function bodyLock() {
-    const lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + 'px';
-    body.style.paddingRight = lockPaddingValue;
+    const lockPadding = window.innerWidth - document.querySelector('.wrapper').offsetWidth + 'px';
+    body.style.paddingRight = lockPadding;
     body.classList.add('hidden');
     unlock = false;
     setTimeout(() => {
         unlock = true;
-    }, timeout);
+    }, 800);
 }
 
 function bodyUnLock() {
@@ -107,8 +108,8 @@ function bodyUnLock() {
         unlock = false;
         setTimeout(() => {
             unlock = true;
-        }, timeout)
-    }, timeout)
+        }, 800)
+    }, 800)
 }
 //==================
 // register logic
@@ -146,6 +147,7 @@ function submitRegForm(event) {
         if (!coincidence) {
             regInfoText.textContent = 'Registration completed successfully';
             objData.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16).toUpperCase();
+            objData.login = true;
             users.push(objData)
             localStorage.setItem('users', JSON.stringify(users))
         }
@@ -154,14 +156,15 @@ function submitRegForm(event) {
     } else {
         let arrUsers = []
         objData.cardNumber = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString(16).toUpperCase();
+        objData.login = true;
         arrUsers.push(objData)
         localStorage.setItem('users', JSON.stringify(arrUsers))
     }
     setTimeout(() => {
         showInfoRegister();
-    }, timeout)
+    }, 800)
 
-    popupClose(formRegister.closest('.popup'))
+    popClose(formRegister.closest('.popup'))
     changeBodyLogin();
     event.preventDefault();
     event.target.reset();
@@ -207,7 +210,7 @@ function changeProfileIcon(elem, defult = false) {
 
 
     if (!defult) {
-        let userIcon = `${elem.firstName[0].toUpperCase()} ${elem.lastName[0].toUpperCase()}`
+        let userIcon = `${elem.firstName[0].toUpperCase()}${elem.lastName[0].toUpperCase()}`
 
         profileIconInProfile.textContent = userIcon;
         profileIconInHeader.innerHTML = '';
@@ -473,29 +476,6 @@ function checkCardUser(e) {
                 }, 10000)
             }
         })
-
-        // setTimeout(() => {
-        //     Array.from(cardInputs).forEach((elem, index) => {
-        //         if (index === 0) {
-        //             elem.value = '';
-        //             elem.placeholder = "Reader's name";
-        //             elem.disabled = false;
-        //             elem.style.color = ''
-        //         } else {
-        //             elem.value = '';
-        //             elem.placeholder = "Card number";
-        //             elem.disabled = false;
-        //             elem.style.color = ''
-        //         }
-        //     })
-
-        //     let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
-        //     statWrapperNew.remove();
-
-        //     cardWrapper.classList.remove('card_login');
-
-        //     cardWrapper.append(libraryBtnCheck);
-        // }, 10000)
     }
 
     if (!toFind) {
@@ -711,9 +691,9 @@ function submitLogForm(event) {
 
     setTimeout(() => {
         showInfoRegister();
-    }, timeout)
+    }, 800)
 
-    popupClose(formLogin.closest('.popup'))
+    popClose(formLogin.closest('.popup'))
 
 
     event.preventDefault();
@@ -752,7 +732,7 @@ if (bookLinks.length > 0) {
                 users.forEach(elem => {
                     if (elem.login === true) {
                         if (elem.cardDate === true) {
-                            
+
                             if (bookInfo) {
                                 elem.books.push(bookInfo);
                                 bookBtn.disabled = true;
@@ -768,16 +748,16 @@ if (bookLinks.length > 0) {
                         }
 
                         if (elem.cardDate === false) {
-                            const currentPopup = document.getElementById(element.dataset.link);
+                            const Popup = document.getElementById(element.dataset.link);
                             getNameBook(element);
-                            popupOpen(currentPopup);
+                            popOpen(Popup);
                             e.preventDefault();
                         }
                     }
                 })
             } else {
                 const popup = document.getElementById('logIn');
-                popupOpen(popup);
+                popOpen(popup);
             }
 
 
@@ -830,7 +810,7 @@ function toBuyBook(e) {
     e.preventDefault()
     e.target.reset();
 
-    popupClose(formBuy.closest('.popup'))
+    popClose(formBuy.closest('.popup'))
 }
 
 formBuy.addEventListener('input', checkValidity)
