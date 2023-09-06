@@ -466,12 +466,12 @@ function checkCardUser(e) {
                             elem.style.color = ''
                         }
                     })
-
+        
                     let statWrapperNew = document.querySelector('.myProfileCloneNodePart');
                     statWrapperNew.remove();
-
+        
                     cardWrapper.classList.remove('card_login');
-
+        
                     cardWrapper.append(libraryBtnCheck);
                 }, 10000)
             }
