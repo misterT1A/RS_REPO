@@ -279,23 +279,22 @@ caruselItems.forEach((elem, index) => {
 const radioBtn = document.querySelectorAll('.radio_default');
 const books = document.querySelectorAll('.book__item');
 
+
 radioBtn.forEach(elem => {
     elem.addEventListener('click', () => {
-        books.forEach(book => {
+        books.forEach(book => {           
             if (book.dataset.season != elem.dataset.check) {
-                book.classList.add('hidden');
+                book.classList.remove('visible');
                 setTimeout(() => {
                     book.classList.add('none');
-                }, 400)
-
+                }, 300)
             } else {
                 setTimeout(() => {
                     book.classList.remove('none');
-                }, 400)
+                }, 300)
                 setTimeout(() => {
-                    book.classList.remove('hidden');
                     book.classList.add('visible');
-                }, 500)
+                }, 400)
             }
         })
     })

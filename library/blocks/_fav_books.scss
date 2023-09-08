@@ -11,22 +11,20 @@
     height: auto;
     padding-right: 40px;
     margin-bottom: 40px;
-    transition: opacity 0.5s linear;
-
+    transition: opacity 0.3s linear;
+    opacity: 0;
     &:nth-child(2n + 1) {
         margin-right: auto;
     }
+    
 }
 
 .book__item.visible {
     opacity: 1;
 }
 
-.book__item.hidden {
-    opacity: 0;
-}
 
-.book__item.hidden.none {
+.book__item.none {
     display: none;
 }
 

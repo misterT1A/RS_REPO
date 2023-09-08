@@ -403,18 +403,21 @@ function checkCardUser(e) {
     }, {})
 
     if (users) {
-        users.forEach(elem => {
-            if (`${elem.firstName} ${elem.lastName}` === objData.name && elem.cardNumber === objData.number) {
+        users.forEach(element => {
+            if ((`${element.firstName} ${element.lastName}` === objData.name ||  element.firstName === objData.name)
+            && element.cardNumber === objData.number) {
                 toFind = true;
                 Array.from(cardInputs).forEach((elem, index) => {
                     if (index === 0) {
                         elem.backgroundColor = 'transparent';
                         elem.disabled = true;
                         elem.style.color = '#BB945F';
+                        elem.value = `${element.firstName} ${element.lastName}`;
                     } else {
                         elem.backgroundColor = 'transparent';
                         elem.disabled = true;
                         elem.style.color = '#BB945F'
+                        elem.value = element.cardNumber;
                     }
                 })
 
@@ -443,11 +446,11 @@ function checkCardUser(e) {
 
                 })
                 statCounts = document.querySelectorAll('.stat_item_count');
-                statCounts.forEach(element => {
-                    for (let key in elem) {
-                        if (element.dataset.statistic === key) {
+                statCounts.forEach(elem => {
+                    for (let key in element) {
+                        if (elem.dataset.statistic === key) {
 
-                            element.textContent = elem[key];
+                            elem.textContent = element[key];
                         }
                     }
                 })
@@ -728,38 +731,42 @@ if (bookLinks.length > 0) {
             bookBtn = element;
             getNameBook(element)
             let users = JSON.parse(localStorage.getItem('users'))
-            if (users.some(isLogin)) {
-                users.forEach(elem => {
-                    if (elem.login === true) {
-                        if (elem.cardDate === true) {
+            if (users) {
+                if (users.some(isLogin)) {
+                    users.forEach(elem => {
+                        if (elem.login === true) {
+                            if (elem.cardDate === true) {
 
-                            if (bookInfo) {
-                                elem.books.push(bookInfo);
-                                bookBtn.disabled = true;
-                                bookBtn.textContent = 'Own'
+                                if (bookInfo) {
+                                    elem.books.push(bookInfo);
+                                    bookBtn.disabled = true;
+                                    bookBtn.textContent = 'Own'
+                                }
+                                elem.booksCount = elem.books.length;
+
+                                bookInfo = null;
+                                bookBtn = null;
+                                localStorage.setItem('users', JSON.stringify(users))
+
+                                updateStatInfo();
                             }
-                            elem.booksCount = elem.books.length;
 
-                            bookInfo = null;
-                            bookBtn = null;
-                            localStorage.setItem('users', JSON.stringify(users))
-
-                            updateStatInfo();
+                            if (elem.cardDate === false) {
+                                const Popup = document.getElementById(element.dataset.link);
+                                getNameBook(element);
+                                popOpen(Popup);
+                                e.preventDefault();
+                            }
                         }
-
-                        if (elem.cardDate === false) {
-                            const Popup = document.getElementById(element.dataset.link);
-                            getNameBook(element);
-                            popOpen(Popup);
-                            e.preventDefault();
-                        }
-                    }
-                })
+                    })
+                } else {
+                    const popup = document.getElementById('logIn');
+                    popOpen(popup);
+                }
             } else {
                 const popup = document.getElementById('logIn');
                 popOpen(popup);
             }
-
 
         })
     })
