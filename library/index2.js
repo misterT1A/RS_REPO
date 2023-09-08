@@ -404,8 +404,8 @@ function checkCardUser(e) {
 
     if (users) {
         users.forEach(element => {
-            if ((`${element.firstName} ${element.lastName}` === objData.name ||  element.firstName === objData.name)
-            && element.cardNumber === objData.number) {
+            if ((`${element.firstName} ${element.lastName}` === objData.name || element.firstName === objData.name)
+                && element.cardNumber === objData.number) {
                 toFind = true;
                 Array.from(cardInputs).forEach((elem, index) => {
                     if (index === 0) {
@@ -776,20 +776,22 @@ function changeBookBtnAfterLogin() {
     bookLinks.forEach(book => {
         let nameBook = book.closest('.book__wrapper').children[2].textContent
         let users = JSON.parse(localStorage.getItem('users'))
-        users.forEach(user => {
-            if (user.login === true) {
-                user.books.forEach(elem => {
-                    if (elem.split(',')[0] === nameBook) {
-                        book.disabled = true;
-                        book.textContent = 'Own'
-                    };
-                })
-            } else {
-                book.disabled = false;
-                book.textContent = 'Buy'
-            }
+        if (users.some(isLogin)) {
+            users.forEach(user => {
+                if (user.login === true) {
+                    user.books.forEach(elem => {
+                        if (elem.split(',')[0] === nameBook) {
+                            book.disabled = true;
+                            book.textContent = 'Own';
+                        } 
+                    })
+                }
 
-        })
+            })
+        } else {
+            book.disabled = false;
+            book.textContent = 'Buy'
+        }
     })
 }
 
