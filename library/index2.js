@@ -568,6 +568,8 @@ function changeMyProfile(elem, defult = false) {
 
         if (elem.books.length > 0) {
             addBook(elem);
+        } else {
+            booksList.innerHTML = '';
         }
     } else {
         profileName.textContent = 'John Doe';
