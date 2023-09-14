@@ -97,7 +97,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2%;
+  gap: 3%;
 }
 
 .text {
@@ -113,22 +113,21 @@ body {
   font-size: 20px;
 }
 
-#progress_bar {
-  cursor: pointer;
+.timeline {
+  background: white;
   width: 80%;
   height: 4%;
-  border-radius: 10px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-#progress_bar::-webkit-slider-thumb {
-  background: #498594;
+  position: relative;
   cursor: pointer;
-  border-radius: 20px;
-  width: 10px;
-  height: 15px;
-  -webkit-appearance: none;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5333333333);
+  border-radius: 10px;
+}
+
+.progress {
+  background: red;
+  width: 0%;
+  height: 100%;
+  transition: 0.25s;
 }
 
 .time {
@@ -156,23 +155,41 @@ body {
 }
 
 #prevBtn,
-#nextBtn {
+#nextBtn,
+#loop,
+#volume,
+#play_pause {
   width: 10%;
   cursor: pointer;
   border-radius: 50%;
+  transition: all 0.1s linear;
 }
 #prevBtn:hover,
-#nextBtn:hover {
-  background-color: rgb(80, 148, 207);
+#nextBtn:hover,
+#loop:hover,
+#volume:hover,
+#play_pause:hover {
+  transform: scale(1.1);
+}
+#prevBtn:active,
+#nextBtn:active,
+#loop:active,
+#volume:active,
+#play_pause:active {
+  transform: scale(0.9);
 }
 
 #play_pause {
   width: 20%;
-  cursor: pointer;
-  border-radius: 50%;
 }
-#play_pause:hover {
-  background-color: rgb(80, 148, 207);
+
+#loop,
+#volume {
+  width: 8%;
+}
+
+.active {
+  border: 2px solid #b9eaf5;
 }
 
 @media screen and (max-width: 1024px) {
