@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>audio player</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
-    
+    <div class="container">
+        <img id="backGroundImg" src="./img/image1.jpg" alt="img1">
+        <audio id="audio" src="./audio/nanebo - Friends.mp3"></audio>
+        <div class="wrapper">
+            <img id="posterImg" src="./img/poster1.jpeg" alt="poster1">
+
+            <div class="controls">
+                <div id="name">Friends</div>
+                <div id="artist">nanebo</div>
+
+                <input type="range" id="progress_bar">
+                <div class="currentTime time">0:00</div>
+                <div class="durationTime time">0:00</div>
+                <div class="btns">
+                    <img id="prevBtn" src="./img/prev-step.svg" alt="prev">
+                    <img id="play_pause" src="./img/circle-play.svg" alt="play">
+                    <img id="nextBtn" src="./img/next-step.svg" alt="next">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
+
 </html>
