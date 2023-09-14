@@ -11,11 +11,16 @@ const prevBtn = document.getElementById('prevBtn');
 const playPause = document.getElementById('play_pause');
 const nextBtn = document.getElementById('nextBtn');
 const loop = document.getElementById('loop');
+const volume = document.getElementById('volume');
+const volumeBtn = document.querySelector('.volume_wrapper');
+const volumeProgress = document.querySelector('.volumeProgress');
+const volumeCurrent = document.querySelector('.volumeCurrent');
 
 const audio = new Audio();
 
 let isPlay = false;
 let playNow = 0;
+let duration = 0;
 const arrAudio = [
     'audio/nanebo - Friends.mp3',
     'audio/nanebo - Mistakes.mp3',
@@ -23,6 +28,35 @@ const arrAudio = [
 ]
 audio.src = arrAudio[playNow];
 audio.loop = true;
+
+audio.addEventListener('loadeddata', () => {
+    durationTime.textContent = getTime(audio.duration)
+    audio.volume = 0.9;
+    duration = audio.duration;
+})
+
+// audio.addEventListener('ended', nextTrack);
+
+
+// setInterval(() => {
+//     if (audio.currentTime === duration) {
+//         playNow += 1;
+//         isPlay = false;
+//         setTimeout(() => {
+//             isPlay = true;
+//             audio.play();
+//         }, 300)
+//     }
+//     // console.log(audio.currentTime)
+// }, 100)
+
+
+audio.onended = function () {
+    console.log('df')
+    // playNow += 1;
+    // audio.src = arrAudio[playNow];
+    // audio.play()
+};
 
 function playPauseAudio() {
     if (audio.paused) {
@@ -102,16 +136,12 @@ function getTime(num) {
     }
 }
 
-audio.addEventListener('loadeddata', () => {
-    durationTime.textContent = getTime(audio.duration)
-    audio.volume = 0.9;
-})
+
 //переключение по прогрессбару
 timeline.addEventListener('click', (e) => {
     const lineWidth = window.getComputedStyle(timeline).width;
     const timeTo = e.offsetX / parseInt(lineWidth) * audio.duration;
     audio.currentTime = timeTo;
-    console.log(audio.currentTime)
 })
 // прогресс бар
 setInterval(() => {
@@ -120,4 +150,26 @@ setInterval(() => {
 }, 500);
 ///===================
 
+//volume=============
+
+function volumeMute() {
+    if (!audio.muted) {
+        audio.muted = true;
+        volume.src = './img/volume_off.svg';
+    } else {
+        audio.muted = false;
+        volume.src = './img/volume.svg';
+    }
+}
+
+function changeVolume(e) {
+    const progressWidth = window.getComputedStyle(volumeProgress).width;
+    const newVolume = e.offsetX / parseInt(progressWidth);
+    audio.volume = newVolume;
+    volumeCurrent.style.width = newVolume * 100 + '%';
+}
+
+volumeProgress.addEventListener('click', changeVolume);
+volume.addEventListener('click', volumeMute);
+//=======================
 

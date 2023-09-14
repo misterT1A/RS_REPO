@@ -90,35 +90,8 @@
     background: red;
     width: 0%;
     height: 100%;
-    transition: 0.25s;
+    transition: 0.15s;
 }
-
-// #progress_bar {
-//     cursor: pointer;
-//     width: 80%;
-//     height: 4%;
-
-//     border-radius: 10px;
-
-//     -webkit-appearance: none;
-//     -moz-appearance: none;
-//     appearance: none;
-//     // outline: none;
-//     // overflow: hidden;
-
-//     // &::-webkit-slider-runnable-track {
-//     //     background-color: #f1f1f1;
-//     // }
-
-//     &::-webkit-slider-thumb {
-//         background: #498594;
-//         cursor: pointer;
-//         border-radius: 20px;
-//         width: 10px;
-//         height: 15px;
-//         -webkit-appearance: none;
-//     }
-// }
 
 .time {
     position: absolute;
@@ -168,9 +141,48 @@
     width: 20%;
 }
 
-#loop,
-#volume {
+#loop {
     width: 8%;
+}
+
+.volume_wrapper {
+    position: relative;
+    width: 8%;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        .volumeProgress {
+            width: 500%;
+            left: -530%;
+        }
+
+    }
+}
+
+#volume {
+    width: 100%;
+}
+
+.volumeProgress {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 4;
+    // width: 500%;
+    width: 0;
+    height: 50%;
+    background-color: #fff;
+    transform: translateY(-50%);
+    transition: all 0.3s linear;
+    box-shadow: 0 0 20px #000a;
+}
+
+.volumeCurrent {
+    width: 90%;
+    height: 100%;
+    background-color: red;
 }
 
 .active {

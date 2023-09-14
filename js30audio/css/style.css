@@ -127,7 +127,7 @@ body {
   background: red;
   width: 0%;
   height: 100%;
-  transition: 0.25s;
+  transition: 0.15s;
 }
 
 .time {
@@ -183,9 +183,43 @@ body {
   width: 20%;
 }
 
-#loop,
-#volume {
+#loop {
   width: 8%;
+}
+
+.volume_wrapper {
+  position: relative;
+  width: 8%;
+  display: flex;
+  align-items: center;
+}
+.volume_wrapper:hover .volumeProgress {
+  width: 500%;
+  left: -530%;
+}
+
+#volume {
+  width: 100%;
+}
+
+.volumeProgress {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 4;
+  width: 0;
+  height: 50%;
+  background-color: #fff;
+  transform: translateY(-50%);
+  transition: all 0.3s linear;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6666666667);
+}
+
+.volumeCurrent {
+  width: 90%;
+  height: 100%;
+  background-color: red;
 }
 
 .active {
