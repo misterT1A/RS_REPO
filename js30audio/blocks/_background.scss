@@ -18,7 +18,32 @@
     width: 100%;
     z-index: 1;
     filter: blur(2px);
+    opacity: 1;
+    transition: all 0.5s;
+
 }
+
+.imgFade {
+    opacity: 0;
+    // animation: fade 2s linear;
+    // animation-delay: 1s;
+}
+
+// @keyframes fade {
+//     0% {
+//         opacity: 1
+//     }
+
+//     50% {
+//         opacity: 0
+//     }
+
+//     100% {
+//         opacity: 1
+//     }
+// }
+
+
 
 .wrapper {
     position: absolute;

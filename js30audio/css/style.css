@@ -57,6 +57,12 @@ body {
   width: 100%;
   z-index: 1;
   filter: blur(2px);
+  opacity: 1;
+  transition: all 0.5s;
+}
+
+.imgFade {
+  opacity: 0;
 }
 
 .wrapper {

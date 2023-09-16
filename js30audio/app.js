@@ -26,8 +26,42 @@ const arrAudio = [
     'audio/nanebo - Mistakes.mp3',
     'audio/nanebo - Home.mp3',
 ]
+
+const backImg = [
+    {
+        'bG': './img/image1.jpg',
+        'poster': './img/poster1.jpeg'
+    },
+    {
+        'bG': './img/image2.jpg',
+        'poster': './img/poster2.jpg'
+    },
+    {
+        'bG': './img/image3.jpg',
+        'poster': './img/poster3.jpg'
+    }
+]
+
+console.log(backImg[1].bG)
+let currentIndex = 0;
+setInterval(function () {
+    bgImg.classList.add('imgFade');
+    bgImg.src = backImg[currentIndex].bG;
+
+    currentIndex++;
+    if (currentIndex >= backImg.length) {
+        currentIndex = 0;
+    }
+    setTimeout(() => {
+        bgImg.classList.remove('imgFade');
+    }, 2500)
+}, 2000);
+
+
+
+
 audio.src = arrAudio[playNow];
-audio.loop = true;
+audio.loop = false;
 
 audio.addEventListener('loadeddata', () => {
     durationTime.textContent = getTime(audio.duration)
@@ -35,27 +69,11 @@ audio.addEventListener('loadeddata', () => {
     duration = audio.duration;
 })
 
-// audio.addEventListener('ended', nextTrack);
-
-
-// setInterval(() => {
-//     if (audio.currentTime === duration) {
-//         playNow += 1;
-//         isPlay = false;
-//         setTimeout(() => {
-//             isPlay = true;
-//             audio.play();
-//         }, 300)
-//     }
-//     // console.log(audio.currentTime)
-// }, 100)
-
-
 audio.onended = function () {
     console.log('df')
-    // playNow += 1;
-    // audio.src = arrAudio[playNow];
-    // audio.play()
+    playNow += 1;
+    audio.src = arrAudio[playNow];
+    audio.play()
 };
 
 function playPauseAudio() {
@@ -111,10 +129,10 @@ function prevTrack() {
 
 function repeatTrack() {
     if (audio.loop) {
-        audio.loop = true;
+        audio.loop = false;
         loop.classList.toggle('active');
     } else {
-        audio.loop = false;
+        audio.loop = true;
         loop.classList.toggle('active');
     }
 }
