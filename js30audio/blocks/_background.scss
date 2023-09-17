@@ -8,7 +8,7 @@
     // background-position: center;
 }
 
-#backGroundImg {
+.bGimg {
     position: absolute;
     top: 0;
     left: 0;
@@ -23,25 +23,25 @@
 
 }
 
-.imgFade {
+.bGimg.imgFade {
     opacity: 0;
-    // animation: fade 2s linear;
+    // animation: fade 2s linear infinite;
     // animation-delay: 1s;
 }
 
-// @keyframes fade {
-//     0% {
-//         opacity: 1
-//     }
+@keyframes fade {
+    0% {
+        opacity: 1
+    }
 
-//     50% {
-//         opacity: 0
-//     }
+    50% {
+        opacity: 0
+    }
 
-//     100% {
-//         opacity: 1
-//     }
-// }
+    100% {
+        opacity: 1
+    }
+}
 
 
 
@@ -55,13 +55,15 @@
     z-index: 2;
     width: 300pt;
     height: 300pt;
-    background-color: aqua;
+    background: #2193b0;
+    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
+    background: linear-gradient(to right, #6dd5ed, #2193b0);
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 0 20px #000000;
 }
 
-#posterImg {
+.poster {
     position: absolute;
     top: 30%;
     left: 50%;
@@ -69,6 +71,15 @@
     width: 110%;
     height: auto;
     z-index: 3;
+
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.poster.imgFade {
+    opacity: 0;
+    // animation: fade 2s linear infinite;
+    // animation-delay: 1s;
 }
 
 .controls {
