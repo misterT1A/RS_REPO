@@ -25,25 +25,7 @@
 
 .bGimg.imgFade {
     opacity: 0;
-    // animation: fade 2s linear infinite;
-    // animation-delay: 1s;
 }
-
-@keyframes fade {
-    0% {
-        opacity: 1
-    }
-
-    50% {
-        opacity: 0
-    }
-
-    100% {
-        opacity: 1
-    }
-}
-
-
 
 .wrapper {
     position: absolute;
@@ -104,13 +86,26 @@
     top: 50%;
 }
 
-#name {
+.name {
     font-size: 30px;
+    opacity: 1;
+    transition: opacity 0.5s;
 }
 
-#artist {
-    font-size: 20px;
+.name.hidden {
+    opacity: 0;
 }
+
+.artist {
+    font-size: 20px;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.artist.hidden {
+    opacity: 0;
+}
+
 
 .timeline {
     background: white;

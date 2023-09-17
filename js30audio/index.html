@@ -5,21 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>audio player</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./img/favicon/site.webmanifest">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
     <div class="container">
-        <img class="bGimg" id="backGroundImg" src="./img/image1.jpg" alt="img1">
+        <img class="bGimg" src="./img/image1.jpg" alt="img1">
         <audio id="audio" src="./audio/nanebo - Friends.mp3"></audio>
         <div class="wrapper">
-            <img class="poster" id="posterImg" src="./img/poster1.jpeg" alt="poster1">
-
+            <img class="poster" src="./img/poster1.jpeg" alt="poster1">
             <div class="controls">
-                <div id="name">Friends</div>
-                <div id="artist">nanebo</div>
-
-                <!-- <input type="range" id="progress_bar"> -->
+                <div class="name">Friends</div>
+                <div class="artist">nanebo</div>
                 <div class="timeline">
                     <div class="progress"></div>
                 </div>
@@ -36,7 +37,6 @@
                             <div class="volumeCurrent"></div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
