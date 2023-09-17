@@ -120,6 +120,16 @@ body {
 .right {
   width: 70%;
   justify-content: flex-end;
+  gap: 20px;
+}
+
+.skip_left,
+.skip_next {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #fff;
+  gap: 3px;
 }
 
 .volum_wraper {
@@ -163,7 +173,6 @@ body {
 }
 
 input[type=range] {
-  -webkit-appearance: none;
   background: transparent;
   width: 80%;
   margin: 0 5px;
