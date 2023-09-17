@@ -42,22 +42,18 @@ const backImg = [
     }
 ]
 
-console.log(backImg[1].bG)
-let currentIndex = 0;
-setInterval(function () {
+function changeImg() {
     bgImg.classList.add('imgFade');
-    bgImg.src = backImg[currentIndex].bG;
-
-    currentIndex++;
-    if (currentIndex >= backImg.length) {
-        currentIndex = 0;
-    }
+    posterImg.classList.add('imgFade');
+    setTimeout(() => {
+        bgImg.src = backImg[playNow].bG;
+        posterImg.src = backImg[playNow].poster;
+    }, 500)
     setTimeout(() => {
         bgImg.classList.remove('imgFade');
-    }, 2500)
-}, 2000);
-
-
+        posterImg.classList.remove('imgFade');
+    }, 500)
+}
 
 
 audio.src = arrAudio[playNow];
@@ -104,6 +100,8 @@ function nextTrack() {
         audio.src = arrAudio[playNow]
     }
 
+    changeImg()
+
     if (isPlay) {
         isPlay = false;
         playPause.src = './img/circle-play.svg';
@@ -113,12 +111,14 @@ function nextTrack() {
 
 function prevTrack() {
     if (playNow === 0) {
-        playNow = arrAudio[arrAudio.length - 1];
+        playNow = arrAudio.length - 1;
         audio.src = arrAudio[playNow];
     } else {
         playNow -= 1;
         audio.src = arrAudio[playNow]
     }
+
+    changeImg()
 
     if (isPlay) {
         isPlay = false;
