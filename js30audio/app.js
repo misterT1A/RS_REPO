@@ -1,8 +1,7 @@
-const bgImg = document.getElementById('backGroundImg');
-// const audio = document.getElementById('audio');
-const posterImg = document.getElementById('posterImg');
-const name = document.getElementById('name');
-const artist = document.getElementById('artist');
+const bgImg = document.querySelector('.bGimg');
+const posterImg = document.querySelector('.poster');
+const name = document.querySelector('.name');
+const artist = document.querySelector('.artist');
 const timeline = document.querySelector('.timeline');
 const progress = document.querySelector('.progress');
 const currentTime = document.querySelector('.currentTime');
@@ -21,11 +20,28 @@ const audio = new Audio();
 let isPlay = false;
 let playNow = 0;
 let duration = 0;
+audio.loop = false;
+
 const arrAudio = [
-    'audio/nanebo - Friends.mp3',
-    'audio/nanebo - Mistakes.mp3',
-    'audio/nanebo - Home.mp3',
+    {
+        'audio': 'audio/nanebo - Friends.mp3',
+        'name': 'Friends',
+        'artist': 'nanebo'
+    },
+    {
+        'audio': 'audio/nanebo - Mistakes.mp3',
+        'name': 'Mistakes',
+        'artist': 'nanebo'
+    },
+    {
+        'audio': 'audio/nanebo - Home.mp3',
+        'name': 'Home',
+        'artist': 'nanebo'
+    }
+
 ]
+
+audio.src = arrAudio[playNow].audio;
 
 const backImg = [
     {
@@ -42,9 +58,23 @@ const backImg = [
     }
 ]
 
+audio.addEventListener('loadeddata', () => {
+    durationTime.textContent = getTime(audio.duration)
+    audio.volume = 0.9;
+    duration = audio.duration;
+})
+
+audio.onended = function () {
+    console.log('df')
+    playNow += 1;
+    audio.src = arrAudio[playNow].audio;
+    audio.play()
+};
+
 function changeImg() {
     bgImg.classList.add('imgFade');
     posterImg.classList.add('imgFade');
+
     setTimeout(() => {
         bgImg.src = backImg[playNow].bG;
         posterImg.src = backImg[playNow].poster;
@@ -55,22 +85,20 @@ function changeImg() {
     }, 500)
 }
 
+function changeNameArtist() {
+    name.classList.add('hidden');
+    artist.classList.add('hidden');
+    setTimeout(() => {
+        name.textContent = arrAudio[playNow].name;
+        artist.textContent = arrAudio[playNow].artist;
+    }, 500)
 
-audio.src = arrAudio[playNow];
-audio.loop = false;
+    setTimeout(() => {
+        name.classList.remove('hidden');
+        artist.classList.remove('hidden');
+    }, 500)
 
-audio.addEventListener('loadeddata', () => {
-    durationTime.textContent = getTime(audio.duration)
-    audio.volume = 0.9;
-    duration = audio.duration;
-})
-
-audio.onended = function () {
-    console.log('df')
-    playNow += 1;
-    audio.src = arrAudio[playNow];
-    audio.play()
-};
+}
 
 function playPauseAudio() {
     if (audio.paused) {
@@ -94,13 +122,14 @@ function playPauseAudio() {
 function nextTrack() {
     if (playNow === arrAudio.length - 1) {
         playNow = 0;
-        audio.src = arrAudio[playNow];
+        audio.src = arrAudio[playNow].audio;
     } else {
         playNow += 1;
-        audio.src = arrAudio[playNow]
+        audio.src = arrAudio[playNow].audio;
     }
 
-    changeImg()
+    changeImg();
+    changeNameArtist();
 
     if (isPlay) {
         isPlay = false;
@@ -112,13 +141,14 @@ function nextTrack() {
 function prevTrack() {
     if (playNow === 0) {
         playNow = arrAudio.length - 1;
-        audio.src = arrAudio[playNow];
+        audio.src = arrAudio[playNow].audio;
     } else {
         playNow -= 1;
-        audio.src = arrAudio[playNow]
+        audio.src = arrAudio[playNow].audio;
     }
 
-    changeImg()
+    changeImg();
+    changeNameArtist();
 
     if (isPlay) {
         isPlay = false;
@@ -154,7 +184,6 @@ function getTime(num) {
     }
 }
 
-
 //переключение по прогрессбару
 timeline.addEventListener('click', (e) => {
     const lineWidth = window.getComputedStyle(timeline).width;
@@ -169,7 +198,6 @@ setInterval(() => {
 ///===================
 
 //volume=============
-
 function volumeMute() {
     if (!audio.muted) {
         audio.muted = true;

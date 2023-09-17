@@ -65,17 +65,6 @@ body {
   opacity: 0;
 }
 
-@keyframes fade {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 .wrapper {
   position: absolute;
   top: 0;
@@ -129,12 +118,24 @@ body {
   top: 50%;
 }
 
-#name {
+.name {
   font-size: 30px;
+  opacity: 1;
+  transition: opacity 0.5s;
 }
 
-#artist {
+.name.hidden {
+  opacity: 0;
+}
+
+.artist {
   font-size: 20px;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.artist.hidden {
+  opacity: 0;
 }
 
 .timeline {
