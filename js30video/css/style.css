@@ -97,7 +97,7 @@ body {
   width: 30%;
   height: 100%;
   background-color: red;
-  transition: all 0.12s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .buttons {
@@ -105,7 +105,12 @@ body {
   display: flex;
   align-items: center;
   padding: 0 20px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.time {
+  font-size: 20px;
+  color: #fff;
 }
 
 .left,

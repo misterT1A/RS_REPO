@@ -19,23 +19,27 @@
                 <div class="buttons">
                     <div class="left">
                         <img class="btn play_pause" src="./src/img/play-svgrepo-com.svg" alt="playPause">
-                        <input class="speed" type="range" min="0.5" max="2" step="0.1" value="1">
+                        <input class="speed" type="range" min="0.25" max="2" step="0.25" value="1">
                     </div>
+                    <span class="time current_time">0:00</span>
+                    <span class="time">&nbsp;/&nbsp;</span>
+                    <span class="time duration_time">0:00</span>
                     <div class="right">
                         <div class="skip_left">
-                            <img class="btn prev" src="./src/img/skip-previous-svgrepo-com.svg" alt="prevSkip">
+                            <img data-skip="-10" class="btn prev" src="./src/img/skip-previous-svgrepo-com.svg"
+                                alt="prevSkip">
                             « 10s
                         </div>
                         <div class="skip_next">
-                            25s »
-                            <img class="btn next" src="./src/img/skip-next-svgrepo-com.svg" alt="nextSkip">
+                            15s »
+                            <img data-skip="15" class="btn next" src="./src/img/skip-next-svgrepo-com.svg"
+                                alt="nextSkip">
                         </div>
 
                         <div class="volum_wraper">
                             <img class="btn volume" src="./src/img/volume-loud-svgrepo-com.svg" alt="volume">
                             <div class="volum_progress_bar">
-                                <input class="volume_progress" type="range" min="0.2" max="1" step="0.05" value="0.8">
-                                <!-- <div class="volume_progress"></div> -->
+                                <input class="volume_progress" type="range" min="0.2" max="1" step="0.05" value="0.9">
                             </div>
                         </div>
                         <img class="btn fullscreen" src="./src/img/fullscreen-svgrepo-com.svg" alt="fullscreen">
