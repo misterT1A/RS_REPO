@@ -1,3 +1,5 @@
+console.log('score 60/60, all task completed, limit of 50 requests per hour')
+
 const input = document.querySelector('.search_input');
 const searchIcon = document.querySelector('.search_icon');
 const closeIcon = document.querySelector('.close_icon');
@@ -6,6 +8,10 @@ const galery = document.querySelector('.galery_inner');
 const body = document.querySelector('.body');
 
 let imgs = document.querySelectorAll('img');
+
+document.addEventListener("DOMContentLoaded", () => {
+    input.focus();
+});
 
 //search btn====================
 let fullInput = false;
@@ -23,30 +29,32 @@ closeIcon.addEventListener('click', () => {
     input.value = '';
     closeIcon.classList.remove('hidden');
 })
+
+function search() {
+    const url = `https://api.unsplash.com/search/photos?query=${input.value}&per_page=30&client_id=IW3Wgnd6Xw3b6ph-2LHMOko8HT4BuIkFPVIFtEoCJFU`;
+    getData(url);
+}
+
+searchIcon.addEventListener('click', search);
+input.addEventListener('keydown', (e) => {
+    if (e.keyCode === 13) {
+        e.preventDefault()
+        search();
+    }
+})
+
 //=============================
 
-// const url = 'https://api.unsplash.com/search/photos?query=winter&per_page=30&client_id=IW3Wgnd6Xw3b6ph-2LHMOko8HT4BuIkFPVIFtEoCJFU';
-// const url = 'https://type.fit/api/quotes';
-
-// async function getData() {
-//     const res = await fetch(url);
-//     const data = await res.json();
-//     console.log(data);
-//     galery.innerHTML = '';
-//     // let dataUrls = data.results.map(elem => {
-
-//     //     console.log(elem.urls.regular)
-
-//     //     createImg(elem.urls.regular)
-//     // })
-//     localStorage.setItem('data', JSON.stringify(data));
-// }
-// getData();
-let data = JSON.parse(localStorage.getItem('data'));
-galery.innerHTML = '';
-let arrUrl = data.results.map(elem => {
-    createImg(elem.urls.regular)
-})
+const url = 'https://api.unsplash.com/search/photos?query=random&per_page=30&client_id=IW3Wgnd6Xw3b6ph-2LHMOko8HT4BuIkFPVIFtEoCJFU';
+async function getData(link) {
+    const res = await fetch(link);
+    const data = await res.json();
+    galery.innerHTML = '';
+    let dataUrls = data.results.map(elem => {
+        createImg(elem.urls.regular)
+    })
+}
+getData(url);
 
 function createImg(url) {
     const element = document.createElement('div');
