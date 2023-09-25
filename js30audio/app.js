@@ -69,6 +69,8 @@ audio.onended = function () {
     playNow += 1;
     audio.src = arrAudio[playNow].audio;
     audio.play()
+    changeImg();
+    changeNameArtist();
 };
 
 function changeImg() {
