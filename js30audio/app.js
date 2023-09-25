@@ -65,8 +65,11 @@ audio.addEventListener('loadeddata', () => {
 })
 
 audio.onended = function () {
-    console.log('df')
-    playNow += 1;
+    if (playNow === arrAudio.length - 1) {
+        playNow = 0;
+    } else {
+        playNow += 1;
+    }
     audio.src = arrAudio[playNow].audio;
     audio.play()
     changeImg();
