@@ -1,0 +1,41 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(82, 82, 82);
+    color: rgb(196, 196, 196);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.game {
+    position: relative;
+    --cell: 2vmin;
+    display: grid;
+    grid-template-columns: repeat(20, var(--cell));
+    grid-template-rows: repeat(20, var(--cell));
+    gap: 0px;
+    border: 1px solid #000;
+}
+
+.box,
+.target {
+    --x: 6;
+    --y: 7;
+    position: absolute;
+    top: calc(var(--y) * var(--cell));
+    left: calc(var(--x) * var(--cell));
+    z-index: 1;
+    width: 2vmin;
+    height: 2vmin;
+    background-color: antiquewhite;
+}
+
+.target {
+    background-color: rgb(179, 114, 30);
+}
