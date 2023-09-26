@@ -1,5 +1,5 @@
 
-import { Game } from "./game.js";
+import { Snake } from "./snake.js";
 import { Box } from "./box.js";
 import { Target } from "./target.js";
 
@@ -10,16 +10,27 @@ const game = document.querySelector('.game');
 const gameeee = new Target(game);
 gameeee.setXY()
 
+const snake = new Snake(game);
+snake.addPart()
+console.log(snake)
+// let direction = 'up';
+// let x = 6;
+// let y = 7
 
-let x = 6;
-let y = 7
-const box = new Box(game, x, y);
 
-let direction = 'up';
+// const snake = [];
+// let snakeLast = 0;
+
+// const box = new Box(game, x, y);
+// snake.push(box)
 
 
-
+// snakeLast = snake.length - 1;
+// console.log(snake)
 setImputOnce();
+
+
+
 
 function setImputOnce() {
     window.addEventListener('keydown', handleInput, { once: true });
@@ -66,26 +77,26 @@ function moveRight() {
     direction = 'right'
 }
 
-// move(x, y);
 
-function move(x, y) {
-    setInterval(() => {
-        box.setBoxXY(x, y)
-        switch (direction) {
-            case 'up':
-                y -= 1
-                break;
-            case 'down':
-                y += 1
-                break;
-            case 'left':
-                x -= 1
-                break;
-            case 'right':
-                x += 1
-                break;
-            default:
-                break;
-        }
-    }, 500)
-}
+
+setTimeout(() => {
+    console.log(snake.snake[0])
+    snake.snake[0].move(snake.direction);
+    snake.snake[0].lastCoordinates();
+    snake.snake[0].setBoxXY(snake.snake[0].nowX, snake.snake[0].nowY);
+    console.log(snake.snake[0])
+    // console.log(snake.snake[0].lastX)
+}, 1000)
+
+setTimeout(() => {
+
+    snake.snake[0].move(snake.direction);
+    snake.snake[0].lastCoordinates();
+    snake.snake[0].setBoxXY(snake.snake[0].nowX, snake.snake[0].nowY);
+
+    console.log(snake.snake[0].lastX)
+}, 2000)
+
+
+
+///snake очередь добавляется новая и в начало массива, последняя удаляется
