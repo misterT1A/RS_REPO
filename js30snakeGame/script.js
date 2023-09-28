@@ -1,37 +1,15 @@
 
 import { Snake } from "./snake.js";
-import { Box } from "./box.js";
-import { Target } from "./target.js";
 
 
 const game = document.querySelector('.game');
+let snake = new Snake(game)
+snake.addHead();
+snake.addNewTarget();
+let eat = false;
+let loose = false;
 
-
-const gameeee = new Target(game);
-gameeee.setXY()
-
-const snake = new Snake(game);
-snake.addPart()
-console.log(snake)
-// let direction = 'up';
-// let x = 6;
-// let y = 7
-
-
-// const snake = [];
-// let snakeLast = 0;
-
-// const box = new Box(game, x, y);
-// snake.push(box)
-
-
-// snakeLast = snake.length - 1;
-// console.log(snake)
 setImputOnce();
-
-
-
-
 function setImputOnce() {
     window.addEventListener('keydown', handleInput, { once: true });
 }
@@ -39,64 +17,73 @@ function setImputOnce() {
 function handleInput(event) {
     switch (event.key) {
         case "ArrowUp":
-            moveUp();
+            snake.moveUp();
             setImputOnce();
             break;
         case "ArrowDown":
-            moveDown();
+            snake.moveDown();
             setImputOnce();
             break;
         case "ArrowLeft":
-            moveLeft();
+            snake.moveLeft();
             setImputOnce();
             break;
         case "ArrowRight":
-            moveRight();
+            snake.moveRight();
             setImputOnce();
             break;
-
         default:
             setImputOnce();
             break;
     }
 }
 
-function moveUp() {
-    direction = 'up'
+// setInterval(() => run(), 1000);
+
+function run() {
+    if (!loose) {
+        snake.head.lastCoordinates();
+        snake.head.move(snake.direction);
+        snake.head.setBoxXY();
+        checkTarger();
+        checkTail();
+        checkBorder();
+        snake.addPart()
+        snake.snake[0].setBoxXY()
+
+        if (snake.snake.length > 6) {
+            if (!eat) {
+                snake.remobeBoxFromDOM()
+
+            } else {
+                snake.rebornTarget();
+            }
+            eat = false;
+        }
+    } else {
+        alert('YOU LOOSE');
+        snake = null;
+    }
 }
 
-function moveDown() {
-    direction = 'down'
+function checkTarger() {
+    if (snake.head.nowX === snake.target.x && snake.head.nowY === snake.target.y) {
+        eat = true;
+    }
 }
 
-function moveLeft() {
-    direction = 'left'
+function checkBorder() {
+    if (snake.head.nowX > 19 || snake.head.nowX < 0 || snake.head.nowY > 19 || snake.head.nowY < 0) {
+        loose = true;
+    }
 }
 
-function moveRight() {
-    direction = 'right'
+function checkTail() {
+    snake.snake.forEach(tail => {
+        if (tail.nowX === snake.head.nowX && tail.nowY === snake.head.nowY) {
+            loose = true;
+        }
+    })
 }
 
 
-
-setTimeout(() => {
-    console.log(snake.snake[0])
-    snake.snake[0].move(snake.direction);
-    snake.snake[0].lastCoordinates();
-    snake.snake[0].setBoxXY(snake.snake[0].nowX, snake.snake[0].nowY);
-    console.log(snake.snake[0])
-    // console.log(snake.snake[0].lastX)
-}, 1000)
-
-setTimeout(() => {
-
-    snake.snake[0].move(snake.direction);
-    snake.snake[0].lastCoordinates();
-    snake.snake[0].setBoxXY(snake.snake[0].nowX, snake.snake[0].nowY);
-
-    console.log(snake.snake[0].lastX)
-}, 2000)
-
-
-
-///snake очередь добавляется новая и в начало массива, последняя удаляется

@@ -13,4 +13,8 @@ export class Target {
         this.target.style.setProperty('--x', `${this.x}`)
         this.target.style.setProperty('--y', `${this.y}`)
     }
+
+    removeDOM() {
+        this.target.remove();
+    }
 }

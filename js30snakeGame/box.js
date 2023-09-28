@@ -18,9 +18,7 @@ export class Box {
         this.lastY = this.nowY;
     }
 
-    setBoxXY(x, y) {
-        this.nowX = x;
-        this.nowY = y;
+    setBoxXY() {
         this.box.style.setProperty('--x', `${this.nowX}`)
         this.box.style.setProperty('--y', `${this.nowY}`)
     }
@@ -44,7 +42,5 @@ export class Box {
         }
     }
 
-    remobeBoxFromDOM(snake) {
-        snake[snake.length - 1].box.remove();
-    }
+
 }
