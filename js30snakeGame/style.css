@@ -11,18 +11,113 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    overflow: hidden;
+    /* background: url('img/1.jpg') center no-repeat;
+    background-size: contain; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 62.5%;
+}
+
+.container {
+    position: relative;
+    top: 11vmin;
+    background: url('img/pngegg.png') center no-repeat;
+    background-size: contain;
+    width: 74vmin;
+    height: 120vmin;
+}
+
+.bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -2;
+    filter: blur(2px);
 }
 
 .game {
     position: relative;
+    top: 8%;
+    left: 17%;
     --cell: 2vmin;
     display: grid;
+    max-width: 40vmin;
+    max-height: 40vmin;
     grid-template-columns: repeat(20, var(--cell));
     grid-template-rows: repeat(20, var(--cell));
     gap: 0px;
-    border: 1px solid #000;
+    border: 3px solid #2c2c2c;
+    background-image: url('img/Cartoon_green_texture_grass.jpg');
+    background-size: cover;
+    border-top-left-radius: 1vmin;
+    border-top-right-radius: 1vmin;
 }
 
+.game:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.controls {
+    position: relative;
+    top: 8%;
+    left: 17%;
+    width: 40vmin;
+    height: 38vmin;
+    padding: 1vmin;
+    background-color: rgb(80, 80, 80);
+    border: 3px solid #2c2c2c;
+    display: flex;
+    flex-direction: column;
+    gap: 2vmin;
+}
+
+.info {
+    display: flex;
+    column-gap: 10%;
+    row-gap: 2vmin;
+    flex-wrap: wrap;
+}
+
+.score,
+.speed,
+.time,
+.table {
+    border: 2px solid #aa5454;
+    background-color: rgb(141, 141, 141);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    height: 5vmin;
+    font-size: 3vmin;
+    border-radius: 2vmin;
+}
+
+.newGame,
+.leave {
+    text-align: center;
+    width: 100%;
+    font-size: 3vmin;
+    border-radius: 2vmin;
+    border: 2px solid #aa5454;
+    border-radius: 2vmin;
+}
+
+.head,
 .box,
 .target {
     --x: 6;
@@ -33,9 +128,45 @@ body {
     z-index: 1;
     width: 2vmin;
     height: 2vmin;
-    background-color: antiquewhite;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: all 0.2s linear;
+    border-radius: 1vmin;
+}
+
+.head {
+    background-image: url('img/snake-svgrepo-com.svg');
+    background-size: 35px;
+}
+
+.head.big {
+    width: 4vmin;
+    height: 4vmin;
+}
+
+.box {
+    background-image: url('img/ball-pet-shop-svgrepo-com.svg');
+    background-size: 23px;
+
 }
 
 .target {
-    background-color: rgb(179, 114, 30);
+    /* background-image: url('img/apple-svgrepo-com.svg'); */
+    background-size: 23px;
+    animation: TargetMove 0.8s infinite;
+}
+
+@keyframes TargetMove {
+    0% {
+        top: calc(var(--y) * var(--cell));
+    }
+
+    33% {
+        top: calc((var(--y) * var(--cell)) + 5px)
+    }
+
+    66% {
+        top: calc((var(--y) * var(--cell)) + 5px)
+    }
 }

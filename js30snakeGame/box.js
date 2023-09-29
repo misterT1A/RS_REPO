@@ -1,8 +1,8 @@
 
 export class Box {
-    constructor(game, x, y) {
+    constructor(game, x, y, part) {
         this.box = document.createElement('div');
-        this.box.classList.add('box');
+        this.box.classList.add(part);
         game.append(this.box);
         this.nowX = x;
         this.nowY = y;
@@ -21,6 +21,13 @@ export class Box {
     setBoxXY() {
         this.box.style.setProperty('--x', `${this.nowX}`)
         this.box.style.setProperty('--y', `${this.nowY}`)
+    }
+
+    headEat() {
+        this.box.classList.add('big');
+        setTimeout(() => {
+            this.box.classList.remove('big');
+        }, 200)
     }
 
     move(direction) {
