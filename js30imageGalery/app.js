@@ -35,11 +35,17 @@ function search() {
     getData(url);
 }
 
-searchIcon.addEventListener('click', search);
+searchIcon.addEventListener('click', () => {
+    if (input.value != '') {
+        search();
+    }
+});
 input.addEventListener('keydown', (e) => {
     if (e.keyCode === 13) {
         e.preventDefault()
-        search();
+        if (input.value != '') {
+            search();
+        }
     }
 })
 

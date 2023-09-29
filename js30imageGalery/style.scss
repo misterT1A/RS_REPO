@@ -136,6 +136,7 @@ body {
     row-gap: 40px;
     column-gap: 20px;
     justify-content: space-evenly;
+    min-height: 78.5vh;
 }
 
 .img {
@@ -152,12 +153,13 @@ body {
 .footer {
     padding: 0 1rem;
     width: 100%;
-    height: 70px;
+    height: 6vh;
     border-top: 2px solid #e2b714;
     font-size: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
 }
 
 .logo_rs {
