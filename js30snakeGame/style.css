@@ -224,7 +224,7 @@ body {
 .speed,
 .time {
     border: 2px solid #aa5454;
-    background-color: rgb(141, 141, 141);
+    background-color: rgb(54, 54, 54);
     display: flex;
     align-items: center;
     justify-content: center;

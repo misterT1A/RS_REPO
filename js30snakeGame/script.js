@@ -19,6 +19,7 @@ class Game {
         this.input = document.querySelector('input');
         this.btnSubmit = document.querySelector('.btnSubmit');
         this.recordTable = this.container.querySelector('.record_table');
+        this.nameRecord = this.container.querySelector('.name_result');
         this.recordElem = this.container.querySelectorAll('.result');
         this.name = null;
         this.score = 0;
@@ -143,10 +144,11 @@ class Game {
         game.bgSong.currentTime = 0;
         game.timeDOM.textContent = 'Time: 00:00';
         game.scoreDOM.textContent = 'Score: 0';
+        clearInterval(this.TochangeTime);
+        game.setDataInLS();
         game.time = 0;
         game.startGame = false;
-        clearInterval(this.TochangeTime)
-        game.setDataInLS();
+
     }
 
     toStartGame(game) {
@@ -217,7 +219,7 @@ class Game {
             game.soundHate.play();
             setTimeout(() => {
                 game.popUpkid.classList.add('hidden');
-            }, 2000)
+            }, 4000)
         }
     }
 
@@ -226,8 +228,16 @@ class Game {
         if (localStorage.getItem('users')) {
             let users = JSON.parse(localStorage.getItem('users'));
             users.forEach(user => {
-                if (game.name = user.name) {
-
+                if (game.name === user.name) {
+                    game.nameRecord.textContent = `${user.name}`;
+                    user.points.forEach((elem, index) => {
+                        game.recordElem[index].textContent = `score ${elem.score} time: ${elem.time}`;
+                    })
+                } else {
+                    game.nameRecord.textContent = `Name`;
+                    game.recordElem.forEach(elem => {
+                        elem.textContent = 'empty';
+                    })
                 }
             })
         }
@@ -244,18 +254,21 @@ class Game {
     setDataInLS() {
         if (localStorage.getItem('users')) {
             let users = JSON.parse(localStorage.getItem('users'));
+            console.log(users)
             let coincidence = false;
             users.forEach(user => {
                 if (user.name === game.name) {
+                    console.log(user.points)
                     coincidence = true;
                     user.points.push({
                         score: game.score,
                         time: game.time
                     })
-                    if (!user.points.length < 11) {
+                    if (user.points.length > 10) {
                         user.points.shift();
                     }
                 }
+                localStorage.setItem('users', JSON.stringify(users))
             })
             if (!coincidence) {
                 let user = {
@@ -275,10 +288,10 @@ class Game {
                 name: game.name,
                 points: []
             }
-            // user.points.push({
-            //     score: game.score,
-            //     time: game.time
-            // })
+            user.points.push({
+                score: game.score,
+                time: game.time
+            })
             arrUsers.push(user);
             localStorage.setItem('users', JSON.stringify(arrUsers))
         }
