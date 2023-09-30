@@ -8,11 +8,6 @@ export class Box {
         this.nowY = y;
     }
 
-    futureCoordinates(x, y) {
-        this.futureX = x;
-        this.FutureY = y;
-    }
-
     lastCoordinates() {
         this.lastX = this.nowX;
         this.lastY = this.nowY;
