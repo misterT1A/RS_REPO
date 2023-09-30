@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+    <img class="bgImg" src="./img/1.jpg" alt="">
+    <div class="user_name_wrapper">
+        <div class="user_name">
+            <form action="post" class="form">
+                <input class="input" type="text" placeholder="Enter your name">
+                <button class="btnSubmit" type="submit">confirm</button>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="popUp">
+            <div class="kid hidden">
+                <div class="kid_text">Ходить стрелочками! %*$##</div>
+                <img src="./img/334c9dbe-transformed.png" alt="kid">
+            </div>
+            <div class="record_table hidden">
+                <div class="name_result">Name</div>
+                <ul class="table_result">
+                    <li class="result">empty</li>
+                    <li class="result">empty</li>
+                    <li class="result">empty</li>
+                    <li class="result">empty</li>
+                    <li class="result">empty</li>
+                    <li class="result">empty</li>
+                    <li class="result">empty</li>
+                    <li class="result">empty</li>
+                    <li class="result">empty</li>
+                    <li class="result">empty</li>
+                </ul>
+            </div>
+        </div>
+        <div class="game">
+        </div>
+        <div class="controls">
+            <div class="info">
+                <div class="score">Score: 0</div>
+                <div class="time">Time: 00:00</div>
+            </div>
+            <div class="table btn">Records</div>
+            <div class="newGame btn">New Game</div>
+            <div class="control btn">Control</div>
+            <div class="volume btn">
+                <img class="volum_icon" src="./img/volume-loud-svgrepo-com.svg" alt="volume">
+            </div>
+            <div class="footer">
+                <div class="year">2023</div>
+                <a class="logo" href="https://rs.school/js-stage0/" target="_blank">
+                    <img src="./img/rs_school_js.svg" alt="logo">
+                </a>
+                <a class="git" href="https://github.com/misterT1A" target="_blank">
+                    <img src="./img/github-142-svgrepo-com (1).svg" alt="git">
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="./script.js" type="module"></script>
+</body>
+
+</html>
