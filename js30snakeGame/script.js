@@ -147,6 +147,7 @@ class Game {
         clearInterval(this.TochangeTime);
         game.setDataInLS();
         game.time = 0;
+        game.score = 0;
         game.startGame = false;
 
     }
