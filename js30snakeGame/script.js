@@ -255,7 +255,6 @@ class Game {
     setDataInLS() {
         if (localStorage.getItem('users')) {
             let users = JSON.parse(localStorage.getItem('users'));
-            console.log(users)
             let coincidence = false;
             users.forEach(user => {
                 if (user.name === game.name) {

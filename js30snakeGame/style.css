@@ -61,6 +61,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 2vmin;
 }
 
 .form {
