@@ -56,11 +56,20 @@ const draw = () => {
 
         ctx.drawImage(botCars[i].car, botCars[i].botcarX, botCars[i].botcarY);
         botCars[i].botcarY += speed - 2;
+        if (((carY <= botCars[i].botcarY + botCars[i].car.height
+            && carY + car.height >= botCars[i].botcarY + botCars[i].car.height)
+            || (carY + car.height >= botCars[i].botcarY && carY <= botCars[i].botcarY))
+            && ((botCars[i].botcarX < carX && carX < botCars[i].botcarX + botCars[i].car.width)
+                || (botCars[i].botcarX < carX + car.width
+                    && carX + car.width < botCars[i].botcarX + botCars[i].car.width))) {
+            console.log('dfdf')
+        }
+
 
         if (!botCars[i].check) {
             if (botCars[i].botcarY > 200) {
-                // const random = Math.floor(2 + Math.random() * (3 + 1 - 2));
-                const random = Math.random() > 0.5 ? 2 : 3;
+                const random = Math.floor(0 + Math.random() * (3 + 1 - 0));
+                // const random = Math.random() > 0.5 ? 2 : 3;
                 botCars.push(new BotCar(random));
                 botCars[i].check = true;
             }
@@ -72,25 +81,25 @@ const draw = () => {
 
     }
 
-    for (let i = 0; i < botCarsRev.length; i++) {
-        ctx.drawImage(botCarsRev[i].car, botCarsRev[i].botcarX, botCarsRev[i].botcarY);
+    // for (let i = 0; i < botCarsRev.length; i++) {
+    //     ctx.drawImage(botCarsRev[i].car, botCarsRev[i].botcarX, botCarsRev[i].botcarY);
 
-        botCarsRev[i].botcarY += speed + 2;
+    //     botCarsRev[i].botcarY += speed + 2;
 
-        if (!botCarsRev[i].check) {
-            if (botCarsRev[i].botcarY > 200) {
+    //     if (!botCarsRev[i].check) {
+    //         if (botCarsRev[i].botcarY > 200) {
 
-                // const random = Math.floor(0 + Math.random() * (1 + 1 - 0));
-                const random = Math.random() > 0.5 ? 0 : 1;
-                botCarsRev.push(new BotCar(random));
-                botCarsRev[i].check = true;
-            }
+    //             // const random = Math.floor(0 + Math.random() * (1 + 1 - 0));
+    //             const random = Math.random() > 0.5 ? 0 : 1;
+    //             botCarsRev.push(new BotCar(random));
+    //             botCarsRev[i].check = true;
+    //         }
 
-            if (botCarsRev[i].botcarY > 1000) {
-                botCarsRev.shift();
-            }
-        }
-    }
+    //         if (botCarsRev[i].botcarY > 1000) {
+    //             botCarsRev.shift();
+    //         }
+    //     }
+    // }
     if (speedActive) {
         drawSpeed();
     }
@@ -125,6 +134,9 @@ const draw = () => {
 }
 
 
+// const checkDamge = (i) => {
+//     if(car.)
+// }
 
 const toPipeSmoke = () => {
     if (isPipeSmoke) {

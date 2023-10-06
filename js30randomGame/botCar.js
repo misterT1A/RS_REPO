@@ -7,7 +7,8 @@ export class BotCar {
         this.botcarX = random * 100 + 10,
             this.botcarY = -150,
             this.car = new Image(),
-            this.type = random > 1 ? this.car.src = this.img[this.random] : this.car.src = this.imgRev[this.random],
+            // this.type = random > 1 ? this.car.src = this.img[this.random] : this.car.src = this.imgRev[this.random],
             this.check = false;
+        this.car.src = this.img[this.random]
     }
 }
