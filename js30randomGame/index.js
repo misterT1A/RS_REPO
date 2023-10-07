@@ -4,6 +4,7 @@ const cvs = document.getElementById('game');
 const ctx = cvs.getContext('2d');
 
 const bg = new Image();
+const bg2 = new Image();
 const pipeSmoke1 = new Image();
 const pipeSmoke2 = new Image();
 const tireSmokeLeft = new Image();
@@ -13,10 +14,14 @@ const speedEffectDown = new Image();
 const damageCar = new Image();
 const damageSmoke = new Image();
 const damageSmoke2 = new Image();
+const botDamageSmoke = new Image();
+const botDamageSmoke2 = new Image();
 const car = new Image();
 
 
+
 bg.src = 'img/road400.png';
+bg2.src = 'img/bg2.png';
 pipeSmoke1.src = 'img/smoke1.png';
 pipeSmoke2.src = 'img/smoke1rev.png';
 tireSmokeLeft.src = 'img/smokeLeft.png';
@@ -26,21 +31,25 @@ speedEffectDown.src = './img/speedDown.png';
 damageCar.src = 'img/car1-90pxDam.png';
 damageSmoke.src = 'img/damageSmoke.png';
 damageSmoke2.src = 'img/damageSmoke2.png';
+botDamageSmoke.src = 'img/botDamSmoke.png';
+botDamageSmoke2.src = 'img/botDamSmoke2.png';
 car.src = 'img/car1-90px.png';
 
 let bgStart = bg.height - 900;
+let bgStart2 = bg2.height - 900;
 
-let carX = 7;
+let carX = 207;
 let carY = 640;
 let turn = null;
 
-let speed = 5;
+let speed = 10;
 
 let pipeSmokeX = carX + car.width - 40;
 let pipeSmokeY = carY + car.height;
 let isPipeSmoke = true;
 let isTireSmoke = true;
 let isDamageSmoke = false;
+let isBotDamageSmoke = false;
 
 let speedActive = false;
 let speedTogle = true;
@@ -57,11 +66,17 @@ botCarsRev[0] = new BotCar(1);
 
 const draw = () => {
     if (bgStart < 0) {
-
         bgStart = bg.height - 900;
     }
-    ctx.drawImage(bg, 0, bgStart, 400, 900, 0, 0, 400, 900)
+
+    if (bgStart2 < 0) {
+        bgStart2 = bg2.height - 900;
+    }
+    ctx.drawImage(bg2, 0, bgStart2, 800, 900, 0, 0, 800, 900)
+    ctx.drawImage(bg, 0, bgStart, 400, 900, 200, 0, 400, 900)
+
     bgStart -= speed;
+    bgStart2 -= speed;
 
     for (let i = 0; i < botCars.length; i++) {
         if (!botCars[i].damage) {
@@ -93,10 +108,13 @@ const draw = () => {
                 damgeRotateBot -= 5;
                 ctx.rotate(damgeRotateBot * Math.PI / 180);
                 ctx.drawImage(botCars[i].car, (-botCars[i].car.width / 2) / 3, (-botCars[i].car.height / 2) - damgeRotateBot / 2);
+                toBotDamageSmoke(i);
+
                 ctx.restore();
             } else {
                 ctx.rotate(damgeRotateBot * Math.PI / 180);
                 ctx.drawImage(botCars[i].car, (-botCars[i].car.width / 2) / 3, (-botCars[i].car.height / 2) - damgeRotateBot / 2);
+                toBotDamageSmoke(i);
                 ctx.restore();
             }
         }
@@ -116,25 +134,6 @@ const draw = () => {
 
     }
 
-    // for (let i = 0; i < botCarsRev.length; i++) {
-    //     ctx.drawImage(botCarsRev[i].car, botCarsRev[i].botcarX, botCarsRev[i].botcarY);
-
-    //     botCarsRev[i].botcarY += speed + 2;
-
-    //     if (!botCarsRev[i].check) {
-    //         if (botCarsRev[i].botcarY > 200) {
-
-    //             // const random = Math.floor(0 + Math.random() * (1 + 1 - 0));
-    //             const random = Math.random() > 0.5 ? 0 : 1;
-    //             botCarsRev.push(new BotCar(random));
-    //             botCarsRev[i].check = true;
-    //         }
-
-    //         if (botCarsRev[i].botcarY > 1000) {
-    //             botCarsRev.shift();
-    //         }
-    //     }
-    // }
     if (speedActive) {
         drawSpeed();
     }
@@ -151,8 +150,10 @@ const draw = () => {
             toPipeSmokeRight();
             toTireSmokeRight();
             ctx.restore();
-            carX += 3;
-            pipeSmokeX += 3;
+            if (carX < 550) {
+                carX += 5;
+                pipeSmokeX += 5;
+            }
         } else if (turn === 'left') {
             ctx.save();
             ctx.translate(carX + car.width / 2, carY + car.height / 2);
@@ -161,8 +162,10 @@ const draw = () => {
             toPipeSmokeLeft();
             toTireSmokeLeft();
             ctx.restore();
-            carX -= 3;
-            pipeSmokeX -= 3;
+            if (carX > 200) {
+                carX -= 5;
+                pipeSmokeX -= 5;
+            }
         }
     } else {
         ctx.save();
@@ -188,7 +191,7 @@ const draw = () => {
     }
 
 
-    // requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
 }
 
 const toPipeSmoke = () => {
@@ -209,6 +212,17 @@ const toDamageSmoke = () => {
     }
     setTimeout(() => {
         isDamageSmoke = true;
+    }, 50)
+}
+
+const toBotDamageSmoke = (i) => {
+    ctx.drawImage(botDamageSmoke, -botCars[i].car.width / 2, (-botCars[i].car.height / 2) + 40);
+    if (isBotDamageSmoke) {
+        ctx.drawImage(botDamageSmoke2, -botCars[i].car.width / 2, (-botCars[i].car.height / 2) + 40);
+        isBotDamageSmoke = false;
+    }
+    setTimeout(() => {
+        isBotDamageSmoke = true;
     }, 50)
 }
 
