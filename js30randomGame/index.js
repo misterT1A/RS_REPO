@@ -5,6 +5,8 @@ const ctx = cvs.getContext('2d');
 
 const bg = new Image();
 const bg2 = new Image();
+const speedPanel = new Image();
+const arrowSpeed = new Image();
 const pipeSmoke1 = new Image();
 const pipeSmoke2 = new Image();
 const tireSmokeLeft = new Image();
@@ -19,9 +21,10 @@ const botDamageSmoke2 = new Image();
 const car = new Image();
 
 
-
 bg.src = 'img/road400.png';
 bg2.src = 'img/bg2.png';
+speedPanel.src = 'img/speedPanel.png';
+arrowSpeed.src = 'img/arrowSpeed.png';
 pipeSmoke1.src = 'img/smoke1.png';
 pipeSmoke2.src = 'img/smoke1rev.png';
 tireSmokeLeft.src = 'img/smokeLeft.png';
@@ -34,6 +37,8 @@ damageSmoke2.src = 'img/damageSmoke2.png';
 botDamageSmoke.src = 'img/botDamSmoke.png';
 botDamageSmoke2.src = 'img/botDamSmoke2.png';
 car.src = 'img/car1-90px.png';
+
+let gameStart = true;
 
 let bgStart = bg.height - 900;
 let bgStart2 = bg2.height - 900;
@@ -59,12 +64,11 @@ let damgeRotate = 0;
 let damgeRotateBot = 0;
 
 const botCars = [];
-const botCarsRev = [];
 botCars[0] = new BotCar(3);
-botCarsRev[0] = new BotCar(1);
-
 
 const draw = () => {
+
+
     if (bgStart < 0) {
         bgStart = bg.height - 900;
     }
@@ -99,6 +103,10 @@ const draw = () => {
                 speed = 0;
                 carFullDamage = true;
                 botCars[i].damage = true;
+                setTimeout(() => {
+                    gameStart = false;
+                }, 2000)
+
             }
 
         } else {
@@ -191,7 +199,19 @@ const draw = () => {
     }
 
 
-    requestAnimationFrame(draw);
+    ctx.drawImage(speedPanel, 30, 720);
+
+    ctx.save();
+    ctx.translate(302, 776 + arrowSpeed.height / 2);
+    ctx.rotate(30 * Math.PI / 180);
+    ctx.drawImage(arrowSpeed, 234, 776);
+    ctx.restore();
+
+
+    if (gameStart) {
+        // requestAnimationFrame(draw);
+    }
+
 }
 
 const toPipeSmoke = () => {
