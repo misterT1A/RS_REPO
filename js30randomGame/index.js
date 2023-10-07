@@ -10,6 +10,9 @@ const tireSmokeLeft = new Image();
 const tireSmokeRight = new Image();
 const speedEffectUp = new Image();
 const speedEffectDown = new Image();
+const damageCar = new Image();
+const damageSmoke = new Image();
+const damageSmoke2 = new Image();
 const car = new Image();
 
 
@@ -20,6 +23,9 @@ tireSmokeLeft.src = 'img/smokeLeft.png';
 tireSmokeRight.src = 'img/smokeRight.png';
 speedEffectUp.src = './img/speedUp.png';
 speedEffectDown.src = './img/speedDown.png';
+damageCar.src = 'img/car1-90pxDam.png';
+damageSmoke.src = 'img/damageSmoke.png';
+damageSmoke2.src = 'img/damageSmoke2.png';
 car.src = 'img/car1-90px.png';
 
 let bgStart = bg.height - 900;
@@ -34,9 +40,14 @@ let pipeSmokeX = carX + car.width - 40;
 let pipeSmokeY = carY + car.height;
 let isPipeSmoke = true;
 let isTireSmoke = true;
+let isDamageSmoke = false;
 
 let speedActive = false;
 let speedTogle = true;
+
+let carFullDamage = false;
+let damgeRotate = 0;
+let damgeRotateBot = 0;
 
 const botCars = [];
 const botCarsRev = [];
@@ -53,18 +64,42 @@ const draw = () => {
     bgStart -= speed;
 
     for (let i = 0; i < botCars.length; i++) {
+        if (!botCars[i].damage) {
 
-        ctx.drawImage(botCars[i].car, botCars[i].botcarX, botCars[i].botcarY);
-        botCars[i].botcarY += speed - 2;
-        if (((carY <= botCars[i].botcarY + botCars[i].car.height
-            && carY + car.height >= botCars[i].botcarY + botCars[i].car.height)
-            || (carY + car.height >= botCars[i].botcarY && carY <= botCars[i].botcarY))
-            && ((botCars[i].botcarX < carX && carX < botCars[i].botcarX + botCars[i].car.width)
-                || (botCars[i].botcarX < carX + car.width
-                    && carX + car.width < botCars[i].botcarX + botCars[i].car.width))) {
-            console.log('dfdf')
+            ctx.drawImage(botCars[i].car, botCars[i].botcarX, botCars[i].botcarY);
+            if (!botCars[i].damage) {
+                botCars[i].botcarY += speed - 2;
+            }
+
+            if (((carY <= botCars[i].botcarY + botCars[i].car.height && carY + car.height >= botCars[i].botcarY + botCars[i].car.height)
+
+                || (carY + car.height >= botCars[i].botcarY && carY <= botCars[i].botcarY))
+
+
+                && ((botCars[i].botcarX < carX && botCars[i].botcarX + botCars[i].car.width > carX)
+
+                    || (botCars[i].botcarX < carX + car.width && botCars[i].botcarX + botCars[i].car.width > carX + car.width)
+
+                    || ((botCars[i].botcarX > carX && botCars[i].botcarX < carX + car.width) && botCars[i].botcarX + botCars[i].car.width > carX && botCars[i].botcarX + botCars[i].car.width < carX + car.width))) {
+                speed = 0;
+                carFullDamage = true;
+                botCars[i].damage = true;
+            }
+
+        } else {
+            ctx.save();
+            ctx.translate(botCars[i].botcarX + botCars[i].car.width / 2, botCars[i].botcarY + botCars[i].car.height / 2);
+            if (damgeRotateBot > -80) {
+                damgeRotateBot -= 5;
+                ctx.rotate(damgeRotateBot * Math.PI / 180);
+                ctx.drawImage(botCars[i].car, (-botCars[i].car.width / 2) / 3, (-botCars[i].car.height / 2) - damgeRotateBot / 2);
+                ctx.restore();
+            } else {
+                ctx.rotate(damgeRotateBot * Math.PI / 180);
+                ctx.drawImage(botCars[i].car, (-botCars[i].car.width / 2) / 3, (-botCars[i].car.height / 2) - damgeRotateBot / 2);
+                ctx.restore();
+            }
         }
-
 
         if (!botCars[i].check) {
             if (botCars[i].botcarY > 200) {
@@ -104,43 +139,61 @@ const draw = () => {
         drawSpeed();
     }
 
+    if (!carFullDamage) {
+        if (!turn) {
+            ctx.drawImage(car, carX, carY);
+            toPipeSmoke();
+        } else if (turn === 'right') {
+            ctx.save();
+            ctx.translate(carX + car.width / 2, carY + car.height / 2);
+            ctx.rotate(30 * Math.PI / 180);
+            ctx.drawImage(car, -car.width / 2, -car.height / 2);
+            toPipeSmokeRight();
+            toTireSmokeRight();
+            ctx.restore();
+            carX += 3;
+            pipeSmokeX += 3;
+        } else if (turn === 'left') {
+            ctx.save();
+            ctx.translate(carX + car.width / 2, carY + car.height / 2);
+            ctx.rotate(-30 * Math.PI / 180);
+            ctx.drawImage(car, -car.width / 2, -car.height / 2);
+            toPipeSmokeLeft();
+            toTireSmokeLeft();
+            ctx.restore();
+            carX -= 3;
+            pipeSmokeX -= 3;
+        }
+    } else {
+        ctx.save();
+        if (damgeRotate < 120) {
+            carY -= 10
+            carX += 3
+        }
 
-    if (!turn) {
-        ctx.drawImage(car, carX, carY);
-        toPipeSmoke();
-    } else if (turn === 'right') {
-        ctx.save();
-        ctx.translate(carX + car.width / 2, carY + car.height / 2);
-        ctx.rotate(30 * Math.PI / 180);
-        ctx.drawImage(car, -car.width / 2, -car.height / 2);
-        toPipeSmokeRight();
-        toTireSmokeRight();
-        ctx.restore();
-        carX += 3;
-        pipeSmokeX += 3;
-    } else if (turn === 'left') {
-        ctx.save();
-        ctx.translate(carX + car.width / 2, carY + car.height / 2);
-        ctx.rotate(-30 * Math.PI / 180);
-        ctx.drawImage(car, -car.width / 2, -car.height / 2);
-        toPipeSmokeLeft();
-        toTireSmokeLeft();
-        ctx.restore();
-        carX -= 3;
-        pipeSmokeX -= 3;
+        ctx.translate(carX + damageCar.width / 2, carY + damageCar.height / 2);
+        if (damgeRotate < 120) {
+            damgeRotate += 5;
+            ctx.rotate(damgeRotate * Math.PI / 180);
+            ctx.drawImage(damageCar, (-damageCar.width / 2) / 3, (-damageCar.height / 2) - damgeRotate / 2);
+            toDamageSmoke();
+            ctx.restore();
+        } else {
+            ctx.rotate(damgeRotate * Math.PI / 180);
+            ctx.drawImage(damageCar, (-damageCar.width / 2) / 3, (-damageCar.height / 2) - damgeRotate / 2);
+            toDamageSmoke();
+            ctx.restore();
+        }
+
     }
+
 
     // requestAnimationFrame(draw);
 }
 
-
-// const checkDamge = (i) => {
-//     if(car.)
-// }
-
 const toPipeSmoke = () => {
     if (isPipeSmoke) {
-        ctx.drawImage(pipeSmoke1, pipeSmokeX, pipeSmokeY);
+        ctx.drawImage(pipeSmoke1, pipeSmokeX + 10, pipeSmokeY);
         isPipeSmoke = false;
     }
     setTimeout(() => {
@@ -148,9 +201,20 @@ const toPipeSmoke = () => {
     }, 50)
 }
 
+const toDamageSmoke = () => {
+    ctx.drawImage(damageSmoke, -damageCar.width / 2, -damageCar.height / 2);
+    if (isDamageSmoke) {
+        ctx.drawImage(damageSmoke2, -damageCar.width / 2, -damageCar.height / 2);
+        isDamageSmoke = false;
+    }
+    setTimeout(() => {
+        isDamageSmoke = true;
+    }, 50)
+}
+
 const toPipeSmokeRight = () => {
     if (isPipeSmoke) {
-        ctx.drawImage(pipeSmoke1, -car.width / 2 + car.width - 40, -car.height / 2 + car.height);
+        ctx.drawImage(pipeSmoke1, -car.width / 2 + car.width - 30, -car.height / 2 + car.height);
         isPipeSmoke = false;
     }
     setTimeout(() => {
@@ -160,7 +224,7 @@ const toPipeSmokeRight = () => {
 
 const toPipeSmokeLeft = () => {
     if (isPipeSmoke) {
-        ctx.drawImage(pipeSmoke1, -car.width / 2 + car.width - 40, -car.height / 2 + car.height);
+        ctx.drawImage(pipeSmoke1, -car.width / 2 + car.width - 30, -car.height / 2 + car.height);
         isPipeSmoke = false;
     }
     setTimeout(() => {
@@ -170,7 +234,7 @@ const toPipeSmokeLeft = () => {
 
 const toTireSmokeRight = () => {
     if (isTireSmoke) {
-        ctx.drawImage(tireSmokeLeft, -car.width / 2 - 75, -car.height / 2 + car.height - 120);
+        ctx.drawImage(tireSmokeLeft, -car.width / 2 - 90, -car.height / 2 + car.height - 120);
         isTireSmoke = false;
     }
     setTimeout(() => {
@@ -180,7 +244,7 @@ const toTireSmokeRight = () => {
 
 const toTireSmokeLeft = () => {
     if (isTireSmoke) {
-        ctx.drawImage(tireSmokeRight, -car.width / 2 + 75, -car.height / 2 + car.height - 120)
+        ctx.drawImage(tireSmokeRight, -car.width / 2 + 60, -car.height / 2 + car.height - 120)
         isTireSmoke = false;
     }
     setTimeout(() => {
