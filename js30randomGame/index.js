@@ -7,6 +7,7 @@ const bg = new Image();
 const bg2 = new Image();
 const speedPanel = new Image();
 const arrowSpeed = new Image();
+const madMan = new Image();
 const pipeSmoke1 = new Image();
 const pipeSmoke2 = new Image();
 const tireSmokeLeft = new Image();
@@ -25,6 +26,7 @@ bg.src = 'img/road400.png';
 bg2.src = 'img/bg2.png';
 speedPanel.src = 'img/speedPanel.png';
 arrowSpeed.src = 'img/arrowSpeed.png';
+madMan.src = 'img/madMan.png';
 pipeSmoke1.src = 'img/smoke1.png';
 pipeSmoke2.src = 'img/smoke1rev.png';
 tireSmokeLeft.src = 'img/smokeLeft.png';
@@ -43,11 +45,17 @@ let gameStart = true;
 let bgStart = bg.height - 900;
 let bgStart2 = bg2.height - 900;
 
-let carX = 207;
+let carX = 307;
 let carY = 640;
 let turn = null;
 
+let gear = 0;
+let gearUpPanel = false;
 let speed = 10;
+let speedHeightCar = 200;
+let score = 0;
+let deg = -45;
+let speedUpText = false;
 
 let pipeSmokeX = carX + car.width - 40;
 let pipeSmokeY = carY + car.height;
@@ -66,11 +74,19 @@ let damgeRotateBot = 0;
 const botCars = [];
 botCars[0] = new BotCar(3);
 
-const draw = () => {
 
+
+const draw = () => {
+    if (gear % 10 === 0 && gear != 0) {
+        speed += 1;
+        gear = 0;
+        gearUpPanel = true;
+        speedUpText = true;
+    }
 
     if (bgStart < 0) {
         bgStart = bg.height - 900;
+        gear += 1;
     }
 
     if (bgStart2 < 0) {
@@ -84,7 +100,6 @@ const draw = () => {
 
     for (let i = 0; i < botCars.length; i++) {
         if (!botCars[i].damage) {
-
             ctx.drawImage(botCars[i].car, botCars[i].botcarX, botCars[i].botcarY);
             if (!botCars[i].damage) {
                 botCars[i].botcarY += speed - 2;
@@ -127,17 +142,25 @@ const draw = () => {
             }
         }
 
+        if (speed > 10 && speed < 16) {
+            speedHeightCar = 300;
+        } else if (speed > 15) {
+            speedHeightCar = 400;
+        } else {
+            speedHeightCar = 200;
+        }
+
         if (!botCars[i].check) {
-            if (botCars[i].botcarY > 200) {
+            if (botCars[i].botcarY > speedHeightCar) {
                 const random = Math.floor(0 + Math.random() * (3 + 1 - 0));
-                // const random = Math.random() > 0.5 ? 2 : 3;
                 botCars.push(new BotCar(random));
                 botCars[i].check = true;
             }
+        }
 
-            if (botCars[i].botcarY > 1000) {
-                botCars.shift();
-            }
+        if (botCars[i].botcarY > 1000) {
+            botCars.shift();
+            score += 100;
         }
 
     }
@@ -201,18 +224,58 @@ const draw = () => {
 
     ctx.drawImage(speedPanel, 30, 720);
 
+    if (gearUpPanel && deg < 220) {
+        deg += 29.4;
+        gearUpPanel = false;
+    }
+
     ctx.save();
-    ctx.translate(302, 776 + arrowSpeed.height / 2);
-    ctx.rotate(30 * Math.PI / 180);
-    ctx.drawImage(arrowSpeed, 234, 776);
+    ctx.translate(-arrowSpeed.width * 0.78 + 173, -arrowSpeed.height / 2 + 811);
+    ctx.rotate(deg * Math.PI / 180);
+    ctx.drawImage(arrowSpeed, -arrowSpeed.width * 0.78, -arrowSpeed.height / 2);
     ctx.restore();
 
+    //-45 220  29.4
+
+    ctx.beginPath();
+    ctx.moveTo(5, 10);
+    ctx.lineTo(200, 10);
+    ctx.lineTo(200, 60);
+    ctx.lineTo(5, 60);
+    ctx.closePath();
+    ctx.fillStyle = '#c3c9a8';
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#000';
+    ctx.font = 'Bold 24px Verdana';
+    ctx.fillText('Score: ' + score, 10, 43);
+
+    if (speedUpText) {
+        textSpeedUp()
+    }
 
     if (gameStart) {
-        // requestAnimationFrame(draw);
+        requestAnimationFrame(draw);
     }
 
 }
+
+
+const textSpeedUp = () => {
+    ctx.save();
+    ctx.fillStyle = '#eeca00';
+    ctx.font = 'Bold 39px Verdana';
+    ctx.translate(cvs.width / 2, cvs.height / 2);
+    ctx.fillText('FASTER', -95, 0);
+    ctx.drawImage(madMan, 130, -230);
+    ctx.restore();
+    setTimeout(() => {
+        speedUpText = false;
+    }, 2000)
+}
+
+
 
 const toPipeSmoke = () => {
     if (isPipeSmoke) {
