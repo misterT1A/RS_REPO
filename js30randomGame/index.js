@@ -1,5 +1,27 @@
 import { BotCar } from "./botCar.js";
 
+const btnNewGame = document.getElementById('newGame');
+const btnPauseGame = document.getElementById('pauseGAme');
+
+const gameMainMenu = document.querySelector('.game_main_menu');
+const btnEnterName = document.querySelector('.name_btn');
+const formInputName = document.querySelector('.input_name');
+const inputName = document.getElementById('inputName');
+const btnInputName = document.getElementById('btnInputName');
+const recordForm = document.querySelector('.records_wrapper');
+const recordName = document.querySelector('.record_name');
+const recordsTable = document.querySelector('.records_table');
+const btnGameStart = document.querySelector('.game_btn');
+const btnRecordShow = document.querySelector('.records_btn');
+
+const countdownFirst = document.querySelector('.first');
+const countdownSecond = document.querySelector('.second');
+const countdownThird = document.querySelector('.third');
+
+const endGameManu = document.querySelector('.end_game');
+const btnBackManu = document.querySelector('.backMenu');
+const btnTryAgain = document.querySelector('.tryAgain');
+
 const cvs = document.getElementById('game');
 const ctx = cvs.getContext('2d');
 
@@ -40,7 +62,10 @@ botDamageSmoke.src = 'img/botDamSmoke.png';
 botDamageSmoke2.src = 'img/botDamSmoke2.png';
 car.src = 'img/car1-90px.png';
 
-let gameStart = true;
+
+let readyGame = false;
+let gameStart = false;
+let endGame = false;
 
 let bgStart = bg.height - 900;
 let bgStart2 = bg2.height - 900;
@@ -71,7 +96,7 @@ let carFullDamage = false;
 let damgeRotate = 0;
 let damgeRotateBot = 0;
 
-const botCars = [];
+let botCars = [];
 botCars[0] = new BotCar(3);
 
 
@@ -119,7 +144,8 @@ const draw = () => {
                 carFullDamage = true;
                 botCars[i].damage = true;
                 setTimeout(() => {
-                    gameStart = false;
+                    endGame = true;
+                    endGameManu.classList.remove('hidden');
                 }, 2000)
 
             }
@@ -255,7 +281,7 @@ const draw = () => {
         textSpeedUp()
     }
 
-    if (gameStart) {
+    if (gameStart && !endGame) {
         requestAnimationFrame(draw);
     }
 
@@ -274,8 +300,6 @@ const textSpeedUp = () => {
         speedUpText = false;
     }, 2000)
 }
-
-
 
 const toPipeSmoke = () => {
     if (isPipeSmoke) {
@@ -424,9 +448,124 @@ const moveStop = (event) => {
     }
 }
 
-car.addEventListener('load', draw);
+const toStartNewGame = () => {
+    ctx.clearRect(0, 0, cvs.width, cvs.height);
+    location.reload();
+}
+
+const toPauseGame = () => {
+    if (gameStart && !endGame) {
+        gameStart = false;
+    } else {
+        gameStart = true;
+        draw();
+    }
+
+}
+
+const toReadyGame = () => {
+    readyGame = true;
+}
+
+const showNameInput = () => {
+    formInputName.classList.toggle('hidden')
+}
+
+const showRecordTable = () => {
+    recordForm.classList.toggle('hidden');
+}
+
+const showCountdownTimer = () => {
+    countdownFirst.classList.remove('hidden');
+    console.log(countdownFirst)
+    setTimeout(() => {
+        countdownFirst.classList.add('hidden');
+        countdownSecond.classList.remove('hidden');
+    }, 1000);
+    setTimeout(() => {
+        countdownSecond.classList.add('hidden');
+        countdownThird.classList.remove('hidden');
+    }, 2000)
+    setTimeout(() => {
+        countdownThird.classList.add('hidden');
+    }, 3000)
+}
+const toDefault = () => {
+    readyGame = true;
+    gameStart = false;
+    endGame = false;
+
+    bgStart = bg.height - 900;
+    bgStart2 = bg2.height - 900;
+
+    carX = 307;
+    carY = 640;
+    turn = null;
+
+    gear = 0;
+    gearUpPanel = false;
+    speed = 10;
+    speedHeightCar = 200;
+    score = 0;
+    deg = -45;
+    speedUpText = false;
+
+    pipeSmokeX = carX + car.width - 40;
+    pipeSmokeY = carY + car.height;
+    isPipeSmoke = true;
+    isTireSmoke = true;
+    isDamageSmoke = false;
+    isBotDamageSmoke = false;
+
+    speedActive = false;
+    speedTogle = true;
+
+    carFullDamage = false;
+    damgeRotate = 0;
+    damgeRotateBot = 0;
+
+    botCars = [];
+    botCars[0] = new BotCar(3);
+}
+
+const startGame = () => {
+    toDefault();
+    if (readyGame) {
+        draw();
+        gameMainMenu.classList.add('hidden');
+        showCountdownTimer();
+        setTimeout(() => {
+            gameStart = true;
+            draw();
+        }, 3000)
+    }
+}
+
+const backMainManu = () => {
+    endGameManu.classList.add('hidden');
+    gameMainMenu.classList.remove('hidden');
+}
+
+
+
+const startNewGame = () => {
+    endGameManu.classList.add('hidden');
+    toDefault();
+    startGame();
+}
+
+car.addEventListener('load', toReadyGame);
 document.addEventListener('keydown', moveCar);
 document.addEventListener('keydown', turnCar);
 document.addEventListener('keyup', moveStop);
 document.addEventListener('keyup', turnStop);
 
+btnNewGame.addEventListener('click', toStartNewGame);
+btnPauseGame.addEventListener('click', toPauseGame);
+
+btnEnterName.addEventListener('click', showNameInput);
+btnGameStart.addEventListener('click', startGame);
+btnRecordShow.addEventListener('click', showRecordTable);
+
+btnBackManu.addEventListener('click', backMainManu);
+btnTryAgain.addEventListener('click', startNewGame);
