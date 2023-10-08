@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="game_wrapper">
+        <canvas id="game" width="800" height="900"></canvas>
+        <div class="game_main_menu">
+            <div class="btn_wrapper">
+                <div class="btn_main name_btn btn">Enter your Name</div>
+                <div class="btn_main game_btn btn">Start Game</div>
+                <div class="btn_main records_btn btn">Records</div>
+            </div>
+        </div>
+        <form class="input_name hidden">
+            <input id="inputName" type="text" placeholder="Enter your Name">
+            <button class="btn" id="btnInputName" type="submit">Submit</button>
+        </form>
+        <div class="records_wrapper hidden">
+            <span class="record_name">Name</span>
+            <ul class="records_table">
+                <li class="record_item">-------</li>
+                <li class="record_item">-------</li>
+                <li class="record_item">-------</li>
+                <li class="record_item">-------</li>
+                <li class="record_item">-------</li>
+                <li class="record_item">-------</li>
+                <li class="record_item">-------</li>
+                <li class="record_item">-------</li>
+                <li class="record_item">-------</li>
+                <li class="record_item">-------</li>
+            </ul>
+        </div>
+        <div class="stats_wrapper">
+            <!-- <div class="btn_menu">MENU</div> -->
+            <div id="pauseGAme" class="btn_menu hidden btn">PAUSE</div>
+            <div id="newGame" class="btn_menu hidden btn">NEW GAME</div>
+        </div>
+        <div class="countdown_timer">
+            <div class="first countdown hidden">3</div>
+            <div class="second countdown hidden">2</div>
+            <div class="third countdown hidden">1</div>
+        </div>
+        <div class="end_game hidden">
+            <div class="btn_main end backMenu btn">Menu</div>
+            <div class="btn_main end tryAgain btn">Try again</div>
+        </div>
+    </div>
+    <script src="./index.js" type="module"></script>
+</body>
+
+</html>
