@@ -3,6 +3,8 @@ import { BotCar } from "./botCar.js";
 const btnNewGame = document.getElementById('newGame');
 const btnPauseGame = document.getElementById('pauseGAme');
 
+const btnAll = document.querySelectorAll('.btn');
+
 const gameMainMenu = document.querySelector('.game_main_menu');
 const btnEnterName = document.querySelector('.name_btn');
 const formInputName = document.querySelector('.input_name');
@@ -25,6 +27,14 @@ const btnTryAgain = document.querySelector('.tryAgain');
 const cvs = document.getElementById('game');
 const ctx = cvs.getContext('2d');
 
+const audioHoverBtn = new Audio();
+const audioClickBtn = new Audio();
+const audiotireSound = new Audio();
+const audioStartEngine = new Audio();
+const audioDamageCar = new Audio();
+const audioEngine = new Audio();
+const audioDeadEngine = new Audio();
+
 const bg = new Image();
 const bg2 = new Image();
 const speedPanel = new Image();
@@ -42,6 +52,16 @@ const damageSmoke2 = new Image();
 const botDamageSmoke = new Image();
 const botDamageSmoke2 = new Image();
 const car = new Image();
+
+audioHoverBtn.src = 'sounds/knopka-hover.wav';
+audioClickBtn.src = 'sounds/knopka-klik.wav';
+audiotireSound.src = 'sounds/tireSound.mp3';
+audioDamageCar.src = 'sounds/damageCar.wav';
+audioStartEngine.src = 'sounds/starEngine.mp3';
+audioEngine.src = 'sounds/engineSound.mp3';
+audioEngine.loop = true;
+audioEngine.volume = 0.3;
+audioDeadEngine.src = 'sounds/deadEngine.mp3';
 
 
 bg.src = 'img/road400.png';
@@ -62,7 +82,7 @@ botDamageSmoke.src = 'img/botDamSmoke.png';
 botDamageSmoke2.src = 'img/botDamSmoke2.png';
 car.src = 'img/car1-90px.png';
 
-
+let name = null;
 let readyGame = false;
 let gameStart = false;
 let endGame = false;
@@ -98,8 +118,6 @@ let damgeRotateBot = 0;
 
 let botCars = [];
 botCars[0] = new BotCar(3);
-
-
 
 const draw = () => {
     if (gear % 10 === 0 && gear != 0) {
@@ -143,6 +161,10 @@ const draw = () => {
                 speed = 0;
                 carFullDamage = true;
                 botCars[i].damage = true;
+                audioDamageCar.play();
+                audioEngine.pause();
+                audioEngine.currentTime = 0;
+                audioDeadEngine.play();
                 setTimeout(() => {
                     endGame = true;
                     endGameManu.classList.remove('hidden');
@@ -287,7 +309,6 @@ const draw = () => {
 
 }
 
-
 const textSpeedUp = () => {
     ctx.save();
     ctx.fillStyle = '#eeca00';
@@ -386,9 +407,19 @@ const drawSpeed = () => {
 
 const turnCar = (event) => {
     if (event.keyCode === 37) {
+        audiotireSound.play();
+        setTimeout(() => {
+            audiotireSound.pause();
+            audiotireSound.currentTime = 0;
+        }, 700)
         turn = 'left';
     } else if (event.keyCode === 39) {
+        audiotireSound.play();
         turn = 'right';
+        setTimeout(() => {
+            audiotireSound.pause();
+            audiotireSound.currentTime = 0;
+        }, 700)
     }
 }
 
@@ -477,7 +508,6 @@ const showRecordTable = () => {
 
 const showCountdownTimer = () => {
     countdownFirst.classList.remove('hidden');
-    console.log(countdownFirst)
     setTimeout(() => {
         countdownFirst.classList.add('hidden');
         countdownSecond.classList.remove('hidden');
@@ -531,12 +561,16 @@ const toDefault = () => {
 const startGame = () => {
     toDefault();
     if (readyGame) {
+        audioStartEngine.play();
         draw();
         gameMainMenu.classList.add('hidden');
         showCountdownTimer();
         setTimeout(() => {
+            audioStartEngine.pause();
+            audioStartEngine.currentTime = 0;
             gameStart = true;
             draw();
+            audioEngine.play();
         }, 3000)
     }
 }
@@ -546,26 +580,104 @@ const backMainManu = () => {
     gameMainMenu.classList.remove('hidden');
 }
 
-
-
 const startNewGame = () => {
     endGameManu.classList.add('hidden');
     toDefault();
     startGame();
 }
 
+const sendNameClosePopUp = (event) => {
+    event.preventDefault();
+    if (inputName.value != '') {
+        name = inputName.value;
+        formInputName.classList.add('hidden');
+    }
+}
+
 car.addEventListener('load', toReadyGame);
-document.addEventListener('keydown', moveCar);
+// document.addEventListener('keydown', moveCar);
 document.addEventListener('keydown', turnCar);
-document.addEventListener('keyup', moveStop);
+// document.addEventListener('keyup', moveStop);
 document.addEventListener('keyup', turnStop);
 
 btnNewGame.addEventListener('click', toStartNewGame);
 btnPauseGame.addEventListener('click', toPauseGame);
 
+formInputName.addEventListener('submit', sendNameClosePopUp);
 btnEnterName.addEventListener('click', showNameInput);
 btnGameStart.addEventListener('click', startGame);
 btnRecordShow.addEventListener('click', showRecordTable);
 
 btnBackManu.addEventListener('click', backMainManu);
 btnTryAgain.addEventListener('click', startNewGame);
+
+btnAll.forEach(btn => btn.addEventListener('mouseover', () => { audioHoverBtn.play() }));
+btnAll.forEach(btn => btn.addEventListener('click', () => { audioClickBtn.play() }))
+
+
+// if (localStorage.getItem('users')) {
+//     let users = JSON.parse(localStorage.getItem('users'));
+//     users.forEach(user => {
+//         if (game.name === user.name) {
+//             game.nameRecord.textContent = `${user.name}`;
+//             user.points.forEach((elem, index) => {
+//                 game.recordElem[index].textContent = `score ${elem.score} time: ${elem.time}`;
+//             })
+//         } else {
+//             game.nameRecord.textContent = `Name`;
+//             game.recordElem.forEach(elem => {
+//                 elem.textContent = 'empty';
+//             })
+//         }
+//     })
+// }
+
+
+
+// setDataInLS() {
+//     if (localStorage.getItem('users')) {
+//         let users = JSON.parse(localStorage.getItem('users'));
+//         console.log(users)
+//         let coincidence = false;
+//         users.forEach(user => {
+//             if (user.name === game.name) {
+//                 console.log(user.points)
+//                 coincidence = true;
+//                 user.points.push({
+//                     score: score,
+//                     time: new Date()
+//                 })
+//                 if (user.points.length > 10) {
+//                     user.points.shift();
+//                 }
+//             }
+//             localStorage.setItem('users', JSON.stringify(users))
+//         })
+//         if (!coincidence) {
+//             let user = {
+//                 name: game.name,
+//                 points: []
+//             }
+//             user.points.push({
+//                 score: score,
+//                 time: new Date()
+//             })
+//             users.push(user);
+//             localStorage.setItem('users', JSON.stringify(users))
+//         }
+//     } else {
+//         let arrUsers = [];
+//         let user = {
+//             name: name,
+//             points: []
+//         }
+//         user.points.push({
+//             score: score,
+//             time: new Date()
+//         })
+//         arrUsers.push(user);
+//         localStorage.setItem('users', JSON.stringify(arrUsers))
+//     }
+// }
+
+
