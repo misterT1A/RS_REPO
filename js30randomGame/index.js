@@ -6,13 +6,12 @@ const btnPauseGame = document.getElementById('pauseGAme');
 const btnAll = document.querySelectorAll('.btn');
 
 const gameMainMenu = document.querySelector('.game_main_menu');
-const btnEnterName = document.querySelector('.name_btn');
+const nameText = document.querySelector('.name_text');
 const formInputName = document.querySelector('.input_name');
 const inputName = document.getElementById('inputName');
-const btnInputName = document.getElementById('btnInputName');
 const recordForm = document.querySelector('.records_wrapper');
 const recordName = document.querySelector('.record_name');
-const recordsTable = document.querySelector('.records_table');
+const recordsElements = document.querySelectorAll('.record_item');
 const btnGameStart = document.querySelector('.game_btn');
 const btnRecordShow = document.querySelector('.records_btn');
 
@@ -21,6 +20,7 @@ const countdownSecond = document.querySelector('.second');
 const countdownThird = document.querySelector('.third');
 
 const endGameManu = document.querySelector('.end_game');
+const scoreText = document.querySelector('.score_text');
 const btnBackManu = document.querySelector('.backMenu');
 const btnTryAgain = document.querySelector('.tryAgain');
 
@@ -96,7 +96,7 @@ let turn = null;
 
 let gear = 0;
 let gearUpPanel = false;
-let speed = 10;
+let speed = 8;
 let speedHeightCar = 200;
 let score = 0;
 let deg = -45;
@@ -165,6 +165,9 @@ const draw = () => {
                 audioEngine.pause();
                 audioEngine.currentTime = 0;
                 audioDeadEngine.play();
+                setDataInLS();
+                scoreText.textContent = `Score: ${score}`;
+                score = 0;
                 setTimeout(() => {
                     endGame = true;
                     endGameManu.classList.remove('hidden');
@@ -431,54 +434,6 @@ const turnStop = (event) => {
     }
 }
 
-const moveCar = (event) => {
-    if (event.keyCode === 38) {
-        speedActive = true;
-        console.log(speed)
-        if (speed < 10) {
-            speed += 1;
-        }
-
-    } else if (event.keyCode === 40) {
-        if (speed > 0) {
-            speed -= 0.5;
-        }
-    }
-}
-
-const moveStop = (event) => {
-    if (event.keyCode === 38) {
-        console.log('dfdf')
-        speedActive = false;
-        speed = 5;
-        // if (!speedActive) {
-        //     const count = 4;
-        //     const interval = setInterval(() => {
-        //         if (count != 0) {
-        //             let newSpeed = (speed - 5) / 4;
-        //             speed -= newSpeed;
-        //         } else {
-        //             clearInterval(interval);
-        //         }
-
-        //     }, 100)
-        // }
-
-    } else if (event.keyCode === 40) {
-        speed = 5;
-        // const count = 4;
-        // const interval = setInterval(() => {
-        //     if (count != 0) {
-        //         let newSpeed = (speed - 5) / 4;
-        //         speed += newSpeed;
-        //     } else {
-        //         clearInterval(interval);
-        //     }
-
-        // }, 100)
-    }
-}
-
 const toStartNewGame = () => {
     ctx.clearRect(0, 0, cvs.width, cvs.height);
     location.reload();
@@ -498,12 +453,9 @@ const toReadyGame = () => {
     readyGame = true;
 }
 
-const showNameInput = () => {
-    formInputName.classList.toggle('hidden')
-}
-
 const showRecordTable = () => {
     recordForm.classList.toggle('hidden');
+    showStatsUser();
 }
 
 const showCountdownTimer = () => {
@@ -561,6 +513,9 @@ const toDefault = () => {
 const startGame = () => {
     toDefault();
     if (readyGame) {
+        if (!recordForm.classList.contains('hidden')) {
+            recordForm.classList.add('hidden');
+        }
         audioStartEngine.play();
         draw();
         gameMainMenu.classList.add('hidden');
@@ -591,20 +546,105 @@ const sendNameClosePopUp = (event) => {
     if (inputName.value != '') {
         name = inputName.value;
         formInputName.classList.add('hidden');
+
+        if (localStorage.getItem('users')) {
+            let users = JSON.parse(localStorage.getItem('users'));
+            let isFind = false;
+            users.forEach(user => {
+                if (user.name === name) {
+                    isFind = true;
+                    recordName.textContent = user.name;
+                    nameText.textContent = user.name;
+                }
+            })
+
+            if (!isFind) {
+                let user = {
+                    name: name,
+                    points: []
+                }
+                nameText.textContent = name;
+                users.push(user);
+                localStorage.setItem('users', JSON.stringify(users))
+            }
+        } else {
+            let arrUsers = [];
+            let user = {
+                name: name,
+                points: []
+            }
+            nameText.textContent = name;
+            arrUsers.push(user);
+            localStorage.setItem('users', JSON.stringify(arrUsers))
+        }
+    }
+}
+
+const getDate = () => {
+    const mainDate = new Date();
+    const date = mainDate.getDate() < 10 ? `0${mainDate.getDate()}` : mainDate.getDate();
+    const mounth = mainDate.getMonth() < 10 ? `0${mainDate.getMonth()}` : mainDate.getMonth();
+    const hours = mainDate.getHours() < 10 ? `0${mainDate.getHours()}` : mainDate.getHours();
+    const minutes = mainDate.getMinutes() < 10 ? `0${mainDate.getMinutes()}` : mainDate.getMinutes();
+    return `${date}.${mounth}.${mainDate.getFullYear()}  ${hours}:${minutes}`;
+}
+
+const setDataInLS = () => {
+    if (localStorage.getItem('users')) {
+        let users = JSON.parse(localStorage.getItem('users'));
+        users.forEach(user => {
+            if (user.name === name) {
+                user.points.push({
+                    score: score,
+                    time: getDate()
+                })
+                if (user.points.length > 10) {
+                    user.points.shift();
+                }
+            }
+            localStorage.setItem('users', JSON.stringify(users))
+        })
+
+    }
+}
+
+const showStatsUser = () => {
+    if (localStorage.getItem('users')) {
+        let users = JSON.parse(localStorage.getItem('users'));
+        let isFind = false;
+        users.forEach(user => {
+            if (user.name === name) {
+                isFind = true;
+                recordName.textContent = user.name;
+                user.points.forEach((elemScore, indexScore) => {
+                    recordsElements[indexScore].textContent = `${elemScore.time}______Score: ${elemScore.score}`;
+                })
+            }
+        })
+
+        if (!isFind) {
+            let user = {
+                name: name,
+                points: []
+            }
+            recordName.textContent = name;
+            recordsElements.forEach(elem => {
+                elem.textContent = '-------';
+            })
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users))
+        }
     }
 }
 
 car.addEventListener('load', toReadyGame);
-// document.addEventListener('keydown', moveCar);
 document.addEventListener('keydown', turnCar);
-// document.addEventListener('keyup', moveStop);
 document.addEventListener('keyup', turnStop);
 
 btnNewGame.addEventListener('click', toStartNewGame);
 btnPauseGame.addEventListener('click', toPauseGame);
 
 formInputName.addEventListener('submit', sendNameClosePopUp);
-btnEnterName.addEventListener('click', showNameInput);
 btnGameStart.addEventListener('click', startGame);
 btnRecordShow.addEventListener('click', showRecordTable);
 
@@ -613,71 +653,4 @@ btnTryAgain.addEventListener('click', startNewGame);
 
 btnAll.forEach(btn => btn.addEventListener('mouseover', () => { audioHoverBtn.play() }));
 btnAll.forEach(btn => btn.addEventListener('click', () => { audioClickBtn.play() }))
-
-
-// if (localStorage.getItem('users')) {
-//     let users = JSON.parse(localStorage.getItem('users'));
-//     users.forEach(user => {
-//         if (game.name === user.name) {
-//             game.nameRecord.textContent = `${user.name}`;
-//             user.points.forEach((elem, index) => {
-//                 game.recordElem[index].textContent = `score ${elem.score} time: ${elem.time}`;
-//             })
-//         } else {
-//             game.nameRecord.textContent = `Name`;
-//             game.recordElem.forEach(elem => {
-//                 elem.textContent = 'empty';
-//             })
-//         }
-//     })
-// }
-
-
-
-// setDataInLS() {
-//     if (localStorage.getItem('users')) {
-//         let users = JSON.parse(localStorage.getItem('users'));
-//         console.log(users)
-//         let coincidence = false;
-//         users.forEach(user => {
-//             if (user.name === game.name) {
-//                 console.log(user.points)
-//                 coincidence = true;
-//                 user.points.push({
-//                     score: score,
-//                     time: new Date()
-//                 })
-//                 if (user.points.length > 10) {
-//                     user.points.shift();
-//                 }
-//             }
-//             localStorage.setItem('users', JSON.stringify(users))
-//         })
-//         if (!coincidence) {
-//             let user = {
-//                 name: game.name,
-//                 points: []
-//             }
-//             user.points.push({
-//                 score: score,
-//                 time: new Date()
-//             })
-//             users.push(user);
-//             localStorage.setItem('users', JSON.stringify(users))
-//         }
-//     } else {
-//         let arrUsers = [];
-//         let user = {
-//             name: name,
-//             points: []
-//         }
-//         user.points.push({
-//             score: score,
-//             time: new Date()
-//         })
-//         arrUsers.push(user);
-//         localStorage.setItem('users', JSON.stringify(arrUsers))
-//     }
-// }
-
 
