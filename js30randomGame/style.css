@@ -76,14 +76,28 @@ body {
     box-shadow: 0 0 30px rgb(110, 114, 94);
 }
 
+.name_text {
+    width: 25%;
+    height: 20%;
+    background-color: #636363;
+    border: 2px solid #636363;
+    border-radius: 2vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(189, 189, 189);
+    font-family: Verdana, sans-serif;
+    font-size: 2vmin;
+}
+
 
 .input_name {
     position: absolute;
-    top: 50%;
+    top: 38%;
     left: 50%;
     z-index: 4;
     transform: translateX(-50%);
-    width: 30%;
+    width: 93%;
     height: 20%;
     background-color: #c3c9a8;
     display: flex;
@@ -99,14 +113,15 @@ body {
 }
 
 .input_name input {
-    width: 80%;
+    width: 60%;
     height: 20%;
     font-size: 2vmin;
 }
 
 .input_name button {
-    width: 30%;
+    width: 20%;
     height: 20%;
+    cursor: pointer;
 }
 
 .records_wrapper {
@@ -115,7 +130,7 @@ body {
     left: 50%;
     z-index: 4;
     transform: translateX(-50%);
-    width: 30%;
+    width: 56%;
     height: 32%;
     padding: 3%;
     background-color: #c3c9a8;
