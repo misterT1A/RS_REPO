@@ -20,6 +20,7 @@ const countdownSecond = document.querySelector('.second');
 const countdownThird = document.querySelector('.third');
 
 const endGameManu = document.querySelector('.end_game');
+const scoreText = document.querySelector('.score_text');
 const btnBackManu = document.querySelector('.backMenu');
 const btnTryAgain = document.querySelector('.tryAgain');
 
@@ -165,6 +166,7 @@ const draw = () => {
                 audioEngine.currentTime = 0;
                 audioDeadEngine.play();
                 setDataInLS();
+                scoreText.textContent = `Score: ${score}`;
                 score = 0;
                 setTimeout(() => {
                     endGame = true;
@@ -511,6 +513,9 @@ const toDefault = () => {
 const startGame = () => {
     toDefault();
     if (readyGame) {
+        if (!recordForm.classList.contains('hidden')) {
+            recordForm.classList.add('hidden');
+        }
         audioStartEngine.play();
         draw();
         gameMainMenu.classList.add('hidden');
@@ -568,6 +573,7 @@ const sendNameClosePopUp = (event) => {
                 name: name,
                 points: []
             }
+            nameText.textContent = name;
             arrUsers.push(user);
             localStorage.setItem('users', JSON.stringify(arrUsers))
         }
@@ -575,8 +581,12 @@ const sendNameClosePopUp = (event) => {
 }
 
 const getDate = () => {
-    const date = new Date();
-    return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}  ${date.getHours()}:${date.getMinutes()}`;
+    const mainDate = new Date();
+    const date = mainDate.getDate() < 10 ? `0${mainDate.getDate()}` : mainDate.getDate();
+    const mounth = mainDate.getMonth() < 10 ? `0${mainDate.getMonth()}` : mainDate.getMonth();
+    const hours = mainDate.getHours() < 10 ? `0${mainDate.getHours()}` : mainDate.getHours();
+    const minutes = mainDate.getMinutes() < 10 ? `0${mainDate.getMinutes()}` : mainDate.getMinutes();
+    return `${date}.${mounth}.${mainDate.getFullYear()}  ${hours}:${minutes}`;
 }
 
 const setDataInLS = () => {
