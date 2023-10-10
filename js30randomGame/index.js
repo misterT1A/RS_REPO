@@ -9,10 +9,8 @@ const gameMainMenu = document.querySelector('.game_main_menu');
 const nameText = document.querySelector('.name_text');
 const formInputName = document.querySelector('.input_name');
 const inputName = document.getElementById('inputName');
-const btnInputName = document.getElementById('btnInputName');
 const recordForm = document.querySelector('.records_wrapper');
 const recordName = document.querySelector('.record_name');
-const recordsTable = document.querySelector('.records_table');
 const recordsElements = document.querySelectorAll('.record_item');
 const btnGameStart = document.querySelector('.game_btn');
 const btnRecordShow = document.querySelector('.records_btn');
@@ -97,7 +95,7 @@ let turn = null;
 
 let gear = 0;
 let gearUpPanel = false;
-let speed = 10;
+let speed = 8;
 let speedHeightCar = 200;
 let score = 0;
 let deg = -45;
@@ -434,54 +432,6 @@ const turnStop = (event) => {
     }
 }
 
-const moveCar = (event) => {
-    if (event.keyCode === 38) {
-        speedActive = true;
-        console.log(speed)
-        if (speed < 10) {
-            speed += 1;
-        }
-
-    } else if (event.keyCode === 40) {
-        if (speed > 0) {
-            speed -= 0.5;
-        }
-    }
-}
-
-const moveStop = (event) => {
-    if (event.keyCode === 38) {
-        console.log('dfdf')
-        speedActive = false;
-        speed = 5;
-        // if (!speedActive) {
-        //     const count = 4;
-        //     const interval = setInterval(() => {
-        //         if (count != 0) {
-        //             let newSpeed = (speed - 5) / 4;
-        //             speed -= newSpeed;
-        //         } else {
-        //             clearInterval(interval);
-        //         }
-
-        //     }, 100)
-        // }
-
-    } else if (event.keyCode === 40) {
-        speed = 5;
-        // const count = 4;
-        // const interval = setInterval(() => {
-        //     if (count != 0) {
-        //         let newSpeed = (speed - 5) / 4;
-        //         speed += newSpeed;
-        //     } else {
-        //         clearInterval(interval);
-        //     }
-
-        // }, 100)
-    }
-}
-
 const toStartNewGame = () => {
     ctx.clearRect(0, 0, cvs.width, cvs.height);
     location.reload();
@@ -499,10 +449,6 @@ const toPauseGame = () => {
 
 const toReadyGame = () => {
     readyGame = true;
-}
-
-const showNameInput = () => {
-    formInputName.classList.toggle('hidden')
 }
 
 const showRecordTable = () => {
@@ -652,7 +598,6 @@ const setDataInLS = () => {
     }
 }
 
-
 const showStatsUser = () => {
     if (localStorage.getItem('users')) {
         let users = JSON.parse(localStorage.getItem('users'));
@@ -662,12 +607,10 @@ const showStatsUser = () => {
                 isFind = true;
                 recordName.textContent = user.name;
                 user.points.forEach((elemScore, indexScore) => {
-                    recordsElements[indexScore].textContent = `${elemScore.time}    Score: ${elemScore.score}`;
+                    recordsElements[indexScore].textContent = `${elemScore.time}______Score: ${elemScore.score}`;
                 })
             }
         })
-
-
 
         if (!isFind) {
             let user = {
@@ -681,24 +624,17 @@ const showStatsUser = () => {
             users.push(user);
             localStorage.setItem('users', JSON.stringify(users))
         }
-
-
-
-
     }
 }
 
 car.addEventListener('load', toReadyGame);
-// document.addEventListener('keydown', moveCar);
 document.addEventListener('keydown', turnCar);
-// document.addEventListener('keyup', moveStop);
 document.addEventListener('keyup', turnStop);
 
 btnNewGame.addEventListener('click', toStartNewGame);
 btnPauseGame.addEventListener('click', toPauseGame);
 
 formInputName.addEventListener('submit', sendNameClosePopUp);
-// btnEnterName.addEventListener('click', showNameInput);
 btnGameStart.addEventListener('click', startGame);
 btnRecordShow.addEventListener('click', showRecordTable);
 
