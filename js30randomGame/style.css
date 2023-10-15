@@ -23,6 +23,7 @@ body {
     border: 4px solid #c3c9a8;
     border-radius: 2vmin;
     overflow: hidden;
+    transform: scale(0.8);
 }
 
 .game_main_menu {
@@ -140,6 +141,10 @@ body {
     justify-content: center;
     gap: 10%;
     border-radius: 2vmin;
+}
+
+#btnInputName {
+    font-size: 2vmin;
 }
 
 .input_name.hidden {
