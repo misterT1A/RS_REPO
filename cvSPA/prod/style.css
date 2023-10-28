@@ -42,7 +42,7 @@
   .nav {
     background-color: #646669;
     position: fixed;
-    top: -100%;
+    top: -200%;
     left: 0;
     z-index: 3;
     width: 100vh;
@@ -362,6 +362,12 @@ body {
   border: 1px solid #646669;
   border-radius: 10px;
 }
+
+@media (max-width: 600px) {
+  .left__part {
+    width: 44%;
+  }
+}
 /*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/sass-loader/dist/cjs.js!./node_modules/sass-resources-loader/lib/loader.js??ruleSet[1].rules[1].use[4]!./src/app/view/main/rightPart/style.scss ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************/
@@ -449,6 +455,10 @@ body {
   }
 }
 @media (max-width: 600px) {
+  .right__part {
+    width: 56%;
+    padding: 90px 0 20px 26px;
+  }
   .right__title {
     font-size: 2rem;
   }
@@ -459,7 +469,14 @@ body {
     margin: 120px 0 50px;
   }
   .mini__title {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
     width: 100%;
+  }
+  .title__right {
+    width: 130%;
+    margin-left: -26px;
   }
   .contact_item {
     font-size: 0.7rem;
