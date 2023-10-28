@@ -96,7 +96,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**************************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": function() { return /* binding */ UlView; }\n/* harmony export */ });\n/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../view */ \"./src/app/view/view.js\");\n/* harmony import */ var _links_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./links-view */ \"./src/app/view/header/nav/links/links-view.js\");\n\n\nconst CssClasses = {\n  UL: 'nav__list'\n};\nconst textContent = [{\n  text: 'About me',\n  attributes: {\n    href: '\"#aboutMe\"'\n  }\n}, {\n  text: 'Contacts',\n  attributes: {\n    href: '\"#contacts\"'\n  }\n}, {\n  text: 'Code',\n  attributes: {\n    href: '\"#code\"'\n  }\n}, {\n  text: 'Skills',\n  attributes: {\n    href: '\"#skills\"'\n  }\n}, {\n  text: 'Education',\n  attributes: {\n    href: '\"#education\"'\n  }\n}];\nclass UlView extends _view__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n  constructor() {\n    const params = {\n      tag: 'ul',\n      classNames: [CssClasses.UL],\n      textContent: ''\n    };\n    super(params);\n    this.configureView();\n  }\n  configureView() {\n    textContent.forEach(item => {\n      const li = new _links_view__WEBPACK_IMPORTED_MODULE_1__[\"default\"](item);\n      this.elementCreator.addInnerElement(li.getHTMLElement());\n    });\n  }\n}\n\n//# sourceURL=webpack://simpleclassapp/./src/app/view/header/nav/links/ul-view.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": function() { return /* binding */ UlView; }\n/* harmony export */ });\n/* harmony import */ var _view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../view */ \"./src/app/view/view.js\");\n/* harmony import */ var _links_view__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./links-view */ \"./src/app/view/header/nav/links/links-view.js\");\n\n\nconst CssClasses = {\n  UL: 'nav__list'\n};\nconst textContent = [{\n  text: 'About me',\n  attributes: {\n    href: '#aboutMe'\n  }\n}, {\n  text: 'Contacts',\n  attributes: {\n    href: '#contacts'\n  }\n}, {\n  text: 'Code',\n  attributes: {\n    href: '#code'\n  }\n}, {\n  text: 'Skills',\n  attributes: {\n    href: '#skills'\n  }\n}, {\n  text: 'Education',\n  attributes: {\n    href: '#education'\n  }\n}];\nclass UlView extends _view__WEBPACK_IMPORTED_MODULE_0__[\"default\"] {\n  constructor() {\n    const params = {\n      tag: 'ul',\n      classNames: [CssClasses.UL],\n      textContent: ''\n    };\n    super(params);\n    this.configureView();\n  }\n  configureView() {\n    textContent.forEach(item => {\n      const li = new _links_view__WEBPACK_IMPORTED_MODULE_1__[\"default\"](item);\n      this.elementCreator.addInnerElement(li.getHTMLElement());\n    });\n  }\n}\n\n//# sourceURL=webpack://simpleclassapp/./src/app/view/header/nav/links/ul-view.js?");
 
 /***/ }),
 
@@ -406,7 +406,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ind
   \************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n// Module\nvar code = \"<!DOCTYPE html>\\r\\n<html lang=\\\"en\\\">\\r\\n\\r\\n<head>\\r\\n    <meta charset=\\\"UTF-8\\\">\\r\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\r\\n    <title>cv</title>\\r\\n</head>\\r\\n\\r\\n<body>\\r\\n\\r\\n</body>\\r\\n\\r\\n</html>\";\n// Exports\n/* harmony default export */ __webpack_exports__[\"default\"] = (code);\n\n//# sourceURL=webpack://simpleclassapp/./src/index.html?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/html-loader/dist/runtime/getUrl.js */ \"./node_modules/html-loader/dist/runtime/getUrl.js\");\n/* harmony import */ var _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0__);\n// Imports\n\nvar ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ./img/favicon-16x16.png */ \"./src/img/favicon-16x16.png\"), __webpack_require__.b);\n// Module\nvar ___HTML_LOADER_REPLACEMENT_0___ = _node_modules_html_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_0___default()(___HTML_LOADER_IMPORT_0___);\nvar code = \"<!DOCTYPE html>\\r\\n<html lang=\\\"en\\\">\\r\\n\\r\\n<head>\\r\\n    <meta charset=\\\"UTF-8\\\">\\r\\n    <meta name=\\\"viewport\\\" content=\\\"width=device-width, initial-scale=1.0\\\">\\r\\n    <title>cv</title>\\r\\n    <link rel=\\\"icon\\\" href=\\\"\" + ___HTML_LOADER_REPLACEMENT_0___ + \"\\\">\\r\\n</head>\\r\\n\\r\\n<body>\\r\\n\\r\\n</body>\\r\\n\\r\\n</html>\";\n// Exports\n/* harmony default export */ __webpack_exports__[\"default\"] = (code);\n\n//# sourceURL=webpack://simpleclassapp/./src/index.html?");
+
+/***/ }),
+
+/***/ "./node_modules/html-loader/dist/runtime/getUrl.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/html-loader/dist/runtime/getUrl.js ***!
+  \*********************************************************/
+/***/ (function(module) {
+
+eval("\n\nmodule.exports = function (url, options) {\n  if (!options) {\n    // eslint-disable-next-line no-param-reassign\n    options = {};\n  }\n\n  if (!url) {\n    return url;\n  } // eslint-disable-next-line no-underscore-dangle, no-param-reassign\n\n\n  url = String(url.__esModule ? url.default : url);\n\n  if (options.hash) {\n    // eslint-disable-next-line no-param-reassign\n    url += options.hash;\n  }\n\n  if (options.maybeNeedQuotes && /[\\t\\n\\f\\r \"'=<>`]/.test(url)) {\n    return \"\\\"\".concat(url, \"\\\"\");\n  }\n\n  return url;\n};\n\n//# sourceURL=webpack://simpleclassapp/./node_modules/html-loader/dist/runtime/getUrl.js?");
 
 /***/ }),
 
@@ -540,6 +550,16 @@ eval("module.exports = __webpack_require__.p + \"assets/img/audioPlayer.png\";\n
 
 /***/ }),
 
+/***/ "./src/img/favicon-16x16.png":
+/*!***********************************!*\
+  !*** ./src/img/favicon-16x16.png ***!
+  \***********************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"assets/img/favicon-16x16.png\";\n\n//# sourceURL=webpack://simpleclassapp/./src/img/favicon-16x16.png?");
+
+/***/ }),
+
 /***/ "./src/img/imageGalary.png":
 /*!*********************************!*\
   !*** ./src/img/imageGalary.png ***!
@@ -636,7 +656,22 @@ eval("module.exports = __webpack_require__.p + \"assets/img/videoPlayer.png\";\n
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	!function() {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = function(module) {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	}();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	!function() {
 /******/ 		// define getter functions for harmony exports
@@ -698,6 +733,32 @@ eval("module.exports = __webpack_require__.p + \"assets/img/videoPlayer.png\";\n
 /******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
 /******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
 /******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	!function() {
+/******/ 		__webpack_require__.b = document.baseURI || self.location.href;
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"main": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		// no on chunks loaded
+/******/ 		
+/******/ 		// no jsonp function
 /******/ 	}();
 /******/ 	
 /************************************************************************/
