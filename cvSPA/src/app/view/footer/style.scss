@@ -1,0 +1,42 @@
+.footer {
+    margin-bottom: 20px;
+    background-color: #e2b714;
+    border-radius: 5px;
+}
+
+.footer__list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer__item {
+    padding: 10px;
+    font-size: 1rem;
+    color: #000;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.git__logo {
+    width: 30px;
+    height: auto;
+}
+
+.git__link {
+    display: block;
+    padding-left: 40px;
+    color: #000;
+    line-height: 2;
+    background: url(../../../img/github-142-svgrepo-com.svg) no-repeat;
+    background-size: 30px 30px;
+}
+
+.git__link:hover {
+    text-decoration: underline;
+}
+
+.rs__link img {
+    width: 100px;
+    height: auto;
+}

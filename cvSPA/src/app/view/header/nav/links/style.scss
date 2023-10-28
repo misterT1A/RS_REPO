@@ -1,0 +1,16 @@
+.nav__list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav_item a {
+    padding: 9px 9px;
+    font-size: 1.5rem;
+    line-height: 2;
+    color: #646669;
+    cursor: pointer;
+}
+
+.nav_item a:hover {
+    color: #27292b;
+}

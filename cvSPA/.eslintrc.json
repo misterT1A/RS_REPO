@@ -1,0 +1,46 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb-base",
+        // "eslint:recommended",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "plugins": [
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto",
+                "singleQuote": true,
+                "parser": "flow"
+            }
+        ],
+        "no-console": "off",
+        "linebreak-style": "off",
+        "no-multiple-empty-lines": "off",
+        "indent": "off",
+        "no-unused-vars": "off",
+        "class-methods-use-this": "off",
+        "quotes": [
+            "off",
+            "double"
+        ],
+        "max-classes-per-file": [
+            "error",
+            {
+                "ignoreExpressions": true,
+                "max": 4
+            }
+        ],
+        "camelcase": "off"
+    }
+}

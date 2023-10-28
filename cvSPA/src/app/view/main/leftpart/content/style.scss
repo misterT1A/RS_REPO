@@ -1,0 +1,28 @@
+.left__contacts {
+    margin-top: 10px;
+}
+
+
+
+.mini__title::before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    height: 40px;
+    width: 30px;
+    background-color: #e2b714;
+}
+
+
+.contact_list {
+    padding: 15px 30px;
+}
+
+.contact_item {
+    font-size: 1rem;
+    line-height: 2;
+    color: #d1d0c5;
+    margin-bottom: 10px;
+}

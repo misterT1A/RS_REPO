@@ -1,0 +1,61 @@
+// .main {
+//     margin-top: 20px;
+//     margin-bottom: 20px;
+//     display: flex;
+// }
+
+.main__wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+
+
+.right__part {
+    width: 65%;
+    padding: 90px 0 20px 60px;
+}
+
+.right__title {
+    font-size: 3rem;
+}
+
+.right__text {
+    font-size: 2rem;
+}
+
+.title__right {
+    width: 110%;
+    margin-left: -60px;
+    margin-bottom: 40px;
+}
+
+.about__me {
+    margin: 200px 0 50px;
+}
+
+.description__text {
+    font-size: 1rem;
+}
+
+.skills {
+    margin-bottom: 50px;
+}
+
+.skills__list {
+    list-style-type: disc;
+}
+
+.skills__item {
+    margin-bottom: 20px;
+    list-style-type: disc;
+}
+
+.code {
+    font-size: 1rem;
+}
+
+.code__example {
+    margin-bottom: 50PX;
+}
